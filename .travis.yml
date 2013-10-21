@@ -1,0 +1,13 @@
+language: erlang
+otp_release:
+  - R16B02
+before_script:
+  - rebar get-deps
+script: rebar compile
+after_script:
+  - rebar clean
+branches:
+  only:
+    - master
+notifications:
+  irc: "chat.freenode.net#cloudi"
