@@ -14,8 +14,8 @@ development, this can help provide a limited set of dependencies.
 
 ## BUILDING
 
-rebar get-deps
-rebar compile
+    rebar get-deps
+    rebar compile
 
 ## EXAMPLE
 
