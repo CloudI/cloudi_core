@@ -1,15 +1,15 @@
 #[`cloudi_core` 1.3.0 (beta)](http://cloudi.org)
 
-[![Build Status](https://secure.travis-ci.org/okeuday/CloudI.png?branch=develop)](http://travis-ci.org/okeuday/CloudI)
+[![Build Status](https://secure.travis-ci.org/CloudI/CloudI.png?branch=develop)](http://travis-ci.org/CloudI/CloudI)
 
 ## LICENSE
 
-[BSD License](https://github.com/okeuday/CloudI/blob/master/src/LICENSE)
+[BSD License](https://github.com/CloudI/CloudI/blob/master/src/LICENSE)
 
 ## ABOUT
 
 `cloudi_core` provides only the internal service support from the main
-[CloudI](https://github.com/okeuday/CloudI/) repository.  For Erlang
+[CloudI](https://github.com/CloudI/CloudI/) repository.  For Erlang
 development, this can help provide a limited set of dependencies.
 
 ## BUILDING
