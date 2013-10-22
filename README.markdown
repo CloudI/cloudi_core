@@ -10,7 +10,9 @@
 
 `cloudi_core` provides only the internal service support from the main
 [CloudI](https://github.com/CloudI/CloudI/) repository.  For Erlang
-development, this can help provide a limited set of dependencies.
+development, this can help provide a limited set of dependencies.  If you
+want external service support also, but with CloudI as a rebar dependency,
+[look here](https://github.com/CloudI/CloudI/tree/master/examples/hello_world3).
 
 ## BUILDING
 
