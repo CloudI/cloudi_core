@@ -222,14 +222,12 @@ destination_all(DestRefresh, _, Name, Pid, Groups, _)
           DestRefresh =:= lazy_oldest) ->
     cpg_data:get_members(Name, Pid, Groups);
 
-destination_all(DestRefresh, _, Name, Pid, Groups, _)
-    when is_list(Name),
-         DestRefresh =:= lazy_local ->
+destination_all(lazy_local, _, Name, Pid, Groups, _)
+    when is_list(Name) ->
     cpg_data:get_local_members(Name, Pid, Groups);
 
-destination_all(DestRefresh, _, Name, Pid, Groups, _)
-    when is_list(Name),
-         DestRefresh =:= lazy_remote ->
+destination_all(lazy_remote, _, Name, Pid, Groups, _)
+    when is_list(Name) ->
     cpg_data:get_remote_members(Name, Pid, Groups);
 
 destination_all(DestRefresh, _, _, _, _, Timeout)
@@ -252,14 +250,12 @@ destination_all(DestRefresh, Scope, Name, Pid, _, Timeout)
           DestRefresh =:= immediate_oldest) ->
     ?CATCH_EXIT(cpg:get_members(Scope, Name, Pid, Timeout));
 
-destination_all(DestRefresh, Scope, Name, Pid, _, Timeout)
-    when is_list(Name),
-         DestRefresh =:= immediate_local ->
+destination_all(immediate_local, Scope, Name, Pid, _, Timeout)
+    when is_list(Name) ->
     ?CATCH_EXIT(cpg:get_local_members(Scope, Name, Pid, Timeout));
 
-destination_all(DestRefresh, Scope, Name, Pid, _, Timeout)
-    when is_list(Name),
-         DestRefresh =:= immediate_remote ->
+destination_all(immediate_remote, Scope, Name, Pid, _, Timeout)
+    when is_list(Name) ->
     ?CATCH_EXIT(cpg:get_remote_members(Scope, Name, Pid, Timeout));
 
 destination_all(DestRefresh, _, _, _, _, _) ->
