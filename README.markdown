@@ -13,6 +13,8 @@
 development, this can help provide a limited set of dependencies.  If you
 want external service support also, but with CloudI as a rebar dependency,
 [look here](https://github.com/CloudI/CloudI/tree/master/examples/hello_world3).
+Otherwise, just use the [main repository](https://github.com/CloudI/CloudI)
+for external service support.
 
 ## BUILDING
 
