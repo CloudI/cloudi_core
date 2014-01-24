@@ -12,7 +12,8 @@
 [CloudI](https://github.com/CloudI/CloudI/) repository.  For Erlang
 development, this can help provide a limited set of dependencies.  If you
 want external service support also, but with CloudI as a rebar dependency,
-[look here](https://github.com/CloudI/CloudI/tree/master/examples/hello_world3).
+[look here for a local installation](https://github.com/CloudI/CloudI/tree/master/examples/hello_world3#readme) or
+[look here for a system-wide installation](https://github.com/CloudI/CloudI/tree/develop/examples/hello_world5#readme).
 Otherwise, just use the [main repository](https://github.com/CloudI/CloudI)
 for external service support.
 
