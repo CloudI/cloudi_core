@@ -1,4 +1,4 @@
-#[`cloudi_core` 1.3.0 (beta)](http://cloudi.org)
+#[`cloudi_core` 1.3.1 (beta)](http://cloudi.org)
 
 [![Build Status](https://secure.travis-ci.org/CloudI/CloudI.png?branch=develop)](http://travis-ci.org/CloudI/CloudI)
 
