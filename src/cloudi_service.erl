@@ -2126,7 +2126,7 @@ context_options(Dispatcher) ->
 %%-------------------------------------------------------------------------
 
 -spec environment_lookup() ->
-    any().
+    trie:trie().
 
 environment_lookup() ->
     cloudi_spawn:environment_lookup().
@@ -2155,7 +2155,7 @@ environment_transform(String) ->
 %%-------------------------------------------------------------------------
 
 -spec environment_transform(String :: string(),
-                            Lookup :: any()) ->
+                            Lookup :: trie:trie()) ->
     string().
 
 environment_transform(String, Lookup) ->
