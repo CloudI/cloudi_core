@@ -79,13 +79,14 @@
 -define(PRIORITY_LOW, 127).
 
 -define(SCOPE_DEFAULT, cpg_default_scope).
+-define(SCOPE_CUSTOM_PREFIX, "cpg_x_").
 -define(SCOPE_ASSIGN(Scope),
         if
             Scope =:= default ->
                 % DEFAULT_SCOPE in cpg application
                 ?SCOPE_DEFAULT;
             true ->
-                erlang:list_to_atom("cpg_x_" ++
+                erlang:list_to_atom(?SCOPE_CUSTOM_PREFIX ++
                                     erlang:atom_to_list(Scope))
         end).
 
