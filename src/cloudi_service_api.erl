@@ -373,6 +373,8 @@ services_add([_ | _] = L, Timeout)
      timeout | noproc |
      cloudi_configuration:error_reason_services_remove()}.
 
+services_remove([], _Timeout) ->
+    ok;
 services_remove([_ | _] = L, Timeout)
     when ((is_integer(Timeout) andalso
            (Timeout > ?TIMEOUT_DELTA) andalso
