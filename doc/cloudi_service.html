@@ -15,7 +15,7 @@
    The interface which all internal services must implement.
 <p>Copyright © 2011-2014 Michael Truog</p>
 
-<p><b>Version:</b> 1.3.2 May 19 2014 14:24:00
+<p><b>Version:</b> 1.3.2 May 31 2014 21:41:37
   ------------------------------------------------------------------------</p>
 <p><b>This module defines the <tt>cloudi_service</tt> behaviour.</b><br> Required callback functions: <tt>cloudi_service_init/3</tt>, <tt>cloudi_service_handle_request/11</tt>, <tt>cloudi_service_handle_info/3</tt>, <tt>cloudi_service_terminate/2</tt>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
@@ -29,6 +29,8 @@
       ==&gt; {ok, State}
           {stop, Reason}
           {stop, Reason, State}
+                 State = undefined, if not returned
+                 Reason = restart | shutdown | Term, terminate(State) is called
   
      cloudi_service_handle_request(Type, Name, Pattern,
                                    RequestInfo, Request, Timeout, Priority,
@@ -40,13 +42,13 @@
            NextTimeout, NextPriority, NewState}
           {noreply, NewState}
           {stop, Reason, NewState}
-                 Reason = normal | shutdown | Term terminate(State) is called
+                 Reason = restart | shutdown | Term, terminate(State) is called
   
      cloudi_service_handle_info(Request, State, Dispatcher)
   
       ==&gt; {noreply, State}
           {stop, Reason, NewState}
-                 Reason = normal | shutdown | Term, terminate(State) is called
+                 Reason = restart | shutdown | Term, terminate(State) is called
   
      cloudi_service_terminate(Reason, State) Let the user module clean up
           always called when the service terminates
@@ -378,8 +380,16 @@
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#send_sync-7">send_sync/7</a></td><td>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#service_name_new-2">service_name_new/2</a></td><td>
+  <h4><a name="Transform_a_service_name_pattern_with_parameters_into_an_exact_service_name.">Transform a service name pattern with parameters into an exact service name.</a></h4>
+  The pattern input can contain consecutive * wildcard characters because
+  they are only used for a template.</td></tr>
+<tr><td valign="top"><a href="#service_name_new-4">service_name_new/4</a></td><td>
+  <h4><a name="Transform_a_service_name_pattern_with_parameters_into_an_exact_service_name.">Transform a service name pattern with parameters into an exact service name.</a></h4>
+  The pattern input can contain consecutive * wildcard characters because
+  they are only used for a template.</td></tr>
 <tr><td valign="top"><a href="#service_name_parse-2">service_name_parse/2</a></td><td>
-  <h4><a name="Parse_a_service_name_pattern.">Parse a service name pattern.</a></h4>.</td></tr>
+  <h4><a name="Parse_a_service_name_pattern_to_return_parameters.">Parse a service name pattern to return parameters.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#service_name_parse_with_suffix-2">service_name_parse_with_suffix/2</a></td><td>
   <h4><a name="Parse_a_service_name_pattern_and_return_the_common_suffix.">Parse a service name pattern and return the common suffix.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#source_subscriptions-2">source_subscriptions/2</a></td><td>
@@ -1020,11 +1030,27 @@ The source pid can be found at:</p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
 </p>
 
+<h3 class="function"><a name="service_name_new-2">service_name_new/2</a></h3>
+<div class="spec">
+<p><tt>service_name_new(Pattern::string(), Parameters::[string()]) -&gt; {ok, string()} | {error, parameters_ignored | parameter_missing}</tt><br></p>
+</div><p>
+  <h4><a name="Transform_a_service_name_pattern_with_parameters_into_an_exact_service_name.">Transform a service name pattern with parameters into an exact service name.</a></h4>
+  The pattern input can contain consecutive * wildcard characters because
+  they are only used for a template.</p>
+
+<h3 class="function"><a name="service_name_new-4">service_name_new/4</a></h3>
+<div class="spec">
+<p><tt>service_name_new(Pattern::string(), Parameters::[string()], ParametersSelected::[pos_integer()], ParametersStrictMatching::boolean()) -&gt; {ok, string()} | {error, parameters_ignored | parameter_missing | parameters_selected_empty | {parameters_selected_ignored, [pos_integer()]} | {parameters_selected_missing, pos_integer()}}</tt><br></p>
+</div><p>
+  <h4><a name="Transform_a_service_name_pattern_with_parameters_into_an_exact_service_name.">Transform a service name pattern with parameters into an exact service name.</a></h4>
+  The pattern input can contain consecutive * wildcard characters because
+  they are only used for a template.</p>
+
 <h3 class="function"><a name="service_name_parse-2">service_name_parse/2</a></h3>
 <div class="spec">
 <p><tt>service_name_parse(Name::string(), Pattern::string()) -&gt; [string()] | error</tt><br></p>
 </div><p>
-  <h4><a name="Parse_a_service_name_pattern.">Parse a service name pattern.</a></h4>
+  <h4><a name="Parse_a_service_name_pattern_to_return_parameters.">Parse a service name pattern to return parameters.</a></h4>
 </p>
 
 <h3 class="function"><a name="service_name_parse_with_suffix-2">service_name_parse_with_suffix/2</a></h3>
@@ -1087,6 +1113,6 @@ The source pid can be found at:</p>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, May 19 2014, 14:24:00.</i></p>
+<p><i>Generated by EDoc, May 31 2014, 21:41:37.</i></p>
 </body>
 </html>
