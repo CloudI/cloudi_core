@@ -226,10 +226,12 @@
               error_reason_sync/0]).
 
 % used for accessing RequestInfo data
--type key_values() :: list({binary() | string() | atom(),
-                            binary() | string() | any()}) |
-                      dict().
--export_type([key_values/0]).
+-type key_values(Key, Value) :: list({Key, Value}) |
+                                dict().
+-type key_values() :: key_values(binary() | string() | atom(),
+                                 binary() | string() | any()).
+-export_type([key_values/2,
+              key_values/0]).
 
 -define(CATCH_TIMEOUT(F),
         try F catch exit:{timeout, _} -> {error, timeout} end).
