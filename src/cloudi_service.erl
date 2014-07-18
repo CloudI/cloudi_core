@@ -255,7 +255,7 @@
                                         Timeout :: timeout_value_milliseconds(),
                                         Priority :: priority(),
                                         TransId :: trans_id(),
-                                        Pid :: source(),
+                                        Source :: source(),
                                         State :: any(),
                                         Dispatcher :: dispatcher()) ->
     {reply, Response :: response(), NewState :: any()} |
@@ -2529,7 +2529,7 @@ trans_id(Dispatcher) ->
                                                 timeout_value_milliseconds(),
                                              Priority :: priority(),
                                              TransId :: trans_id(),
-                                             Pid :: source(),
+                                             Source :: source(),
                                              State :: any(),
                                              Dispatcher :: dispatcher()) ->
     {reply, Response :: response(), NewState :: any()} |
