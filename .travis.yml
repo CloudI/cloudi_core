@@ -1,6 +1,8 @@
 language: erlang
 otp_release:
-  - R16B02
+  - 17.0
+  - R16B03-1
+  - R16B
 before_script:
   - rebar get-deps
 script: rebar compile
