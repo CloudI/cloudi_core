@@ -46,7 +46,7 @@
 %%%
 %%% @author Michael Truog <mjtruog [at] gmail (dot) com>
 %%% @copyright 2011-2014 Michael Truog
-%%% @version 1.3.2 {@date} {@time}
+%%% @version 1.3.3 {@date} {@time}
 %%%------------------------------------------------------------------------
 
 -module(cloudi_services_monitor).
@@ -76,12 +76,7 @@
 -define(CATCH_EXIT(F),
         try F catch exit:{Reason, _} -> {error, Reason} end).
 
--record(state,
-    {
-        services = key2value:new(dict), % {uuid, pid} ->
-                                                 %     configuration
-        changes = dict:new() :: dict() % uuid -> list()
-    }).
+-type dict_proxy(_Key, _Value) :: dict().
 
 -record(service,
     {
@@ -111,6 +106,18 @@
         increase = 0 :: non_neg_integer(),
         decrease = 0 :: non_neg_integer(),
         rate = 0.0 :: float()
+    }).
+
+-record(state,
+    {
+        services = key2value:new() ::
+            key2value:
+            key2value(cloudi_service_api:service_id(),
+                               pid(), #service{}),
+        changes = dict:new() ::
+            dict_proxy(cloudi_service_api:service_id(),
+                       list({increase | decrease,
+                             number(), number(), number()}))
     }).
 
 %%%------------------------------------------------------------------------
