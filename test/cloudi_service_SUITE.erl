@@ -276,7 +276,7 @@ groups() ->
 
 suite() ->
     [{ct_hooks, [cth_surefire]},
-     {timetrap, 5100}].
+     {timetrap, 10100}].
 
 init_per_suite(Config) ->
     ok = reltool_util:application_start(cloudi_core, [], infinity),
