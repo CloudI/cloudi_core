@@ -65,7 +65,7 @@
 %%-------------------------------------------------------------------------
 
 -spec lookup_content_type() ->
-    cloudi_x_trie:cloudi_x_trie().
+    trie:trie().
 
 lookup_content_type() ->
     lookup_content_type(binary).
@@ -77,12 +77,12 @@ lookup_content_type() ->
 %%-------------------------------------------------------------------------
 
 -spec lookup_content_type(binary | list) ->
-    cloudi_x_trie:cloudi_x_trie().
+    trie:trie().
 
 lookup_content_type(binary) ->
-    cloudi_x_trie:new(lookup_content_type_data());
+    trie:new(lookup_content_type_data());
 lookup_content_type(list) ->
-    cloudi_x_trie:new([{E, {T, erlang:binary_to_list(V)}}
+    trie:new([{E, {T, erlang:binary_to_list(V)}}
                        || {E, {T, V}} <- lookup_content_type_data()]).
 
 %%%------------------------------------------------------------------------
