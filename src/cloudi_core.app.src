@@ -64,6 +64,7 @@
         trie,
         reltool_util,
         key2value,
+        keys1value,
         uuid,
         cpg,
         sasl,
