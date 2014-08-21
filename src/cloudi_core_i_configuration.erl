@@ -3274,16 +3274,6 @@ logging_formatter_validate(Key, Value) ->
          Formatter, Config] ->
             case logging_formatter_level(Level) of
                 {ok, NewLevel} ->
-                    OutputName = if
-                        Output =:= undefined ->
-                            undefined;
-                        true ->
-                            Instance = erlang:phash2({Key,
-                                                      OutputArgs,
-                                                      OutputMaxR, OutputMaxT,
-                                                      Formatter, Config}),
-                            ?LOGGING_FORMATTER_OUTPUT_ASSIGN(Output, Instance)
-                    end,
                     NewOutputArgs = if
                         Output =:= undefined ->
                             OutputArgs;
@@ -3305,6 +3295,16 @@ logging_formatter_validate(Key, Value) ->
                                     none
                             end,
                             [{level, LagerLevel} | OutputArgs]
+                    end,
+                    OutputName = if
+                        Output =:= undefined ->
+                            undefined;
+                        true ->
+                            Instance = erlang:phash2({Key,
+                                                      NewOutputArgs,
+                                                      OutputMaxR, OutputMaxT,
+                                                      Formatter, Config}),
+                            ?LOGGING_FORMATTER_OUTPUT_ASSIGN(Output, Instance)
                     end,
                     {ok,
                      FormatterConfig#config_logging_formatter{
