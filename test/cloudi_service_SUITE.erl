@@ -279,6 +279,8 @@ suite() ->
      {timetrap, 10100}].
 
 init_per_suite(Config) ->
+    ok = reltool_util:
+             application_start(sasl, [{sasl_error_logger, false}], infinity),
     ok = reltool_util:application_start(cloudi_core, [], infinity),
     Config.
 
@@ -295,10 +297,21 @@ init_per_group(_GroupName, Config) ->
 end_per_group(_GroupName, Config) ->
     Config.
 
+init_per_testcase(TestCase) ->
+    error_logger:info_msg("~p init~n", [TestCase]),
+    error_logger:tty(false),
+    ok.
+
+end_per_testcase(TestCase) ->
+    error_logger:tty(true),
+    error_logger:info_msg("~p end~n", [TestCase]),
+    ok.
+
 init_per_testcase(TestCase, Config)
     when (TestCase =:= t_service_internal_sync_1) orelse
          (TestCase =:= t_service_internal_sync_2) orelse
          (TestCase =:= t_service_internal_async_1) ->
+    init_per_testcase(TestCase),
     {ok, ServiceIds} = cloudi_service_api:services_add([
         % using proplist configuration format, not the tuple/record format
         [{prefix, ?SERVICE_PREFIX1},
@@ -313,6 +326,7 @@ init_per_testcase(TestCase, Config)
     [{service_ids, ServiceIds} | Config];
 init_per_testcase(TestCase, Config)
     when (TestCase =:= t_service_internal_sync_3) ->
+    init_per_testcase(TestCase),
     {ok, ServiceIds} = cloudi_service_api:services_add([
         % using proplist configuration format, not the tuple/record format
         [{prefix, ?SERVICE_PREFIX1},
@@ -327,6 +341,7 @@ init_per_testcase(TestCase, Config)
     [{service_ids, ServiceIds} | Config];
 init_per_testcase(TestCase, Config)
     when (TestCase =:= t_service_internal_async_2) ->
+    init_per_testcase(TestCase),
     {ok, ServiceIds} = cloudi_service_api:services_add([
         % using proplist configuration format, not the tuple/record format
         [{prefix, ?SERVICE_PREFIX1},
@@ -340,6 +355,7 @@ init_per_testcase(TestCase, Config)
     [{service_ids, ServiceIds} | Config];
 init_per_testcase(TestCase, Config)
     when (TestCase =:= t_service_internal_async_3) ->
+    init_per_testcase(TestCase),
     {ok, ServiceIds} = cloudi_service_api:services_add([
         % using proplist configuration format, not the tuple/record format
         [{prefix, ?SERVICE_PREFIX1},
@@ -354,6 +370,7 @@ init_per_testcase(TestCase, Config)
     [{service_ids, ServiceIds} | Config];
 init_per_testcase(TestCase, Config)
     when (TestCase =:= t_service_internal_aspects_1) ->
+    init_per_testcase(TestCase),
     InitAfter1 = fun(_, _, #state{count = Count} = State, _) ->
         {ok, State#state{count = Count + 3}}
     end,
@@ -382,6 +399,7 @@ init_per_testcase(TestCase, Config)
     [{service_ids, ServiceIds} | Config];
 init_per_testcase(TestCase, Config)
     when (TestCase =:= t_service_internal_terminate_1) ->
+    init_per_testcase(TestCase),
     {ok, ServiceIds} = cloudi_service_api:services_add([
         % using proplist configuration format, not the tuple/record format
         [{prefix, ?SERVICE_PREFIX1},
@@ -396,6 +414,7 @@ init_per_testcase(TestCase, Config)
     [{service_ids, ServiceIds} | Config];
 init_per_testcase(TestCase, Config)
     when (TestCase =:= t_service_internal_terminate_2) ->
+    init_per_testcase(TestCase),
     {ok, ServiceIds} = cloudi_service_api:services_add([
         % using proplist configuration format, not the tuple/record format
         [{prefix, ?SERVICE_PREFIX1},
@@ -411,6 +430,7 @@ init_per_testcase(TestCase, Config)
     [{service_ids, ServiceIds} | Config];
 init_per_testcase(TestCase, Config)
     when (TestCase =:= t_service_internal_terminate_3) ->
+    init_per_testcase(TestCase),
     {ok, ServiceIds} = cloudi_service_api:services_add([
         % using proplist configuration format, not the tuple/record format
         [{prefix, ?SERVICE_PREFIX1},
@@ -425,6 +445,7 @@ init_per_testcase(TestCase, Config)
     [{service_ids, ServiceIds} | Config];
 init_per_testcase(TestCase, Config)
     when (TestCase =:= t_service_internal_terminate_4) ->
+    init_per_testcase(TestCase),
     {ok, ServiceIds} = cloudi_service_api:services_add([
         % using proplist configuration format, not the tuple/record format
         [{prefix, ?SERVICE_PREFIX1},
@@ -439,7 +460,8 @@ init_per_testcase(TestCase, Config)
         ], infinity),
     [{service_ids, ServiceIds} | Config].
 
-end_per_testcase(_TestCase, Config) ->
+end_per_testcase(TestCase, Config) ->
+    end_per_testcase(TestCase),
     {value, {_, ServiceIds}, NewConfig} = lists:keytake(service_ids, 1, Config),
     ok = cloudi_service_api:services_remove(ServiceIds, infinity),
     NewConfig.
@@ -456,7 +478,6 @@ t_service_internal_sync_1(_Config) ->
     Context = cloudi:new(),
     ServiceName = ?SERVICE_PREFIX1 ++ ?SERVICE_SUFFIX1,
     Self = self(),
-    TimeoutMax = cloudi:timeout_sync(Context),
     {ok,
      ?RESPONSE_INFO1,
      ?RESPONSE1} = cloudi:send_sync(Context,
@@ -465,28 +486,16 @@ t_service_internal_sync_1(_Config) ->
                                     undefined, undefined),
     {ok,
      [{'send_sync', ServiceName, ServiceName, ?REQUEST_INFO1, ?REQUEST1,
-       Timeout, 0, TransId1, Self}]} = cloudi:send_sync(Context,
-                                                        ServiceName,
-                                                        ?REQUEST2),
-    true = (Timeout == TimeoutMax),
+       _Timeout1, 0, TransId1, Self}]} = cloudi:send_sync(Context,
+                                                          ServiceName,
+                                                          ?REQUEST2),
     true = uuid:is_v1(TransId1),
-    case cloudi_service_api:services_add([
+    {ok, _} = cloudi_service_api:services_add([
         [{prefix, ?SERVICE_PREFIX1},
          {module, ?MODULE},
          {args, [{mode, init_send_sync}]},
          {options, [{automatic_loading, false}]}]
-        ], infinity) of
-        {error,
-         {service_internal_start_failed,
-          {{{badmatch,{error,invalid_state}},
-            _},
-           _}}} ->
-            ok;
-        {error,
-         {service_internal_start_failed,
-          internal_init_timeout}} ->
-            ok
-    end,
+        ], infinity),
     {ok,
      ?RESPONSE_INFO1,
      ?RESPONSE1} = cloudi:send_sync(Context,
@@ -495,28 +504,17 @@ t_service_internal_sync_1(_Config) ->
                                     undefined, undefined),
     {ok,
      [{'send_sync', ServiceName, ServiceName, ?REQUEST_INFO1, ?REQUEST1,
-       Timeout, 0, TransId2, Self}]} = cloudi:send_sync(Context,
-                                                        ServiceName,
-                                                        ?REQUEST2),
+       _Timeout2, 0, TransId2, Self}]} = cloudi:send_sync(Context,
+                                                          ServiceName,
+                                                          ?REQUEST2),
     true = uuid:is_v1(TransId2),
     true = (TransId2 > TransId1),
-    case cloudi_service_api:services_add([
+    {ok, _} = cloudi_service_api:services_add([
         [{prefix, ?SERVICE_PREFIX1},
          {module, ?MODULE},
          {args, [{mode, init_send_sync}]},
          {options, [{automatic_loading, false}]}]
-        ], infinity) of
-        {error,
-         {service_internal_start_failed,
-          {{{badmatch,{error,invalid_state}},
-            _},
-           _}}} ->
-            ok;
-        {error,
-         {service_internal_start_failed,
-          internal_init_timeout}} ->
-            ok
-    end,
+        ], infinity),
     ok.
 
 t_service_internal_sync_2(_Config) ->
@@ -570,23 +568,12 @@ t_service_internal_async_1(_Config) ->
                                                          ?REQUEST2),
     true = (Timeout1 > (TimeoutMax - 1000)) andalso (Timeout1 =< TimeoutMax),
     true = uuid:is_v1(TransId1),
-    case cloudi_service_api:services_add([
+    {ok, _} = cloudi_service_api:services_add([
         [{prefix, ?SERVICE_PREFIX1},
          {module, ?MODULE},
          {args, [{mode, init_send_async_recv}]},
          {options, [{automatic_loading, false}]}]
-        ], infinity) of
-        {error,
-         {service_internal_start_failed,
-          {{{badmatch,{error,invalid_state}},
-            _},
-           _}}} ->
-            ok;
-        {error,
-         {service_internal_start_failed,
-          internal_init_timeout}} ->
-            ok
-    end,
+        ], infinity),
     {ok, TransId2} = cloudi:send_async(Context,
                                        ServiceName,
                                        ?REQUEST_INFO1, ?REQUEST1,
@@ -603,29 +590,19 @@ t_service_internal_async_1(_Config) ->
     true = (Timeout2 > (TimeoutMax - 1000)) andalso (Timeout2 =< TimeoutMax),
     true = uuid:is_v1(TransId2),
     true = (TransId2 > TransId1),
-    case cloudi_service_api:services_add([
+    {ok, _} = cloudi_service_api:services_add([
         [{prefix, ?SERVICE_PREFIX1},
          {module, ?MODULE},
          {args, [{mode, init_send_async_recv}]},
          {options, [{automatic_loading, false}]}]
-        ], infinity) of
-        {error,
-         {service_internal_start_failed,
-          {{{badmatch,{error,invalid_state}},
-            _},
-           _}}} ->
-            ok;
-        {error,
-         {service_internal_start_failed,
-          internal_init_timeout}} ->
-            ok
-    end,
+        ], infinity),
     ok.
 
 t_service_internal_async_2(_Config) ->
     % make sure mcast_async works normally and remains ordered when
     % sending to a service that has a single process
     % (including cloudi:recv_asyncs functionality)
+    receive after 1000 -> ok end,
     Context = cloudi:new(),
     ServiceName = ?SERVICE_PREFIX1 ++ ?SERVICE_SUFFIX1,
     Self = self(),
@@ -721,6 +698,7 @@ t_service_internal_async_3(_Config) ->
     % exist, a service mcast_async to the service name will only be able to
     % send to a single service process)
     % (including cloudi_service:recv_asyncs functionality)
+    receive after 1000 -> ok end,
     Context = cloudi:new(),
     ServiceName = ?SERVICE_PREFIX1 ++ ?SERVICE_SUFFIX1,
     {ok,
