@@ -2152,7 +2152,7 @@ services_validate_options_internal(OptionsList, CountProcess) ->
          _, _, _, _, _, _, _, _]
         when not ((QueueLimit =:= undefined) orelse
                   (is_integer(QueueLimit) andalso
-                   (QueueLimit >= 1))) ->
+                   (QueueLimit >= 0))) ->
             {error, {service_options_queue_limit_invalid,
                      QueueLimit}};
         [_, _, QueueSize, _, _, _, _, _, _, _, _, _,
@@ -2568,7 +2568,7 @@ services_validate_options_external(OptionsList, CountProcess) ->
          _, _, _, _, _, _, _]
         when not ((QueueLimit =:= undefined) orelse
                   (is_integer(QueueLimit) andalso
-                   (QueueLimit >= 1))) ->
+                   (QueueLimit >= 0))) ->
             {error, {service_options_queue_limit_invalid,
                      QueueLimit}};
         [_, _, QueueSize, _, _, _, _, _, _, _, _, _,
