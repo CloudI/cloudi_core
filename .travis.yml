@@ -13,3 +13,5 @@ branches:
     - master
 notifications:
   irc: "chat.freenode.net#cloudi"
+    on_success: change
+    on_failure: always
