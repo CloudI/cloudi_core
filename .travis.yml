@@ -5,7 +5,7 @@ otp_release:
   - R16B
 before_script:
   - rebar get-deps
-script: rebar compile ct suites=cloudi_service || ( cat logs/raw.log && exit 1 )
+script: rebar compile ct suites=cloudi_service || ( cat logs/raw.log logs/ct_run*/cloudi.log && exit 1 )
 after_script:
   - rebar clean
 branches:
