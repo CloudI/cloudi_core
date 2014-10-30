@@ -12,7 +12,7 @@ defmodule CloudICore.Mixfile do
 
   defp deps do
     [{:cpg, "~> 1.4.0-rc.4"},
-     {:uuid_erl, "~> 1.4.0-rc.4"},
+     {:uuid, "~> 1.4.0-rc.4", hex: :uuid_erl},
      {:reltool_util, "~> 1.4.0-rc.4"},
      {:trie, "~> 1.4.0-rc.4"},
      {:erlang_term, "~> 1.4.0-rc.4"},
