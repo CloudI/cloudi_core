@@ -227,34 +227,19 @@ handle_call({monitor, M, F, A, ProcessIndex, CountProcess, CountThread,
     case erlang:apply(M, F, [ProcessIndex, CountProcess | A]) of
         {ok, Pid} when is_pid(Pid) ->
             Pids = [Pid],
-            NewServices =
-                key2value:store(ServiceId, Pid,
-                    #service{service_m = M,
-                             service_f = F,
-                             service_a = A,
-                             process_index = ProcessIndex,
-                             count_process = CountProcess,
-                             count_thread = CountThread,
-                             pids = Pids,
-                             monitor = erlang:monitor(process, Pid),
-                             timeout_term = TimeoutTerm,
-                             max_r = MaxR,
-                             max_t = MaxT}, Services),
+            NewServices = key2value:store(ServiceId, Pid,
+                new_service_process(M, F, A,
+                                    ProcessIndex, CountProcess, CountThread,
+                                    Pids, erlang:monitor(process, Pid),
+                                    TimeoutTerm, MaxR, MaxT), Services),
             {reply, {ok, Pids}, State#state{services = NewServices}};
         {ok, [Pid | _] = Pids} when is_pid(Pid) ->
             NewServices = lists:foldl(fun(P, D) ->
                 key2value:store(ServiceId, P,
-                    #service{service_m = M,
-                             service_f = F,
-                             service_a = A,
-                             process_index = ProcessIndex,
-                             count_process = CountProcess,
-                             count_thread = CountThread,
-                             pids = Pids,
-                             monitor = erlang:monitor(process, P),
-                             timeout_term = TimeoutTerm,
-                             max_r = MaxR,
-                             max_t = MaxT}, D)
+                    new_service_process(M, F, A,
+                                        ProcessIndex, CountProcess, CountThread,
+                                        Pids, erlang:monitor(process, P),
+                                        TimeoutTerm, MaxR, MaxT), D)
             end, Services, Pids),
             {reply, {ok, Pids}, State#state{services = NewServices}};
         {error, _} = Error ->
@@ -738,6 +723,7 @@ pids_increase_loop(Count, ProcessIndex,
                             service_a = A,
                             count_process = CountProcess,
                             count_thread = CountThread,
+                            timeout_term = TimeoutTerm,
                             max_r = MaxR,
                             max_t = MaxT} = Service, ServiceId, Services) ->
     NewServices = case erlang:apply(M, F, [ProcessIndex, CountProcess | A]) of
@@ -746,16 +732,10 @@ pids_increase_loop(Count, ProcessIndex,
                       [uuid:uuid_to_string(ServiceId), Pid]),
             Pids = [Pid],
             NextServices = key2value:store(ServiceId, Pid,
-                #service{service_m = M,
-                         service_f = F,
-                         service_a = A,
-                         process_index = ProcessIndex,
-                         count_process = CountProcess,
-                         count_thread = CountThread,
-                         pids = Pids,
-                         monitor = erlang:monitor(process, Pid),
-                         max_r = MaxR,
-                         max_t = MaxT}, Services),
+                new_service_process(M, F, A,
+                                    ProcessIndex, CountProcess, CountThread,
+                                    Pids, erlang:monitor(process, Pid),
+                                    TimeoutTerm, MaxR, MaxT), Services),
             ok = initialize(Pids),
             NextServices;
         {ok, [Pid | _] = Pids} when is_pid(Pid) ->
@@ -763,16 +743,10 @@ pids_increase_loop(Count, ProcessIndex,
                       [uuid:uuid_to_string(ServiceId), Pids]),
             NextServices = lists:foldl(fun(P, D) ->
                 key2value:store(ServiceId, P,
-                    #service{service_m = M,
-                             service_f = F,
-                             service_a = A,
-                             process_index = ProcessIndex,
-                             count_process = CountProcess,
-                             count_thread = CountThread,
-                             pids = Pids,
-                             monitor = erlang:monitor(process, P),
-                             max_r = MaxR,
-                             max_t = MaxT}, D)
+                    new_service_process(M, F, A,
+                                        ProcessIndex, CountProcess, CountThread,
+                                        Pids, erlang:monitor(process, P),
+                                        TimeoutTerm, MaxR, MaxT), D)
             end, Services, Pids),
             ok = initialize(Pids),
             NextServices;
@@ -849,4 +823,18 @@ terminate_service(ServiceId, Pids, Reason,
         key2value:erase(ServiceId, P, D)
     end, Services, Pids),
     NewServices.
+
+new_service_process(M, F, A, ProcessIndex, CountProcess, CountThread,
+                    Pids, MonitorRef, TimeoutTerm, MaxR, MaxT) ->
+    #service{service_m = M,
+             service_f = F,
+             service_a = A,
+             process_index = ProcessIndex,
+             count_process = CountProcess,
+             count_thread = CountThread,
+             pids = Pids,
+             monitor = MonitorRef,
+             timeout_term = TimeoutTerm,
+             max_r = MaxR,
+             max_t = MaxT}.
 
