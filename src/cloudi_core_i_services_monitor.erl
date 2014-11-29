@@ -47,7 +47,7 @@
 %%%
 %%% @author Michael Truog <mjtruog [at] gmail (dot) com>
 %%% @copyright 2011-2014 Michael Truog
-%%% @version 1.3.3 {@date} {@time}
+%%% @version 1.4.0 {@date} {@time}
 %%%------------------------------------------------------------------------
 
 -module(cloudi_core_i_services_monitor).
@@ -57,7 +57,7 @@
 
 %% external interface
 -export([start_link/0,
-         monitor/11,
+         monitor/12,
          initialize/1,
          shutdown/2,
          restart/2,
@@ -88,6 +88,7 @@
         process_index :: non_neg_integer(),
         count_process :: pos_integer(),
         count_thread :: pos_integer(),
+        scope :: atom(),
         % pids is only accurate on the pid lookup (find2)
         % due to the overwrite of #service{}
         pids :: list(pid()),
@@ -137,6 +138,7 @@ start_link() ->
               ProcessIndex :: non_neg_integer(),
               CountProcess :: pos_integer(),
               CountThread :: pos_integer(),
+              Scope :: atom(),
               TimeoutTerm :: cloudi_service_api:timeout_milliseconds(),
               MaxR :: non_neg_integer(),
               MaxT :: non_neg_integer(),
@@ -145,18 +147,18 @@ start_link() ->
     {ok, list(pid())} |
     {error, any()}.
 
-monitor(M, F, A, ProcessIndex, CountProcess,
-        CountThread, TimeoutTerm, MaxR, MaxT, ServiceId, Timeout)
+monitor(M, F, A, ProcessIndex, CountProcess, CountThread, Scope,
+        TimeoutTerm, MaxR, MaxT, ServiceId, Timeout)
     when is_atom(M), is_atom(F), is_list(A),
          is_integer(ProcessIndex), ProcessIndex >= 0,
          is_integer(CountProcess), CountProcess > 0,
-         is_integer(CountThread), CountThread > 0,
+         is_integer(CountThread), CountThread > 0, is_atom(Scope),
          is_integer(TimeoutTerm), TimeoutTerm > ?TIMEOUT_DELTA,
          is_integer(MaxR), MaxR >= 0, is_integer(MaxT), MaxT >= 0,
          is_binary(ServiceId), byte_size(ServiceId) == 16 ->
     ?CATCH_EXIT(gen_server:call(?MODULE,
                                 {monitor, M, F, A,
-                                 ProcessIndex, CountProcess, CountThread,
+                                 ProcessIndex, CountProcess, CountThread, Scope,
                                  TimeoutTerm, MaxR, MaxT, ServiceId},
                                 Timeout)).
 
@@ -221,7 +223,7 @@ terminate_kill(Pid, Reason)
 init([]) ->
     {ok, #state{}}.
 
-handle_call({monitor, M, F, A, ProcessIndex, CountProcess, CountThread,
+handle_call({monitor, M, F, A, ProcessIndex, CountProcess, CountThread, Scope,
              TimeoutTerm, MaxR, MaxT, ServiceId}, _,
             #state{services = Services} = State) ->
     case erlang:apply(M, F, [ProcessIndex, CountProcess | A]) of
@@ -230,7 +232,7 @@ handle_call({monitor, M, F, A, ProcessIndex, CountProcess, CountThread,
             NewServices = key2value:store(ServiceId, Pid,
                 new_service_process(M, F, A,
                                     ProcessIndex, CountProcess, CountThread,
-                                    Pids, erlang:monitor(process, Pid),
+                                    Scope, Pids, erlang:monitor(process, Pid),
                                     TimeoutTerm, MaxR, MaxT), Services),
             {reply, {ok, Pids}, State#state{services = NewServices}};
         {ok, [Pid | _] = Pids} when is_pid(Pid) ->
@@ -238,7 +240,7 @@ handle_call({monitor, M, F, A, ProcessIndex, CountProcess, CountThread,
                 key2value:store(ServiceId, P,
                     new_service_process(M, F, A,
                                         ProcessIndex, CountProcess, CountThread,
-                                        Pids, erlang:monitor(process, P),
+                                        Scope, Pids, erlang:monitor(process, P),
                                         TimeoutTerm, MaxR, MaxT), D)
             end, Services, Pids),
             {reply, {ok, Pids}, State#state{services = NewServices}};
@@ -288,8 +290,8 @@ handle_call({search, PidList}, _,
 handle_call({pids, ServiceId}, _,
             #state{services = Services} = State) ->
     case key2value:find1(ServiceId, Services) of
-        {ok, {PidList, _}} ->
-            {reply, {ok, PidList}, State};
+        {ok, {PidList, #service{scope = Scope}}} ->
+            {reply, {ok, Scope, PidList}, State};
         error ->
             {reply, {error, not_found}, State}
     end;
@@ -723,6 +725,7 @@ pids_increase_loop(Count, ProcessIndex,
                             service_a = A,
                             count_process = CountProcess,
                             count_thread = CountThread,
+                            scope = Scope,
                             timeout_term = TimeoutTerm,
                             max_r = MaxR,
                             max_t = MaxT} = Service, ServiceId, Services) ->
@@ -734,7 +737,7 @@ pids_increase_loop(Count, ProcessIndex,
             NextServices = key2value:store(ServiceId, Pid,
                 new_service_process(M, F, A,
                                     ProcessIndex, CountProcess, CountThread,
-                                    Pids, erlang:monitor(process, Pid),
+                                    Scope, Pids, erlang:monitor(process, Pid),
                                     TimeoutTerm, MaxR, MaxT), Services),
             ok = initialize(Pids),
             NextServices;
@@ -745,7 +748,7 @@ pids_increase_loop(Count, ProcessIndex,
                 key2value:store(ServiceId, P,
                     new_service_process(M, F, A,
                                         ProcessIndex, CountProcess, CountThread,
-                                        Pids, erlang:monitor(process, P),
+                                        Scope, Pids, erlang:monitor(process, P),
                                         TimeoutTerm, MaxR, MaxT), D)
             end, Services, Pids),
             ok = initialize(Pids),
@@ -825,13 +828,14 @@ terminate_service(ServiceId, Pids, Reason,
     NewServices.
 
 new_service_process(M, F, A, ProcessIndex, CountProcess, CountThread,
-                    Pids, MonitorRef, TimeoutTerm, MaxR, MaxT) ->
+                    Scope, Pids, MonitorRef, TimeoutTerm, MaxR, MaxT) ->
     #service{service_m = M,
              service_f = F,
              service_a = A,
              process_index = ProcessIndex,
              count_process = CountProcess,
              count_thread = CountThread,
+             scope = Scope,
              pids = Pids,
              monitor = MonitorRef,
              timeout_term = TimeoutTerm,
