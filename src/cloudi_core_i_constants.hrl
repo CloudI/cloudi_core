@@ -92,6 +92,12 @@
 % outside of the CloudI repository
 -define(CLOUDI_CORE_STANDALONE, true).
 
+% used to calculate the timeout_terminate based on MaxT / MaxR
+-define(TIMEOUT_TERMINATE_CALC0(MaxT),
+        (1000 * MaxT) - ?TIMEOUT_DELTA).
+-define(TIMEOUT_TERMINATE_CALC1(MaxT, MaxR),
+        (1000 * MaxT) div MaxR - ?TIMEOUT_DELTA).
+
 % pqueue4 usage limited by the signed byte integer storage
 -define(PRIORITY_HIGH, -128).
 -define(PRIORITY_LOW, 127).
