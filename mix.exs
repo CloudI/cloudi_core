@@ -3,7 +3,7 @@ defmodule CloudICore.Mixfile do
 
   def project do
     [app: :cloudi_core,
-     version: "1.4.0-rc.4",
+     version: "1.4.0",
      language: :erlang,
      description: description,
      package: package,
@@ -11,16 +11,16 @@ defmodule CloudICore.Mixfile do
   end
 
   defp deps do
-    [{:cpg, "~> 1.4.0-rc.4"},
-     {:uuid, "~> 1.4.0-rc.4", hex: :uuid_erl},
-     {:reltool_util, "~> 1.4.0-rc.4"},
-     {:trie, "~> 1.4.0-rc.4"},
-     {:erlang_term, "~> 1.4.0-rc.4"},
-     {:quickrand, "~> 1.4.0-rc.4"},
-     {:pqueue, "~> 1.4.0-rc.4"},
-     {:key2value, "~> 1.4.0-rc.4"},
-     {:keys1value, "~> 1.4.0-rc.4"},
-     {:nodefinder, "~> 1.4.0-rc.4"},
+    [{:cpg, "~> 1.4.0"},
+     {:uuid, "~> 1.4.0", hex: :uuid_erl},
+     {:reltool_util, "~> 1.4.0"},
+     {:trie, "~> 1.4.0"},
+     {:erlang_term, "~> 1.4.0"},
+     {:quickrand, "~> 1.4.0"},
+     {:pqueue, "~> 1.4.0"},
+     {:key2value, "~> 1.4.0"},
+     {:keys1value, "~> 1.4.0"},
+     {:nodefinder, "~> 1.4.0"},
      {:dynamic_compile, "~> 1.0.0"},
      {:syslog, "~> 1.0.2"}]
   end

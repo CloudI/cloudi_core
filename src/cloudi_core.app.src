@@ -3,7 +3,7 @@
 
 {application, cloudi_core, 
   [{description, "CloudI Core Application"},
-   {vsn, "1.4.0-rc.4"},
+   {vsn, "1.4.0"},
    {modules, [
         cloudi,
         cloudi_concurrency,

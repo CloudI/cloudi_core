@@ -15,9 +15,9 @@
    The interface which all internal services must implement.
 <p>Copyright © 2011-2014 Michael Truog</p>
 
-<p><b>Version:</b> 1.3.3 Sep 30 2014 14:01:31
+<p><b>Version:</b> 1.4.0 Dec 20 2014 15:04:59
   ------------------------------------------------------------------------</p>
-<p><b>This module defines the <tt>cloudi_service</tt> behaviour.</b><br> Required callback functions: <tt>cloudi_service_init/3</tt>, <tt>cloudi_service_handle_request/11</tt>, <tt>cloudi_service_handle_info/3</tt>, <tt>cloudi_service_terminate/2</tt>.</p>
+<p><b>This module defines the <tt>cloudi_service</tt> behaviour.</b><br> Required callback functions: <tt>cloudi_service_init/4</tt>, <tt>cloudi_service_handle_request/11</tt>, <tt>cloudi_service_handle_info/3</tt>, <tt>cloudi_service_terminate/3</tt>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
 
 <h2><a name="description">Description</a></h2>
@@ -25,7 +25,7 @@
    The interface which all internal services must implement.
    <pre>   The user module should export:
   
-     cloudi_service_init(Args, Prefix, Dispatcher)
+     cloudi_service_init(Args, Prefix, Timeout, Dispatcher)
       ==&gt; {ok, State}
           {stop, Reason}
           {stop, Reason, State}
@@ -50,7 +50,8 @@
           {stop, Reason, NewState}
                  Reason = restart | shutdown | Term, terminate(State) is called
   
-     cloudi_service_terminate(Reason, State) Let the user module clean up
+     cloudi_service_terminate(Reason, Timeout,
+                              State) Let the user module clean up
           always called when the service terminates
   
       ==&gt; ok
@@ -160,10 +161,10 @@
   <h4><a name="Handle_an_incoming_service_request.">Handle an incoming service request.</a></h4>
   The request_pid_uses and request_pid_options service configuration options
   control the Erlang process used to call this function.</td></tr>
-<tr><td valign="top"><a href="#Module%3acloudi_service_init-3">'Module:cloudi_service_init'/3</a></td><td>
+<tr><td valign="top"><a href="#Module%3acloudi_service_init-4">'Module:cloudi_service_init'/4</a></td><td>
   <h4><a name="Initialize_the_internal_service.">Initialize the internal service.</a></h4>
   Create the internal service state.</td></tr>
-<tr><td valign="top"><a href="#Module%3acloudi_service_terminate-2">'Module:cloudi_service_terminate'/2</a></td><td>
+<tr><td valign="top"><a href="#Module%3acloudi_service_terminate-3">'Module:cloudi_service_terminate'/3</a></td><td>
   <h4><a name="Handle_service_termination.">Handle service termination.</a></h4>
   cloudi_service_terminate/2 is always called, even when cloudi_service_init/3
   returns a stop tuple.</td></tr>
@@ -410,18 +411,18 @@ The source pid can be found at:</p>
   The request_pid_uses and request_pid_options service configuration options
   control the Erlang process used to call this function.</p>
 
-<h3 class="function"><a name="Module%3acloudi_service_init-3">'Module:cloudi_service_init'/3</a></h3>
+<h3 class="function"><a name="Module%3acloudi_service_init-4">'Module:cloudi_service_init'/4</a></h3>
 <div class="spec">
-<p><tt>'Module:cloudi_service_init'(Args::list(), Prefix::<a href="#type-service_name_pattern">service_name_pattern()</a>, Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; {ok, State::any()} | {stop, Reason::any()} | {stop, Reason::any(), State::any()}</tt><br></p>
+<p><tt>'Module:cloudi_service_init'(Args::list(), Prefix::<a href="#type-service_name_pattern">service_name_pattern()</a>, Timeout::<a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; {ok, State::any()} | {stop, Reason::any()} | {stop, Reason::any(), State::any()}</tt><br></p>
 </div><p>
   <h4><a name="Initialize_the_internal_service.">Initialize the internal service.</a></h4>
   Create the internal service state.  Do any initial service subscriptions
   necessary.  Send service requests, if required for service initialization.
   State implicitly becomes 'undefined' if not provided to 'stop'.</p>
 
-<h3 class="function"><a name="Module%3acloudi_service_terminate-2">'Module:cloudi_service_terminate'/2</a></h3>
+<h3 class="function"><a name="Module%3acloudi_service_terminate-3">'Module:cloudi_service_terminate'/3</a></h3>
 <div class="spec">
-<p><tt>'Module:cloudi_service_terminate'(Reason::any(), State::any()) -&gt; ok</tt><br></p>
+<p><tt>'Module:cloudi_service_terminate'(Reason::any(), Timeout::<a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, State::any()) -&gt; ok</tt><br></p>
 </div><p>
   <h4><a name="Handle_service_termination.">Handle service termination.</a></h4>
   cloudi_service_terminate/2 is always called, even when cloudi_service_init/3
@@ -1074,6 +1075,6 @@ The source pid can be found at:</p>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Sep 30 2014, 14:01:31.</i></p>
+<p><i>Generated by EDoc, Dec 20 2014, 15:04:59.</i></p>
 </body>
 </html>
