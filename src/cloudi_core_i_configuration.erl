@@ -1763,7 +1763,7 @@ services_validate([#internal{
         ok ->
             case services_validate_options_internal(Options, CountProcess) of
                 {ok, NewOptions} ->
-                    ID = uuid:get_v1(UUID),
+                    {ID, NewUUID} = uuid:get_v1(UUID),
                     services_validate(L,
                                       [#config_service_internal{
                                            prefix = Prefix,
@@ -1783,7 +1783,7 @@ services_validate([#internal{
                                            options = NewOptions,
                                            uuid = ID} | Output],
                                       [ID | IDs],
-                                      UUID);
+                                      NewUUID);
                 {error, _} = Error ->
                     Error
             end;
@@ -1936,7 +1936,7 @@ services_validate([#external{
         ok ->
             case services_validate_options_external(Options, CountProcess) of
                 {ok, NewOptions} ->
-                    ID = uuid:get_v1(UUID),
+                    {ID, NewUUID} = uuid:get_v1(UUID),
                     services_validate(L,
                                       [#config_service_external{
                                            prefix = Prefix,
@@ -1959,7 +1959,7 @@ services_validate([#external{
                                            options = NewOptions,
                                            uuid = ID} | Output],
                                       [ID | IDs],
-                                      UUID);
+                                      NewUUID);
                 {error, _} = Error ->
                     Error
             end;

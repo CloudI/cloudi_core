@@ -524,7 +524,7 @@ validate(RInfoF, RF, RInfo, R) ->
 failure(false, _, _, FailureList) ->
     FailureList;
 failure(true, MaxCount, MaxPeriod, FailureList) ->
-    failure_check(erlang:now(), FailureList, MaxCount, MaxPeriod).
+    failure_check(cloudi_timestamp:seconds(), FailureList, MaxCount, MaxPeriod).
 
 failure_store(FailureList, MaxCount) ->
     if
@@ -535,13 +535,12 @@ failure_store(FailureList, MaxCount) ->
     end,
     FailureList.
 
-failure_check(Now, FailureList, MaxCount, infinity) ->
-    failure_store([Now | FailureList], MaxCount);
-failure_check(Now, FailureList, MaxCount, MaxPeriod) ->
-    NewFailureList = lists:reverse(lists:dropwhile(fun(T) ->
-        erlang:trunc(timer:now_diff(Now, T) * 1.0e-6) > MaxPeriod
-    end, lists:reverse(FailureList))),
-    failure_store([Now | NewFailureList], MaxCount).
+failure_check(SecondsNow, FailureList, MaxCount, infinity) ->
+    failure_store([SecondsNow | FailureList], MaxCount);
+failure_check(SecondsNow, FailureList, MaxCount, MaxPeriod) ->
+    NewFailureList = cloudi_timestamp:seconds_filter(FailureList,
+                                                     SecondsNow, MaxPeriod),
+    failure_store([SecondsNow | NewFailureList], MaxCount).
 
 failure_kill() ->
     erlang:exit(cloudi_queue).

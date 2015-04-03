@@ -253,6 +253,11 @@
 
 -define(CATCH_TIMEOUT(F),
         try F catch exit:{timeout, _} -> {error, timeout} end).
+-ifdef(ERLANG_OTP_VERSION_16).
+-type dict_proxy(_Key, _Value) :: dict().
+-else.
+-type dict_proxy(Key, Value) :: dict:dict(Key, Value).
+-endif.
 
 %%%------------------------------------------------------------------------
 %%% Callback functions from behavior
@@ -2429,7 +2434,7 @@ service_name_parse_with_suffix(Name, Pattern) ->
 
 -spec request_http_qs_parse(Request :: binary() |
                                        list({any(), any()})) ->
-    Result :: dict().
+    Result :: dict_proxy(binary(), binary()).
 
 request_http_qs_parse(Request) ->
     cloudi_request:http_qs_parse(Request).
@@ -2455,7 +2460,7 @@ request_info_key_value_new(RequestInfo) ->
 
 -spec request_info_key_value_parse(RequestInfo :: binary() |
                                                   list({any(), any()})) ->
-    Result :: dict().
+    Result :: dict_proxy(any(), any()).
 
 request_info_key_value_parse(RequestInfo) ->
     cloudi_request_info:key_value_parse(RequestInfo).
