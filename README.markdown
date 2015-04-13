@@ -1,4 +1,4 @@
-#[`cloudi_core` 1.4.0](http://cloudi.org)
+#[`cloudi_core` 1.5.0](http://cloudi.org)
 
 [![Build Status](https://secure.travis-ci.org/CloudI/cloudi_core.png?branch=master)](http://travis-ci.org/CloudI/cloudi_core)
 

@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Service_API_Module">CloudI Service API Module</a></h3>
    A module that exposes dynamic configuration of CloudI.
-<p>Copyright © 2011-2014 Michael Truog</p>
+<p>Copyright © 2011-2015 Michael Truog</p>
 
-<p><b>Version:</b> 1.4.0 Dec 20 2014 15:04:58
+<p><b>Version:</b> 1.4.1 Apr 12 2015 20:34:49
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
 
@@ -140,6 +140,18 @@
 <p><tt>latency_time_milliseconds() = 1..4294967295</tt></p>
 
 
+<h3 class="typedecl"><a name="type-limit_external">limit_external()</a></h3>
+<p><tt>limit_external() = system | [{<a href="#type-limit_external_key">limit_external_key()</a>, <a href="#type-limit_external_value">limit_external_value()</a>}]</tt></p>
+
+
+<h3 class="typedecl"><a name="type-limit_external_key">limit_external_key()</a></h3>
+<p><tt>limit_external_key() = as | core | cpu | data | fsize | memlock | msgqueue | nice | nofile | nproc | rss | rtprio | rttime | sigpending | stack | vmem</tt></p>
+
+
+<h3 class="typedecl"><a name="type-limit_external_value">limit_external_value()</a></h3>
+<p><tt>limit_external_value() = undefined | non_neg_integer() | infinity | [{current, non_neg_integer() | infinity} | {maximum, non_neg_integer() | infinity}]</tt></p>
+
+
 <h3 class="typedecl"><a name="type-logging_formatters_set_proplist">logging_formatters_set_proplist()</a></h3>
 <p><tt>logging_formatters_set_proplist() = [{any | [module(), ...], [fatal | error | warn | info | debug | trace | emergency | alert | critical | warning | notice | {level, fatal | error | warn | info | debug | trace | emergency | alert | critical | warning | notice} | {output, module() | undefined} | {output_args, list()} | {output_max_r, non_neg_integer()} | {output_max_t, <a href="cloudi_service_api.html#type-seconds">cloudi_service_api:seconds()</a>} | {formatter, module() | undefined} | {formatter_config, list()}]}]</tt></p>
 
@@ -201,7 +213,7 @@
 
 
 <h3 class="typedecl"><a name="type-service_options_external">service_options_external()</a></h3>
-<p><tt>service_options_external() = [{priority_default, -128..127} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {count_process_dynamic, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_max, number()} | {rate_request_min, number()} | {count_max, number()} | {count_min, number()}] | false} | {scope, atom()} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_stddev, float()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {automatic_loading, boolean()} | {aspects_init_after, [<a href="#type-aspect_init_after_external">aspect_init_after_external()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_external">aspect_request_before_external()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_external">aspect_request_after_external()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_external">aspect_terminate_before_external()</a>]}]</tt></p>
+<p><tt>service_options_external() = [{priority_default, -128..127} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {count_process_dynamic, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_max, number()} | {rate_request_min, number()} | {count_max, number()} | {count_min, number()}] | false} | {scope, atom()} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_stddev, float()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {automatic_loading, boolean()} | {aspects_init_after, [<a href="#type-aspect_init_after_external">aspect_init_after_external()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_external">aspect_request_before_external()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_external">aspect_request_after_external()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_external">aspect_terminate_before_external()</a>]} | {limit, <a href="#type-limit_external">limit_external()</a>}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_options_internal">service_options_internal()</a></h3>
@@ -519,6 +531,6 @@
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Dec 20 2014, 15:04:58.</i></p>
+<p><i>Generated by EDoc, Apr 12 2015, 20:34:49.</i></p>
 </body>
 </html>

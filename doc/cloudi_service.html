@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Internal_Service_Behavior">CloudI Internal Service Behavior</a></h3>
    The interface which all internal services must implement.
-<p>Copyright © 2011-2014 Michael Truog</p>
+<p>Copyright © 2011-2015 Michael Truog</p>
 
-<p><b>Version:</b> 1.4.0 Dec 20 2014 15:04:59
+<p><b>Version:</b> 1.4.1 Apr 12 2015 20:34:50
   ------------------------------------------------------------------------</p>
 <p><b>This module defines the <tt>cloudi_service</tt> behaviour.</b><br> Required callback functions: <tt>cloudi_service_init/4</tt>, <tt>cloudi_service_handle_request/11</tt>, <tt>cloudi_service_handle_info/3</tt>, <tt>cloudi_service_terminate/3</tt>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
@@ -71,6 +71,10 @@
   
       cloudi_service_terminate         &lt;-----              .</pre>
 <h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-dict_proxy">dict_proxy()</a></h3>
+<p><tt>dict_proxy(Key, Value) = <a href="dict.html#type-dict">dict:dict</a>(Key, Value)</tt></p>
+
 
 <h3 class="typedecl"><a name="type-dispatcher">dispatcher()</a></h3>
 <p><tt>dispatcher() = pid()</tt></p>
@@ -380,6 +384,8 @@ The source pid can be found at:</p>
   <h4><a name="Subscribe_to_a_service_name_pattern.">Subscribe to a service name pattern.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#subscribe_count-2">subscribe_count/2</a></td><td>
   <h4><a name="Determine_how_may_service_name_pattern_subscriptions_have_occurred.">Determine how may service name pattern subscriptions have occurred.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#suffix-2">suffix/2</a></td><td>
+  <h4><a name="Service_request_suffix_from_a_service_name_or_service_name_pattern.">Service request suffix from a service name or service name pattern.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#timeout_async-1">timeout_async/1</a></td><td>
   <h4><a name="Configured_service_default_asynchronous_timeout_(in_milliseconds).">Configured service default asynchronous timeout (in milliseconds).</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#timeout_max-1">timeout_max/1</a></td><td>
@@ -739,7 +745,7 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="request_http_qs_parse-1">request_http_qs_parse/1</a></h3>
 <div class="spec">
-<p><tt>request_http_qs_parse(Request::binary() | [{any(), any()}]) -&gt; Result::dict()</tt><br></p>
+<p><tt>request_http_qs_parse(Request::binary() | [{any(), any()}]) -&gt; Result::<a href="#type-dict_proxy">dict_proxy</a>(binary(), binary())</tt><br></p>
 </div><p><b>This function is deprecated:</b> Use <a href="cloudi_request.html#http_qs_parse-1"><code>cloudi_request:http_qs_parse/1</code></a> instead</p>
 
 
@@ -751,7 +757,7 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="request_info_key_value_parse-1">request_info_key_value_parse/1</a></h3>
 <div class="spec">
-<p><tt>request_info_key_value_parse(RequestInfo::binary() | [{any(), any()}]) -&gt; Result::dict()</tt><br></p>
+<p><tt>request_info_key_value_parse(RequestInfo::binary() | [{any(), any()}]) -&gt; Result::<a href="#type-dict_proxy">dict_proxy</a>(any(), any())</tt><br></p>
 </div><p><b>This function is deprecated:</b> Use <a href="cloudi_request_info.html#key_value_parse-1"><code>cloudi_request_info:key_value_parse/1</code></a> instead</p>
 
 
@@ -1038,6 +1044,13 @@ The source pid can be found at:</p>
   <h4><a name="Determine_how_may_service_name_pattern_subscriptions_have_occurred.">Determine how may service name pattern subscriptions have occurred.</a></h4>
 </p>
 
+<h3 class="function"><a name="suffix-2">suffix/2</a></h3>
+<div class="spec">
+<p><tt>suffix(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, NameOrPattern::<a href="#type-service_name">service_name()</a> | <a href="#type-service_name_pattern">service_name_pattern()</a>) -&gt; Suffix::<a href="#type-service_name">service_name()</a> | <a href="#type-service_name_pattern">service_name_pattern()</a></tt><br></p>
+</div><p>
+  <h4><a name="Service_request_suffix_from_a_service_name_or_service_name_pattern.">Service request suffix from a service name or service name pattern.</a></h4>
+</p>
+
 <h3 class="function"><a name="timeout_async-1">timeout_async/1</a></h3>
 <div class="spec">
 <p><tt>timeout_async(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; TimeoutAsync::<a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a></tt><br></p>
@@ -1075,6 +1088,6 @@ The source pid can be found at:</p>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Dec 20 2014, 15:04:59.</i></p>
+<p><i>Generated by EDoc, Apr 12 2015, 20:34:50.</i></p>
 </body>
 </html>
