@@ -55,6 +55,9 @@
          transform/1,
          transform/2]).
 
+-type lookup() :: trie:trie().
+-export_type([lookup/0]).
+
 %%%------------------------------------------------------------------------
 %%% External interface functions
 %%%------------------------------------------------------------------------
@@ -66,7 +69,7 @@
 %%-------------------------------------------------------------------------
 
 -spec lookup() ->
-    trie:trie().
+    lookup().
 
 lookup() ->
     cloudi_core_i_spawn:environment_lookup().
@@ -95,7 +98,7 @@ transform(String) ->
 %%-------------------------------------------------------------------------
 
 -spec transform(String :: string(),
-                Lookup :: trie:trie()) ->
+                Lookup :: lookup()) ->
     string().
 
 transform(String, Lookup) ->
