@@ -260,7 +260,7 @@
 -endif.
 
 %%%------------------------------------------------------------------------
-%%% Callback functions from behavior
+%%% Callback functions for behavior
 %%%------------------------------------------------------------------------
 
 -ifdef(CLOUDI_SERVICE_OLD). % CloudI =< 1.3.3
