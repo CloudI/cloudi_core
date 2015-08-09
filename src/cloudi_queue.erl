@@ -79,6 +79,8 @@
          send/8,
          timeout/3]).
 
+-include("cloudi_core_i_constants.hrl").
+
 -record(request,
     {
         name :: cloudi_service:service_name(),
@@ -101,7 +103,8 @@
         failures_source_max_count :: pos_integer(),
         failures_source_max_period :: infinity | pos_integer(),
         failures_source = [] :: list(erlang:timestamp()),
-        requests = dict:new()
+        requests = dict:new() :: dict_proxy(cloudi_service:trans_id(),
+                                            #request{})
     }).
 
 -include("cloudi_service.hrl").
