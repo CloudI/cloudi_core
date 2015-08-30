@@ -122,8 +122,9 @@
         queue_requests = true :: boolean(),
         % queued incoming service requests
         queued = pqueue4:new()
-            :: pqueue4:pqueue4() |
-               list({integer(), any()}),
+            :: pqueue4:pqueue4(
+                   cloudi:message_service_request()) |
+               list({cloudi:priority_value(), any()}),
 
         % state record fields unique to the external thread Erlang process:
 
