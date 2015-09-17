@@ -57,9 +57,10 @@
 %% external interface
 -export([datetime/1,
          datetime/2,
-         uuid/1,
-         uuid/2,
-         increment/1]).
+         from_string/1,
+         increment/1,
+         to_string/1,
+         to_string/2]).
 
 %%%------------------------------------------------------------------------
 %%% External interface functions
@@ -92,30 +93,15 @@ datetime(TransId, MicroSecondsOffset) ->
 
 %%-------------------------------------------------------------------------
 %% @doc
-%% ===Return the transaction id in a standard string format.===
+%% ===Return a transaction id as a binary UUID (16 bytes).===
 %% @end
 %%-------------------------------------------------------------------------
 
--spec uuid(TransId :: uuid:uuid()) ->
-    string().
+-spec from_string(String :: string() | binary()) ->
+    uuid:uuid().
 
-uuid(TransId) ->
-    uuid(TransId, standard).
-
-%%-------------------------------------------------------------------------
-%% @doc
-%% ===Return the transaction id in a string format.===
-%% @end
-%%-------------------------------------------------------------------------
-
--spec uuid(TransId :: uuid:uuid(),
-           Format :: standard | nodash |
-                     list_standard | list_nodash |
-                     binary_standard | binary_nodash) ->
-    string() | binary().
-
-uuid(TransId, Format) ->
-    uuid:uuid_to_string(TransId, Format).
+from_string(String) ->
+    uuid:string_to_uuid(String).
 
 %%-------------------------------------------------------------------------
 %% @doc
@@ -130,6 +116,33 @@ uuid(TransId, Format) ->
 
 increment(TransId) ->
     uuid:increment(TransId).
+
+%%-------------------------------------------------------------------------
+%% @doc
+%% ===Return the transaction id in a standard string format.===
+%% @end
+%%-------------------------------------------------------------------------
+
+-spec to_string(TransId :: uuid:uuid()) ->
+    string().
+
+to_string(TransId) ->
+    to_string(TransId, standard).
+
+%%-------------------------------------------------------------------------
+%% @doc
+%% ===Return the transaction id in a string format.===
+%% @end
+%%-------------------------------------------------------------------------
+
+-spec to_string(TransId :: uuid:uuid(),
+                Format :: standard | nodash |
+                          list_standard | list_nodash |
+                          binary_standard | binary_nodash) ->
+    string() | binary().
+
+to_string(TransId, Format) ->
+    uuid:uuid_to_string(TransId, Format).
 
 %%%------------------------------------------------------------------------
 %%% Private functions
