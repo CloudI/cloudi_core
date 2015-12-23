@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="Fake_CloudI_Logger_Interface">Fake CloudI Logger Interface</a></h3>
    These functions get replaced dynamically.
-<p>Copyright © 2011-2013 Michael Truog</p>
+<p>Copyright © 2011-2015 Michael Truog</p>
 
-<p><b>Version:</b> 1.3.1 Apr 12 2015 20:34:49
+<p><b>Version:</b> 1.5.1 Dec 23 2015 13:31:29
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
 
@@ -24,31 +24,37 @@
    These functions get replaced dynamically.
    This module just helps allow code analysis.
 <h2><a name="index">Function Index</a></h2>
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#debug-4">debug/4</a></td><td></td></tr>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#debug-6">debug/6</a></td><td></td></tr>
 <tr><td valign="top"><a href="#debug_apply-2">debug_apply/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#debug_apply-3">debug_apply/3</a></td><td></td></tr>
-<tr><td valign="top"><a href="#error-4">error/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#debug_sync-6">debug_sync/6</a></td><td></td></tr>
+<tr><td valign="top"><a href="#error-6">error/6</a></td><td></td></tr>
 <tr><td valign="top"><a href="#error_apply-2">error_apply/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#error_apply-3">error_apply/3</a></td><td></td></tr>
-<tr><td valign="top"><a href="#fatal-4">fatal/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#error_sync-6">error_sync/6</a></td><td></td></tr>
+<tr><td valign="top"><a href="#fatal-6">fatal/6</a></td><td></td></tr>
 <tr><td valign="top"><a href="#fatal_apply-2">fatal_apply/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#fatal_apply-3">fatal_apply/3</a></td><td></td></tr>
-<tr><td valign="top"><a href="#info-4">info/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#fatal_sync-6">fatal_sync/6</a></td><td></td></tr>
+<tr><td valign="top"><a href="#info-6">info/6</a></td><td></td></tr>
 <tr><td valign="top"><a href="#info_apply-2">info_apply/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#info_apply-3">info_apply/3</a></td><td></td></tr>
-<tr><td valign="top"><a href="#trace-4">trace/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#info_sync-6">info_sync/6</a></td><td></td></tr>
+<tr><td valign="top"><a href="#trace-6">trace/6</a></td><td></td></tr>
 <tr><td valign="top"><a href="#trace_apply-2">trace_apply/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#trace_apply-3">trace_apply/3</a></td><td></td></tr>
-<tr><td valign="top"><a href="#warn-4">warn/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#trace_sync-6">trace_sync/6</a></td><td></td></tr>
+<tr><td valign="top"><a href="#warn-6">warn/6</a></td><td></td></tr>
 <tr><td valign="top"><a href="#warn_apply-2">warn_apply/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#warn_apply-3">warn_apply/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#warn_sync-6">warn_sync/6</a></td><td></td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
 
-<h3 class="function"><a name="debug-4">debug/4</a></h3>
+<h3 class="function"><a name="debug-6">debug/6</a></h3>
 <div class="spec">
-<p><tt>debug(Module, Line, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>debug(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="debug_apply-2">debug_apply/2</a></h3>
@@ -61,9 +67,14 @@
 <p><tt>debug_apply(M, F, A) -&gt; any()</tt></p>
 </div>
 
-<h3 class="function"><a name="error-4">error/4</a></h3>
+<h3 class="function"><a name="debug_sync-6">debug_sync/6</a></h3>
 <div class="spec">
-<p><tt>error(Module, Line, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>debug_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="error-6">error/6</a></h3>
+<div class="spec">
+<p><tt>error(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="error_apply-2">error_apply/2</a></h3>
@@ -76,9 +87,14 @@
 <p><tt>error_apply(M, F, A) -&gt; any()</tt></p>
 </div>
 
-<h3 class="function"><a name="fatal-4">fatal/4</a></h3>
+<h3 class="function"><a name="error_sync-6">error_sync/6</a></h3>
 <div class="spec">
-<p><tt>fatal(Module, Line, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>error_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="fatal-6">fatal/6</a></h3>
+<div class="spec">
+<p><tt>fatal(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="fatal_apply-2">fatal_apply/2</a></h3>
@@ -91,9 +107,14 @@
 <p><tt>fatal_apply(M, F, A) -&gt; any()</tt></p>
 </div>
 
-<h3 class="function"><a name="info-4">info/4</a></h3>
+<h3 class="function"><a name="fatal_sync-6">fatal_sync/6</a></h3>
 <div class="spec">
-<p><tt>info(Module, Line, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>fatal_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="info-6">info/6</a></h3>
+<div class="spec">
+<p><tt>info(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="info_apply-2">info_apply/2</a></h3>
@@ -106,9 +127,14 @@
 <p><tt>info_apply(M, F, A) -&gt; any()</tt></p>
 </div>
 
-<h3 class="function"><a name="trace-4">trace/4</a></h3>
+<h3 class="function"><a name="info_sync-6">info_sync/6</a></h3>
 <div class="spec">
-<p><tt>trace(Module, Line, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>info_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="trace-6">trace/6</a></h3>
+<div class="spec">
+<p><tt>trace(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="trace_apply-2">trace_apply/2</a></h3>
@@ -121,9 +147,14 @@
 <p><tt>trace_apply(M, F, A) -&gt; any()</tt></p>
 </div>
 
-<h3 class="function"><a name="warn-4">warn/4</a></h3>
+<h3 class="function"><a name="trace_sync-6">trace_sync/6</a></h3>
 <div class="spec">
-<p><tt>warn(Module, Line, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>trace_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="warn-6">warn/6</a></h3>
+<div class="spec">
+<p><tt>warn(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="warn_apply-2">warn_apply/2</a></h3>
@@ -135,9 +166,14 @@
 <div class="spec">
 <p><tt>warn_apply(M, F, A) -&gt; any()</tt></p>
 </div>
+
+<h3 class="function"><a name="warn_sync-6">warn_sync/6</a></h3>
+<div class="spec">
+<p><tt>warn_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+</div>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Apr 12 2015, 20:34:49.</i></p>
+<p><i>Generated by EDoc, Dec 23 2015, 13:31:29.</i></p>
 </body>
 </html>

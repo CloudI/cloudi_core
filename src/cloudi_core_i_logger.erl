@@ -1686,7 +1686,8 @@ load_interface_module(Level, Mode, Process) when is_atom(Level) ->
     end.
 
 syslog_open(SyslogIdentity, SyslogFacility) ->
-    {ok, Syslog} = syslog:open(SyslogIdentity, [ndelay, pid], SyslogFacility),
+    {ok, Syslog} = syslog:open(SyslogIdentity,
+                                        [ndelay, pid], SyslogFacility),
     Syslog.
 
 %%%------------------------------------------------------------------------

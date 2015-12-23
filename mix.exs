@@ -3,7 +3,7 @@ defmodule CloudICore.Mixfile do
 
   def project do
     [app: :cloudi_core,
-     version: "1.5.0",
+     version: "1.5.1",
      language: :erlang,
      description: description,
      package: package,
@@ -11,18 +11,23 @@ defmodule CloudICore.Mixfile do
   end
 
   defp deps do
-    [{:cpg, "~> 1.5.0"},
-     {:uuid, "~> 1.5.0", hex: :uuid_erl},
-     {:reltool_util, "~> 1.5.0"},
-     {:trie, "~> 1.5.0"},
-     {:erlang_term, "~> 1.5.0"},
-     {:quickrand, "~> 1.5.0"},
-     {:pqueue, "~> 1.5.0"},
-     {:key2value, "~> 1.5.0"},
-     {:keys1value, "~> 1.5.0"},
-     {:nodefinder, "~> 1.5.0"},
+    [{:cpg, "~> 1.5.1"},
+     {:uuid, "~> 1.5.1", hex: :uuid_erl},
+     {:reltool_util, "~> 1.5.1"},
+     {:trie, "~> 1.5.1"},
+     {:erlang_term, "~> 1.5.1"},
+     {:quickrand, "~> 1.5.1"},
+     {:pqueue, "~> 1.5.1"},
+     {:key2value, "~> 1.5.1"},
+     {:keys1value, "~> 1.5.1"},
+     {:nodefinder, "~> 1.5.1"},
+     {:supool, "~> 1.5.1"},
+     {:varpool, "~> 1.5.1"},
      {:dynamic_compile, "~> 1.0.0"},
-     {:syslog, "~> 1.0.2"}]
+     {:syslog, "~> 1.0.2"},
+     {:msgpack,
+      [git: "https://github.com/msgpack/msgpack-erlang.git",
+       ref: "0.3.4"]}]
   end
 
   defp description do
@@ -31,7 +36,7 @@ defmodule CloudICore.Mixfile do
 
   defp package do
     [files: ~w(src include doc test rebar.config README.markdown cloudi.conf),
-     contributors: ["Michael Truog"],
+     maintainers: ["Michael Truog"],
      licenses: ["BSD"],
      links: %{"Website" => "http://cloudi.org",
               "GitHub" => "https://github.com/CloudI/cloudi_core"}]

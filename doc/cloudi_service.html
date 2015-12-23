@@ -15,7 +15,7 @@
    The interface which all internal services must implement.
 <p>Copyright © 2011-2015 Michael Truog</p>
 
-<p><b>Version:</b> 1.4.1 Apr 12 2015 20:34:50
+<p><b>Version:</b> 1.5.1 Dec 23 2015 13:31:30
   ------------------------------------------------------------------------</p>
 <p><b>This module defines the <tt>cloudi_service</tt> behaviour.</b><br> Required callback functions: <tt>cloudi_service_init/4</tt>, <tt>cloudi_service_handle_request/11</tt>, <tt>cloudi_service_handle_info/3</tt>, <tt>cloudi_service_terminate/3</tt>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
@@ -140,6 +140,10 @@
 <p><tt>service_name_pattern() = <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a></tt></p>
 
 
+<h3 class="typedecl"><a name="type-service_name_pattern_suffix">service_name_pattern_suffix()</a></h3>
+<p><tt>service_name_pattern_suffix() = <a href="cloudi.html#type-service_name_pattern_suffix">cloudi:service_name_pattern_suffix()</a></tt></p>
+
+
 <h3 class="typedecl"><a name="type-source">source()</a></h3>
 <p><tt>source() = pid()</tt></p>
 
@@ -176,6 +180,12 @@
   <h4><a name="Get_the_context_options_from_the_service's_configuration.">Get the context options from the service's configuration.</a></h4>
   A service would only use this when delaying the creation of a context
   for child processes.</td></tr>
+<tr><td valign="top"><a href="#demonitor-2">demonitor/2</a></td><td>
+  <h4><a name="Demonitor_an_Erlang_pid.">Demonitor an Erlang pid.</a></h4>
+  The function will make sure an Erlang pid is demonitored properly.</td></tr>
+<tr><td valign="top"><a href="#demonitor-3">demonitor/3</a></td><td>
+  <h4><a name="Demonitor_an_Erlang_pid_with_options.">Demonitor an Erlang pid with options.</a></h4>
+  The function will make sure an Erlang pid is demonitored properly.</td></tr>
 <tr><td valign="top"><a href="#destination_refresh_immediate-1">destination_refresh_immediate/1</a></td><td>
   <h4><a name="Configured_service_destination_refresh_is_immediate.">Configured service destination refresh is immediate.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#destination_refresh_lazy-1">destination_refresh_lazy/1</a></td><td>
@@ -184,6 +194,8 @@
   <h4><a name="Return_the_Erlang_pid_representing_the_service_sender.">Return the Erlang pid representing the service sender.</a></h4>
   Use when the Dispatcher is stored and used after the current
   cloudi_service callback has returned.</td></tr>
+<tr><td valign="top"><a href="#duo_mode-1">duo_mode/1</a></td><td>
+  <h4><a name="Determine_if_duo_mode_is_enabled.">Determine if duo_mode is enabled.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#environment_lookup-0">environment_lookup/0</a></td><td>(<em>Deprecated</em>.) </td></tr>
 <tr><td valign="top"><a href="#environment_transform-1">environment_transform/1</a></td><td>(<em>Deprecated</em>.) </td></tr>
 <tr><td valign="top"><a href="#environment_transform-2">environment_transform/2</a></td><td>(<em>Deprecated</em>.) </td></tr>
@@ -237,6 +249,10 @@
 <tr><td valign="top"><a href="#mcast_async_passive-6">mcast_async_passive/6</a></td><td>
   <h4><a name="Send_a_multicast_asynchronous_service_request.">Send a multicast asynchronous service request.</a></h4>
   An alias for mcast_async.</td></tr>
+<tr><td valign="top"><a href="#monitor-2">monitor/2</a></td><td>
+  <h4><a name="Monitor_an_Erlang_pid.">Monitor an Erlang pid.</a></h4>
+  The function will make sure an Erlang pid is monitored properly so the
+  cloudi_service_handle_info/3 callback receives the monitor result.</td></tr>
 <tr><td valign="top"><a href="#prefix-1">prefix/1</a></td><td>
   <h4><a name="Configured_service_default_prefix.">Configured service default prefix.</a></h4>
   All subscribed/unsubscribed service names use this prefix.</td></tr>
@@ -448,6 +464,20 @@ The source pid can be found at:</p>
   A service would only use this when delaying the creation of a context
   for child processes.</p>
 
+<h3 class="function"><a name="demonitor-2">demonitor/2</a></h3>
+<div class="spec">
+<p><tt>demonitor(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, MonitorRef::reference()) -&gt; true</tt><br></p>
+</div><p>
+  <h4><a name="Demonitor_an_Erlang_pid.">Demonitor an Erlang pid.</a></h4>
+  The function will make sure an Erlang pid is demonitored properly.</p>
+
+<h3 class="function"><a name="demonitor-3">demonitor/3</a></h3>
+<div class="spec">
+<p><tt>demonitor(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, MonitorRef::reference(), Options::list()) -&gt; true</tt><br></p>
+</div><p>
+  <h4><a name="Demonitor_an_Erlang_pid_with_options.">Demonitor an Erlang pid with options.</a></h4>
+  The function will make sure an Erlang pid is demonitored properly.</p>
+
 <h3 class="function"><a name="destination_refresh_immediate-1">destination_refresh_immediate/1</a></h3>
 <div class="spec">
 <p><tt>destination_refresh_immediate(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; boolean()</tt><br></p>
@@ -471,6 +501,13 @@ The source pid can be found at:</p>
   cloudi_service callback has returned.  This is only necessary when
   storing the dispatcher within the cloudi_service_init/3 callback,
   for use in a different callback.</p>
+
+<h3 class="function"><a name="duo_mode-1">duo_mode/1</a></h3>
+<div class="spec">
+<p><tt>duo_mode(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; boolean()</tt><br></p>
+</div><p>
+  <h4><a name="Determine_if_duo_mode_is_enabled.">Determine if duo_mode is enabled.</a></h4>
+</p>
 
 <h3 class="function"><a name="environment_lookup-0">environment_lookup/0</a></h3>
 <div class="spec">
@@ -647,6 +684,16 @@ The source pid can be found at:</p>
   An alias for mcast_async.  The asynchronous service requests are returned
   and handled the same way as within external services.</p>
 
+<h3 class="function"><a name="monitor-2">monitor/2</a></h3>
+<div class="spec">
+<p><tt>monitor(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Pid::pid()) -&gt; MonitorRef::reference()</tt><br></p>
+</div><p>
+  <h4><a name="Monitor_an_Erlang_pid.">Monitor an Erlang pid.</a></h4>
+  The function will make sure an Erlang pid is monitored properly so the
+  cloudi_service_handle_info/3 callback receives the monitor result.
+  Since both the request_pid and the info_pid are temporary Erlang processes,
+  no spawned Erlang process should be linked to the request_pid or info_pid.</p>
+
 <h3 class="function"><a name="prefix-1">prefix/1</a></h3>
 <div class="spec">
 <p><tt>prefix(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; Prefix::<a href="#type-service_name_pattern">service_name_pattern()</a></tt><br></p>
@@ -745,7 +792,7 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="request_http_qs_parse-1">request_http_qs_parse/1</a></h3>
 <div class="spec">
-<p><tt>request_http_qs_parse(Request::binary() | [{any(), any()}]) -&gt; Result::<a href="#type-dict_proxy">dict_proxy</a>(binary(), binary())</tt><br></p>
+<p><tt>request_http_qs_parse(Request::binary() | <a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::<a href="#type-dict_proxy">dict_proxy</a>(<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a>, <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>)</tt><br></p>
 </div><p><b>This function is deprecated:</b> Use <a href="cloudi_request.html#http_qs_parse-1"><code>cloudi_request:http_qs_parse/1</code></a> instead</p>
 
 
@@ -809,7 +856,7 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="self-1">self/1</a></h3>
 <div class="spec">
-<p><tt>self(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; Self::pid()</tt><br></p>
+<p><tt>self(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; Self::<a href="#type-source">source()</a></tt><br></p>
 </div><p>
   <h4><a name="Return_the_Erlang_pid_representing_the_service.">Return the Erlang pid representing the service.</a></h4>
 </p>
@@ -1032,14 +1079,14 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="subscribe-2">subscribe/2</a></h3>
 <div class="spec">
-<p><tt>subscribe(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>) -&gt; ok | error</tt><br></p>
+<p><tt>subscribe(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Pattern::<a href="#type-service_name_pattern_suffix">service_name_pattern_suffix()</a>) -&gt; ok | error</tt><br></p>
 </div><p>
   <h4><a name="Subscribe_to_a_service_name_pattern.">Subscribe to a service name pattern.</a></h4>
 </p>
 
 <h3 class="function"><a name="subscribe_count-2">subscribe_count/2</a></h3>
 <div class="spec">
-<p><tt>subscribe_count(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>) -&gt; non_neg_integer()</tt><br></p>
+<p><tt>subscribe_count(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Pattern::<a href="#type-service_name_pattern_suffix">service_name_pattern_suffix()</a>) -&gt; non_neg_integer()</tt><br></p>
 </div><p>
   <h4><a name="Determine_how_may_service_name_pattern_subscriptions_have_occurred.">Determine how may service name pattern subscriptions have occurred.</a></h4>
 </p>
@@ -1081,13 +1128,13 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="unsubscribe-2">unsubscribe/2</a></h3>
 <div class="spec">
-<p><tt>unsubscribe(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>) -&gt; ok | error</tt><br></p>
+<p><tt>unsubscribe(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Pattern::<a href="#type-service_name_pattern_suffix">service_name_pattern_suffix()</a>) -&gt; ok | error</tt><br></p>
 </div><p>
   <h4><a name="Unsubscribe_from_a_service_name_pattern.">Unsubscribe from a service name pattern.</a></h4>
 </p>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Apr 12 2015, 20:34:50.</i></p>
+<p><i>Generated by EDoc, Dec 23 2015, 13:31:30.</i></p>
 </body>
 </html>

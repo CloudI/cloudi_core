@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Rate-Based_Configuration">CloudI Rate-Based Configuration</a></h3>
    Routines for service request rate-based configuration adjustments.
-<p>Copyright © 2013-2014 Michael Truog</p>
+<p>Copyright © 2013-2015 Michael Truog</p>
 
-<p><b>Version:</b> 1.3.3 Apr 12 2015 20:34:49
+<p><b>Version:</b> 1.5.1 Dec 23 2015 13:31:29
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
 
@@ -38,6 +38,11 @@
 <tr><td valign="top"><a href="#hibernate_reinit-1">hibernate_reinit/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#hibernate_request-1">hibernate_request/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#hibernate_validate-1">hibernate_validate/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#rate_request_format-1">rate_request_format/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#rate_request_init-1">rate_request_init/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#rate_request_reinit-1">rate_request_reinit/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#rate_request_request-1">rate_request_request/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#rate_request_validate-1">rate_request_validate/1</a></td><td></td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
@@ -116,9 +121,34 @@
 <div class="spec">
 <p><tt>hibernate_validate(Options::[{atom(), any()}] | true | false) -&gt; {ok, #hibernate{method = undefined | rate_request, period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_min = undefined | number(), hibernate = boolean()} | true | false} | {error, {service_options_hibernate_invalid, any()}}</tt><br></p>
 </div>
+
+<h3 class="function"><a name="rate_request_format-1">rate_request_format/1</a></h3>
+<div class="spec">
+<p><tt>rate_request_format(Rate_request::#rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()} | undefined) -&gt; [{atom(), any()}] | undefined</tt><br></p>
+</div>
+
+<h3 class="function"><a name="rate_request_init-1">rate_request_init/1</a></h3>
+<div class="spec">
+<p><tt>rate_request_init(RateRequest::#rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()}) -&gt; #rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()}</tt><br></p>
+</div>
+
+<h3 class="function"><a name="rate_request_reinit-1">rate_request_reinit/1</a></h3>
+<div class="spec">
+<p><tt>rate_request_reinit(RateRequest::#rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()}) -&gt; #rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()}</tt><br></p>
+</div>
+
+<h3 class="function"><a name="rate_request_request-1">rate_request_request/1</a></h3>
+<div class="spec">
+<p><tt>rate_request_request(RateRequest::#rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()}) -&gt; {boolean(), #rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()}}</tt><br></p>
+</div>
+
+<h3 class="function"><a name="rate_request_validate-1">rate_request_validate/1</a></h3>
+<div class="spec">
+<p><tt>rate_request_validate(Value::[{atom(), any()}] | number() | undefined) -&gt; {ok, #rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()} | undefined} | {error, {service_options_rate_request_max_invalid, any()}}</tt><br></p>
+</div>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Apr 12 2015, 20:34:49.</i></p>
+<p><i>Generated by EDoc, Dec 23 2015, 13:31:29.</i></p>
 </body>
 </html>

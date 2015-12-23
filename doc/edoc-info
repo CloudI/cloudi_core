@@ -1,13 +1,12 @@
 %% encoding: UTF-8
 {application,cloudi_core}.
-{packages,[]}.
-{modules,[cloudi,cloudi_concurrency,cloudi_core_i_app,
+{modules,[cloudi,cloudi_args_type,cloudi_concurrency,cloudi_core_i_app,
           cloudi_core_i_configuration,cloudi_core_i_configurator,
           cloudi_core_i_logger,cloudi_core_i_logger_interface,
           cloudi_core_i_logger_output,cloudi_core_i_logger_output_sup,
           cloudi_core_i_logger_sup,cloudi_core_i_nodes,
-          cloudi_core_i_os_rlimit,cloudi_core_i_os_spawn,cloudi_core_i_pool,
-          cloudi_core_i_pool_sup,cloudi_core_i_rate_based_configuration,
+          cloudi_core_i_os_process,cloudi_core_i_os_spawn,
+          cloudi_core_i_rate_based_configuration,
           cloudi_core_i_runtime_testing,cloudi_core_i_services_external,
           cloudi_core_i_services_external_sup,cloudi_core_i_services_internal,
           cloudi_core_i_services_internal_init,
@@ -19,4 +18,4 @@
           cloudi_request,cloudi_request_info,cloudi_response,
           cloudi_response_info,cloudi_service,cloudi_service_api,
           cloudi_service_future,cloudi_service_name,cloudi_string,
-          cloudi_timestamp]}.
+          cloudi_timestamp,cloudi_trans_id]}.

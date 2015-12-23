@@ -14,7 +14,7 @@
    <h3><a name="CloudI_Erlang_Interface">CloudI Erlang Interface</a></h3>.
 <p>Copyright © 2013-2015 Michael Truog</p>
 
-<p><b>Version:</b> 1.5.0 Apr 12 2015 20:34:50
+<p><b>Version:</b> 1.5.1 Dec 23 2015 13:31:29
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
 
@@ -28,7 +28,7 @@
 
 
 <h3 class="typedecl"><a name="type-context">context()</a></h3>
-<p><tt>context() = #cloudi_context{dest_refresh = undefined | <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, dest_refresh_delay = undefined | <a href="cloudi_service_api.html#type-dest_refresh_delay_milliseconds">cloudi_service_api:dest_refresh_delay_milliseconds()</a>, request_name_lookup = undefined | sync | async, timeout_async = undefined | <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = undefined | <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, priority_default = undefined | <a href="cloudi_service_api.html#type-priority">cloudi_service_api:priority()</a>, scope = undefined | atom(), receiver = undefined | pid(), uuid_generator = undefined | <a href="deps/uuid/doc/uuid.html#type-state">uuid:state()</a>, cpg_data = undefined | any(), cpg_data_stale = boolean()}</tt></p>
+<p><tt>context() = #cloudi_context{dest_refresh = undefined | <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, dest_refresh_delay = undefined | <a href="cloudi_service_api.html#type-dest_refresh_delay_milliseconds">cloudi_service_api:dest_refresh_delay_milliseconds()</a>, request_name_lookup = undefined | sync | async, timeout_async = undefined | <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = undefined | <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, priority_default = undefined | <a href="cloudi_service_api.html#type-priority">cloudi_service_api:priority()</a>, scope = undefined | atom(), receiver = undefined | pid(), uuid_generator = undefined | <a href="deps/uuid/doc/uuid.html#type-state">uuid:state()</a>, cpg_data = undefined | <a href="deps/cpg/doc/cpg_data.html#type-state">cpg_data:state()</a>, cpg_data_stale = boolean()}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a></h3>
@@ -47,8 +47,16 @@
 <p><tt>error_reason_sync() = <a href="#type-error_reason">error_reason()</a> | <a href="cloudi_service.html#type-error_reason_sync">cloudi_service:error_reason_sync()</a></tt></p>
 
 
+<h3 class="typedecl"><a name="type-message_service_request">message_service_request()</a></h3>
+<p><tt>message_service_request() = {Type::cloudi_service_send_async | cloudi_service_send_sync, Name::<a href="#type-service_name">service_name()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a>, Priority::<a href="#type-priority_value">priority_value()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Source::pid()}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-message_service_response">message_service_response()</a></h3>
+<p><tt>message_service_response() = {Type::cloudi_service_return_async | cloudi_service_return_sync, Name::<a href="#type-service_name">service_name()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, Timeout::<a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Source::pid()}</tt></p>
+
+
 <h3 class="typedecl"><a name="type-options">options()</a></h3>
-<p><tt>options() = [{dest_refresh, <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="cloudi_service_api.html#type-dest_refresh_delay_milliseconds">cloudi_service_api:dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {timeout_async, <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>} | {timeout_sync, <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>} | {priority_default, <a href="#type-priority">priority()</a>} | {scope, atom()} | {uuid, <a href="deps/uuid/doc/uuid.html#type-state">uuid:state()</a>} | {groups, any()} | {groups_scope, atom()} | {groups_static, boolean()}]</tt></p>
+<p><tt>options() = [{dest_refresh, <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="cloudi_service_api.html#type-dest_refresh_delay_milliseconds">cloudi_service_api:dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {timeout_async, <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>} | {timeout_sync, <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>} | {priority_default, <a href="#type-priority">priority()</a>} | {scope, atom()} | {uuid, <a href="deps/uuid/doc/uuid.html#type-state">uuid:state()</a>} | {groups, <a href="deps/cpg/doc/cpg_data.html#type-state">cpg_data:state()</a>} | {groups_scope, atom()} | {groups_static, boolean()}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-pattern_pid">pattern_pid()</a></h3>
@@ -84,11 +92,15 @@
 
 
 <h3 class="typedecl"><a name="type-service_name">service_name()</a></h3>
-<p><tt>service_name() = string()</tt></p>
+<p><tt>service_name() = nonempty_string()</tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_name_pattern">service_name_pattern()</a></h3>
-<p><tt>service_name_pattern() = string()</tt></p>
+<p><tt>service_name_pattern() = nonempty_string()</tt></p>
+
+
+<h3 class="typedecl"><a name="type-service_name_pattern_suffix">service_name_pattern_suffix()</a></h3>
+<p><tt>service_name_pattern_suffix() = string()</tt></p>
 
 
 <h3 class="typedecl"><a name="type-timeout_milliseconds">timeout_milliseconds()</a></h3>
@@ -231,7 +243,7 @@
 
 <h3 class="function"><a name="destinations_refresh-2">destinations_refresh/2</a></h3>
 <div class="spec">
-<p><tt>destinations_refresh(Context::<a href="#type-context">context()</a>, Message::{cloudi_cpg_data, any()}) -&gt; <a href="#type-context">context()</a></tt><br></p>
+<p><tt>destinations_refresh(Context::<a href="#type-context">context()</a>, Message::{cloudi_cpg_data, <a href="deps/cpg/doc/cpg_data.html#type-state">cpg_data:state()</a>}) -&gt; <a href="#type-context">context()</a></tt><br></p>
 </div><p>
   <h4><a name="Refresh_destination_lookup_data.">Refresh destination lookup data.</a></h4>
   Called when using a lazy destination refresh method.
@@ -526,6 +538,6 @@
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Apr 12 2015, 20:34:50.</i></p>
+<p><i>Generated by EDoc, Dec 23 2015, 13:31:29.</i></p>
 </body>
 </html>
