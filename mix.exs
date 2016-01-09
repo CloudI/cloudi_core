@@ -3,7 +3,7 @@ defmodule CloudICore.Mixfile do
 
   def project do
     [app: :cloudi_core,
-     version: "1.5.1",
+     version: "1.5.1-package",
      language: :erlang,
      description: description,
      package: package,
@@ -25,9 +25,7 @@ defmodule CloudICore.Mixfile do
      {:varpool, "~> 1.5.1"},
      {:dynamic_compile, "~> 1.0.0"},
      {:syslog, "~> 1.0.2"},
-     {:msgpack,
-      [git: "https://github.com/msgpack/msgpack-erlang.git",
-       ref: "0.3.4"]}]
+     {:msgpack, "~> 0.3.5"}]
   end
 
   defp description do
