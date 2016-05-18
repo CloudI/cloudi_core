@@ -26,9 +26,7 @@ for external service support.
 ## EXAMPLE
 
     $ erl -pz deps/*/ebin -pz ebin
-    Erlang R16B02 (erts-5.10.3) [source] [64-bit] [smp:8:8] [async-threads:10] [kernel-poll:false]
     
-    Eshell V5.10.3  (abort with ^G)
     1> reltool_util:application_start(cloudi_core, [{configuration, "cloudi.conf"}]).
 
 ## CONTACT
