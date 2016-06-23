@@ -10,6 +10,38 @@ defmodule CloudICore.Mixfile do
      deps: deps]
   end
 
+  def application do
+    [applications: [
+       :nodefinder,
+       :dynamic_compile,
+       :pqueue,
+       :quickrand,
+       :supool,
+       :varpool,
+       :trie,
+       :reltool_util,
+       :key2value,
+       :keys1value,
+       :uuid,
+       :erlang_term,
+       :cpg,
+       :msgpack,
+       :sasl],
+     included_applications: [
+       :syslog],
+     mod: {:cloudi_core_i_app, []},
+     registered: [
+       :cloudi_core_i_configurator,
+       :cloudi_core_i_logger,
+       :cloudi_core_i_logger_sup,
+       :cloudi_core_i_nodes,
+       :cloudi_core_i_os_spawn,
+       :cloudi_core_i_services_external_sup,
+       :cloudi_core_i_services_internal_reload,
+       :cloudi_core_i_services_internal_sup,
+       :cloudi_core_i_services_monitor]]
+  end
+
   defp deps do
     [{:cpg, "~> 1.5.1"},
      {:uuid, "~> 1.5.1", hex: :uuid_erl},
