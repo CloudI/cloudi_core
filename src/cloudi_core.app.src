@@ -67,7 +67,6 @@
         ]},
    {applications, [
         nodefinder,
-        dynamic_compile,
         pqueue,
         quickrand,
         supool,
