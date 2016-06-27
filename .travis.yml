@@ -1,6 +1,7 @@
 language: erlang
 otp_release:
-  - 18.2.1
+  - 19.0
+  - 18.3
 before_script:
   - rebar get-deps
 script: rebar compile ct suites=cloudi_service || ( cat logs/raw.log logs/ct_run*/cloudi.log && exit 1 )
