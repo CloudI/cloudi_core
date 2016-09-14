@@ -16,9 +16,9 @@ For internal services that need to have successful service request sends
 (i.e., a timeout does not occur because a response is received within the    
 timeout period) with each send done asynchronously and all tracking done   
 with in-memory data.</p>.
-<p>Copyright © 2015 Michael Truog</p>
+<p>Copyright © 2015-2016 Michael Truog</p>
 
-<p><b>Version:</b> 1.5.1 Dec 23 2015 13:31:29
+<p><b>Version:</b> 1.5.2 Sep 14 2016 16:25:22
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
 
@@ -53,7 +53,7 @@ be sent concurrently and every request must receive a response
 
 
 <h3 class="typedecl"><a name="type-state">state()</a></h3>
-<p><tt>state() = #cloudi_queue{retry_max = undefined | non_neg_integer(), validate_request_info = undefined | fun((any()) -&gt; boolean()), validate_request = undefined | fun((any(), any()) -&gt; boolean()), validate_response_info = undefined | fun((any()) -&gt; boolean()), validate_response = undefined | fun((any(), any()) -&gt; boolean()), failures_source_die = undefined | boolean(), failures_source_max_count = undefined | pos_integer(), failures_source_max_period = undefined | infinity | pos_integer(), failures_source = [<a href="erlang.html#type-timestamp">erlang:timestamp()</a>], requests = <a href="#type-dict_proxy">dict_proxy</a>(<a href="cloudi_service.html#type-trans_id">cloudi_service:trans_id()</a>, #request{name = undefined | <a href="cloudi_service.html#type-service_name">cloudi_service:service_name()</a>, request_info = undefined | <a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>, request = undefined | <a href="cloudi_service.html#type-request">cloudi_service:request()</a>, timeout = undefined | <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>, priority = undefined | <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>, pattern_pid = undefined | <a href="cloudi_service.html#type-pattern_pid">cloudi_service:pattern_pid()</a>, retry_count = non_neg_integer()})}</tt></p>
+<p><tt>state() = #cloudi_queue{retry_max = non_neg_integer(), validate_request_info = undefined | fun((any()) -&gt; boolean()), validate_request = undefined | fun((any(), any()) -&gt; boolean()), validate_response_info = undefined | fun((any()) -&gt; boolean()), validate_response = undefined | fun((any(), any()) -&gt; boolean()), failures_source_die = boolean(), failures_source_max_count = pos_integer(), failures_source_max_period = infinity | pos_integer(), failures_source = [<a href="erlang.html#type-timestamp">erlang:timestamp()</a>], requests = <a href="#type-dict_proxy">dict_proxy</a>(<a href="cloudi_service.html#type-trans_id">cloudi_service:trans_id()</a>, #request{name = <a href="cloudi_service.html#type-service_name">cloudi_service:service_name()</a>, request_info = <a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>, request = <a href="cloudi_service.html#type-request">cloudi_service:request()</a>, timeout = <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>, priority = <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>, pattern_pid = <a href="cloudi_service.html#type-pattern_pid">cloudi_service:pattern_pid()</a>, retry_count = non_neg_integer()})}</tt></p>
 
 
 <h2><a name="index">Function Index</a></h2>
@@ -97,7 +97,7 @@ be sent concurrently and every request must receive a response
 
 <h3 class="function"><a name="recv-3">recv/3</a></h3>
 <div class="spec">
-<p><tt>recv(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Return_async_active::#return_async_active{name = undefined | <a href="cloudi_service.html#type-service_name">cloudi_service:service_name()</a>, pattern = undefined | <a href="cloudi_service.html#type-service_name_pattern">cloudi_service:service_name_pattern()</a>, response_info = undefined | <a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>, response = undefined | <a href="cloudi_service.html#type-response">cloudi_service:response()</a>, timeout = undefined | <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>, trans_id = undefined | <a href="cloudi_service.html#type-trans_id">cloudi_service:trans_id()</a>}, State::<a href="#type-state">state()</a>) -&gt; {ok, NewState::<a href="#type-state">state()</a>} | {{error, Reason::<a href="cloudi_service.html#type-error_reason">cloudi_service:error_reason()</a>}, NewState::<a href="#type-state">state()</a>}</tt><br></p>
+<p><tt>recv(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Return_async_active::#return_async_active{name = <a href="cloudi_service.html#type-service_name">cloudi_service:service_name()</a>, pattern = <a href="cloudi_service.html#type-service_name_pattern">cloudi_service:service_name_pattern()</a>, response_info = <a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>, response = <a href="cloudi_service.html#type-response">cloudi_service:response()</a>, timeout = <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>, trans_id = <a href="cloudi_service.html#type-trans_id">cloudi_service:trans_id()</a>}, State::<a href="#type-state">state()</a>) -&gt; {ok, NewState::<a href="#type-state">state()</a>} | {{error, Reason::<a href="cloudi_service.html#type-error_reason">cloudi_service:error_reason()</a>}, NewState::<a href="#type-state">state()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Receive_a_service_request.">Receive a service request.</a></h4>
   Must be called from the <code>cloudi_service_handle_info/3</code> callback function.</p>
@@ -139,7 +139,7 @@ be sent concurrently and every request must receive a response
 
 <h3 class="function"><a name="timeout-3">timeout/3</a></h3>
 <div class="spec">
-<p><tt>timeout(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Timeout_async_active::#timeout_async_active{trans_id = undefined | <a href="cloudi_service.html#type-trans_id">cloudi_service:trans_id()</a>}, State::<a href="#type-state">state()</a>) -&gt; {ok, NewState::<a href="#type-state">state()</a>} | {{error, Reason::<a href="cloudi_service.html#type-error_reason">cloudi_service:error_reason()</a>}, NewState::<a href="#type-state">state()</a>}</tt><br></p>
+<p><tt>timeout(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Timeout_async_active::#timeout_async_active{trans_id = <a href="cloudi_service.html#type-trans_id">cloudi_service:trans_id()</a>}, State::<a href="#type-state">state()</a>) -&gt; {ok, NewState::<a href="#type-state">state()</a>} | {{error, Reason::<a href="cloudi_service.html#type-error_reason">cloudi_service:error_reason()</a>}, NewState::<a href="#type-state">state()</a>}</tt><br></p>
 </div><p>
   <h4><a name="A_service_request_timeout.">A service request timeout.</a></h4>
   <code>ok</code> is returned if a service request is retried. Must be called from the
@@ -147,6 +147,6 @@ be sent concurrently and every request must receive a response
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Dec 23 2015, 13:31:29.</i></p>
+<p><i>Generated by EDoc, Sep 14 2016, 16:25:22.</i></p>
 </body>
 </html>

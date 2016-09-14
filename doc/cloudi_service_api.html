@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Service_API_Module">CloudI Service API Module</a></h3>
    A module that exposes dynamic configuration of CloudI.
-<p>Copyright © 2011-2015 Michael Truog</p>
+<p>Copyright © 2011-2016 Michael Truog</p>
 
-<p><b>Version:</b> 1.5.1 Dec 23 2015 13:31:29
+<p><b>Version:</b> 1.5.2 Sep 14 2016 16:25:21
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
 
@@ -49,7 +49,7 @@
 
 
 <h3 class="typedecl"><a name="type-aspect_info_internal">aspect_info_internal()</a></h3>
-<p><tt>aspect_info_internal() = <a href="#type-aspect_info_internal_f">aspect_info_internal_f()</a> | {Module::module(), Function::atom()}</tt></p>
+<p><tt>aspect_info_internal() = <a href="#type-aspect_info_internal_f">aspect_info_internal_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_info_internal_f">aspect_info_internal_f()</a></h3>
@@ -57,7 +57,7 @@
 
 
 <h3 class="typedecl"><a name="type-aspect_init_after_external">aspect_init_after_external()</a></h3>
-<p><tt>aspect_init_after_external() = <a href="#type-aspect_init_after_external_f">aspect_init_after_external_f()</a> | {Module::module(), Function::atom()}</tt></p>
+<p><tt>aspect_init_after_external() = <a href="#type-aspect_init_after_external_f">aspect_init_after_external_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_init_after_external_f">aspect_init_after_external_f()</a></h3>
@@ -65,15 +65,27 @@
 
 
 <h3 class="typedecl"><a name="type-aspect_init_after_internal">aspect_init_after_internal()</a></h3>
-<p><tt>aspect_init_after_internal() = <a href="#type-aspect_init_after_internal_f">aspect_init_after_internal_f()</a> | {Module::module(), Function::atom()}</tt></p>
+<p><tt>aspect_init_after_internal() = <a href="#type-aspect_init_after_internal_f">aspect_init_after_internal_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_init_after_internal_f">aspect_init_after_internal_f()</a></h3>
 <p><tt>aspect_init_after_internal_f() = fun((Args::list(), Prefix::<a href="cloudi_service.html#type-service_name_pattern">cloudi_service:service_name_pattern()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, State::any(), Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>) -&gt; {ok, NewState::any()} | {stop, Reason::any(), NewState::any()})</tt></p>
 
 
+<h3 class="typedecl"><a name="type-aspect_log_after">aspect_log_after()</a></h3>
+<p><tt>aspect_log_after() = <a href="#type-aspect_log_f">aspect_log_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-aspect_log_before">aspect_log_before()</a></h3>
+<p><tt>aspect_log_before() = <a href="#type-aspect_log_f">aspect_log_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-aspect_log_f">aspect_log_f()</a></h3>
+<p><tt>aspect_log_f() = fun((Level::<a href="#type-loglevel_on">loglevel_on()</a>, Timestamp::<a href="erlang.html#type-timestamp">erlang:timestamp()</a>, Node::node(), Pid::pid(), Module::module(), Line::pos_integer(), Function::atom() | undefined, Arity::non_neg_integer() | undefined, MetaData::[{atom(), any()}], LogMessage::string()) -&gt; ok)</tt></p>
+
+
 <h3 class="typedecl"><a name="type-aspect_request_after_external">aspect_request_after_external()</a></h3>
-<p><tt>aspect_request_after_external() = <a href="#type-aspect_request_after_external_f">aspect_request_after_external_f()</a> | {Module::module(), Function::atom()}</tt></p>
+<p><tt>aspect_request_after_external() = <a href="#type-aspect_request_after_external_f">aspect_request_after_external_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_request_after_external_f">aspect_request_after_external_f()</a></h3>
@@ -81,7 +93,7 @@
 
 
 <h3 class="typedecl"><a name="type-aspect_request_after_internal">aspect_request_after_internal()</a></h3>
-<p><tt>aspect_request_after_internal() = <a href="#type-aspect_request_after_internal_f">aspect_request_after_internal_f()</a> | {Module::module(), Function::atom()}</tt></p>
+<p><tt>aspect_request_after_internal() = <a href="#type-aspect_request_after_internal_f">aspect_request_after_internal_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_request_after_internal_f">aspect_request_after_internal_f()</a></h3>
@@ -89,7 +101,7 @@
 
 
 <h3 class="typedecl"><a name="type-aspect_request_before_external">aspect_request_before_external()</a></h3>
-<p><tt>aspect_request_before_external() = <a href="#type-aspect_request_before_external_f">aspect_request_before_external_f()</a> | {Module::module(), Function::atom()}</tt></p>
+<p><tt>aspect_request_before_external() = <a href="#type-aspect_request_before_external_f">aspect_request_before_external_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_request_before_external_f">aspect_request_before_external_f()</a></h3>
@@ -97,7 +109,7 @@
 
 
 <h3 class="typedecl"><a name="type-aspect_request_before_internal">aspect_request_before_internal()</a></h3>
-<p><tt>aspect_request_before_internal() = <a href="#type-aspect_request_before_internal_f">aspect_request_before_internal_f()</a> | {Module::module(), Function::atom()}</tt></p>
+<p><tt>aspect_request_before_internal() = <a href="#type-aspect_request_before_internal_f">aspect_request_before_internal_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_request_before_internal_f">aspect_request_before_internal_f()</a></h3>
@@ -105,7 +117,7 @@
 
 
 <h3 class="typedecl"><a name="type-aspect_terminate_before_external">aspect_terminate_before_external()</a></h3>
-<p><tt>aspect_terminate_before_external() = <a href="#type-aspect_terminate_before_external_f">aspect_terminate_before_external_f()</a> | {Module::module(), Function::atom()}</tt></p>
+<p><tt>aspect_terminate_before_external() = <a href="#type-aspect_terminate_before_external_f">aspect_terminate_before_external_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_terminate_before_external_f">aspect_terminate_before_external_f()</a></h3>
@@ -113,7 +125,7 @@
 
 
 <h3 class="typedecl"><a name="type-aspect_terminate_before_internal">aspect_terminate_before_internal()</a></h3>
-<p><tt>aspect_terminate_before_internal() = <a href="#type-aspect_terminate_before_internal_f">aspect_terminate_before_internal_f()</a> | {Module::module(), Function::atom()}</tt></p>
+<p><tt>aspect_terminate_before_internal() = <a href="#type-aspect_terminate_before_internal_f">aspect_terminate_before_internal_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_terminate_before_internal_f">aspect_terminate_before_internal_f()</a></h3>
@@ -134,6 +146,10 @@
 
 <h3 class="typedecl"><a name="type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a></h3>
 <p><tt>dest_refresh_delay_milliseconds() = 101..4294967295</tt></p>
+
+
+<h3 class="typedecl"><a name="type-directory_external">directory_external()</a></h3>
+<p><tt>directory_external() = <a href="file.html#type-filename">file:filename()</a> | undefined</tt></p>
 
 
 <h3 class="typedecl"><a name="type-latency_time_milliseconds">latency_time_milliseconds()</a></h3>
@@ -157,7 +173,7 @@
 
 
 <h3 class="typedecl"><a name="type-logging_proplist">logging_proplist()</a></h3>
-<p><tt>logging_proplist() = [{file, string() | undefined} | {level, <a href="#type-loglevel">loglevel()</a>} | {syslog, <a href="#type-logging_syslog_set_proplist">logging_syslog_set_proplist()</a> | undefined} | {formatters, <a href="#type-logging_formatters_set_proplist">logging_formatters_set_proplist()</a> | undefined} | {redirect, node() | undefined}, ...]</tt></p>
+<p><tt>logging_proplist() = [{file, string() | undefined} | {level, <a href="#type-loglevel">loglevel()</a>} | {redirect, node() | undefined} | {syslog, <a href="#type-logging_syslog_set_proplist">logging_syslog_set_proplist()</a> | undefined} | {formatters, <a href="#type-logging_formatters_set_proplist">logging_formatters_set_proplist()</a> | undefined} | {aspects_log_before, [<a href="#type-aspect_log_before">aspect_log_before()</a>]} | {aspects_log_after, [<a href="#type-aspect_log_after">aspect_log_after()</a>]}, ...]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-logging_syslog_set_proplist">logging_syslog_set_proplist()</a></h3>
@@ -165,7 +181,23 @@
 
 
 <h3 class="typedecl"><a name="type-loglevel">loglevel()</a></h3>
-<p><tt>loglevel() = fatal | error | warn | info | debug | trace | off</tt></p>
+<p><tt>loglevel() = <a href="#type-loglevel_on">loglevel_on()</a> | off</tt></p>
+
+
+<h3 class="typedecl"><a name="type-loglevel_on">loglevel_on()</a></h3>
+<p><tt>loglevel_on() = fatal | error | warn | info | debug | trace</tt></p>
+
+
+<h3 class="typedecl"><a name="type-module_state_internal">module_state_internal()</a></h3>
+<p><tt>module_state_internal() = <a href="#type-module_state_internal_f">module_state_internal_f()</a> | {Module::module(), Function::atom()} | {{Module::module(), Function::atom()}}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-module_state_internal_f">module_state_internal_f()</a></h3>
+<p><tt>module_state_internal_f() = fun((OldModuleVersion::<a href="#type-module_version">module_version()</a>, NewModuleVersion::<a href="#type-module_version">module_version()</a>, OldState::any()) -&gt; {ok, NewState::any()} | {error, Reason::any()})</tt></p>
+
+
+<h3 class="typedecl"><a name="type-module_version">module_version()</a></h3>
+<p><tt>module_version() = [any()]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-node_reconnect_delay_seconds">node_reconnect_delay_seconds()</a></h3>
@@ -201,11 +233,11 @@
 
 
 <h3 class="typedecl"><a name="type-service">service()</a></h3>
-<p><tt>service() = #internal{prefix = <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, module = undefined | atom() | <a href="file.html#type-filename">file:filename()</a>, args = list(), dest_refresh = <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, timeout_init = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_async = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, dest_list_deny = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, dest_list_allow = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, count_process = pos_integer() | float(), max_r = non_neg_integer(), max_t = <a href="cloudi_service_api.html#type-seconds">cloudi_service_api:seconds()</a>, options = <a href="cloudi_service_api.html#type-service_options_internal">cloudi_service_api:service_options_internal()</a>} | #external{prefix = <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, file_path = undefined | <a href="file.html#type-filename">file:filename()</a>, args = string(), env = [{string(), string()}], dest_refresh = <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, protocol = default | local | tcp | udp, buffer_size = default | pos_integer(), timeout_init = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_async = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, dest_list_deny = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, dest_list_allow = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, count_process = pos_integer() | float(), count_thread = pos_integer() | float(), max_r = non_neg_integer(), max_t = <a href="cloudi_service_api.html#type-seconds">cloudi_service_api:seconds()</a>, options = <a href="cloudi_service_api.html#type-service_options_external">cloudi_service_api:service_options_external()</a>}</tt></p>
+<p><tt>service() = #internal{prefix = <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, module = atom() | <a href="file.html#type-filename">file:filename()</a>, args = list(), dest_refresh = <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, timeout_init = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_async = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, dest_list_deny = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, dest_list_allow = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, count_process = pos_integer() | float(), max_r = non_neg_integer(), max_t = <a href="cloudi_service_api.html#type-seconds">cloudi_service_api:seconds()</a>, options = <a href="cloudi_service_api.html#type-service_options_internal">cloudi_service_api:service_options_internal()</a>} | #external{prefix = <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, file_path = <a href="file.html#type-filename">file:filename()</a>, args = string(), env = [{string(), string()}], dest_refresh = <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, protocol = default | local | tcp | udp, buffer_size = default | pos_integer(), timeout_init = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_async = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, dest_list_deny = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, dest_list_allow = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, count_process = pos_integer() | float(), count_thread = pos_integer() | float(), max_r = non_neg_integer(), max_t = <a href="cloudi_service_api.html#type-seconds">cloudi_service_api:seconds()</a>, options = <a href="cloudi_service_api.html#type-service_options_external">cloudi_service_api:service_options_external()</a>}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_external">service_external()</a></h3>
-<p><tt>service_external() = #external{prefix = <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, file_path = undefined | <a href="file.html#type-filename">file:filename()</a>, args = string(), env = [{string(), string()}], dest_refresh = <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, protocol = default | local | tcp | udp, buffer_size = default | pos_integer(), timeout_init = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_async = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, dest_list_deny = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, dest_list_allow = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, count_process = pos_integer() | float(), count_thread = pos_integer() | float(), max_r = non_neg_integer(), max_t = <a href="cloudi_service_api.html#type-seconds">cloudi_service_api:seconds()</a>, options = <a href="cloudi_service_api.html#type-service_options_external">cloudi_service_api:service_options_external()</a>}</tt></p>
+<p><tt>service_external() = #external{prefix = <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, file_path = <a href="file.html#type-filename">file:filename()</a>, args = string(), env = [{string(), string()}], dest_refresh = <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, protocol = default | local | tcp | udp, buffer_size = default | pos_integer(), timeout_init = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_async = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, dest_list_deny = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, dest_list_allow = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, count_process = pos_integer() | float(), count_thread = pos_integer() | float(), max_r = non_neg_integer(), max_t = <a href="cloudi_service_api.html#type-seconds">cloudi_service_api:seconds()</a>, options = <a href="cloudi_service_api.html#type-service_options_external">cloudi_service_api:service_options_external()</a>}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_id">service_id()</a></h3>
@@ -213,19 +245,39 @@
 <p> version 1 UUID (service instance id)</p>
 
 <h3 class="typedecl"><a name="type-service_internal">service_internal()</a></h3>
-<p><tt>service_internal() = #internal{prefix = <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, module = undefined | atom() | <a href="file.html#type-filename">file:filename()</a>, args = list(), dest_refresh = <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, timeout_init = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_async = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, dest_list_deny = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, dest_list_allow = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, count_process = pos_integer() | float(), max_r = non_neg_integer(), max_t = <a href="cloudi_service_api.html#type-seconds">cloudi_service_api:seconds()</a>, options = <a href="cloudi_service_api.html#type-service_options_internal">cloudi_service_api:service_options_internal()</a>}</tt></p>
+<p><tt>service_internal() = #internal{prefix = <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, module = atom() | <a href="file.html#type-filename">file:filename()</a>, args = list(), dest_refresh = <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, timeout_init = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_async = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, timeout_sync = <a href="cloudi_service_api.html#type-timeout_milliseconds">cloudi_service_api:timeout_milliseconds()</a>, dest_list_deny = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, dest_list_allow = <a href="cloudi_service_api.html#type-dest_list">cloudi_service_api:dest_list()</a>, count_process = pos_integer() | float(), max_r = non_neg_integer(), max_t = <a href="cloudi_service_api.html#type-seconds">cloudi_service_api:seconds()</a>, options = <a href="cloudi_service_api.html#type-service_options_internal">cloudi_service_api:service_options_internal()</a>}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_options_external">service_options_external()</a></h3>
-<p><tt>service_options_external() = [{priority_default, -128..127} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {rate_request_max, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {value, number()}] | number() | undefined} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {count_process_dynamic, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_max, number()} | {rate_request_min, number()} | {count_max, number()} | {count_min, number()}] | false} | {timeout_terminate, undefined | <a href="#type-timeout_terminate_milliseconds">timeout_terminate_milliseconds()</a>} | {scope, atom()} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_stddev, float()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {automatic_loading, boolean()} | {aspects_init_after, [<a href="#type-aspect_init_after_external">aspect_init_after_external()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_external">aspect_request_before_external()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_external">aspect_request_after_external()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_external">aspect_terminate_before_external()</a>]} | {limit, <a href="#type-limit_external">limit_external()</a>} | {owner, <a href="#type-owner_external">owner_external()</a>}]</tt></p>
+<p><tt>service_options_external() = [{priority_default, -128..127} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {rate_request_max, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {value, number()}] | number() | undefined} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {count_process_dynamic, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_max, number()} | {rate_request_min, number()} | {count_max, number()} | {count_min, number()}] | false} | {timeout_terminate, undefined | <a href="#type-timeout_terminate_milliseconds">timeout_terminate_milliseconds()</a>} | {scope, atom()} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_stddev, float()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {automatic_loading, boolean()} | {dispatcher_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {aspects_init_after, [<a href="#type-aspect_init_after_external">aspect_init_after_external()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_external">aspect_request_before_external()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_external">aspect_request_after_external()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_external">aspect_terminate_before_external()</a>]} | {limit, <a href="#type-limit_external">limit_external()</a>} | {owner, <a href="#type-owner_external">owner_external()</a>} | {directory, <a href="#type-directory_external">directory_external()</a>}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_options_internal">service_options_internal()</a></h3>
-<p><tt>service_options_internal() = [{priority_default, <a href="#type-priority">priority()</a>} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {rate_request_max, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {value, number()}] | number() | undefined} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {count_process_dynamic, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_max, number()} | {rate_request_min, number()} | {count_max, number()} | {count_min, number()}] | false} | {timeout_terminate, undefined | <a href="#type-timeout_terminate_milliseconds">timeout_terminate_milliseconds()</a>} | {scope, atom()} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_stddev, float()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {automatic_loading, boolean()} | {aspects_init_after, [<a href="#type-aspect_init_after_internal">aspect_init_after_internal()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_internal">aspect_request_before_internal()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_internal">aspect_request_after_internal()</a>]} | {aspects_info_before, [<a href="#type-aspect_info_before_internal">aspect_info_before_internal()</a>]} | {aspects_info_after, [<a href="#type-aspect_info_after_internal">aspect_info_after_internal()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_internal">aspect_terminate_before_internal()</a>]} | {application_name, undefined | atom()} | {request_pid_uses, infinity | pos_integer()} | {request_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()}]} | {info_pid_uses, infinity | pos_integer()} | {info_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()}]} | {duo_mode, boolean()} | {hibernate, boolean()} | {reload, boolean()}]</tt></p>
+<p><tt>service_options_internal() = [{priority_default, <a href="#type-priority">priority()</a>} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {rate_request_max, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {value, number()}] | number() | undefined} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {count_process_dynamic, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_max, number()} | {rate_request_min, number()} | {count_max, number()} | {count_min, number()}] | false} | {timeout_terminate, undefined | <a href="#type-timeout_terminate_milliseconds">timeout_terminate_milliseconds()</a>} | {scope, atom()} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_stddev, float()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {automatic_loading, boolean()} | {dispatcher_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {aspects_init_after, [<a href="#type-aspect_init_after_internal">aspect_init_after_internal()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_internal">aspect_request_before_internal()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_internal">aspect_request_after_internal()</a>]} | {aspects_info_before, [<a href="#type-aspect_info_before_internal">aspect_info_before_internal()</a>]} | {aspects_info_after, [<a href="#type-aspect_info_after_internal">aspect_info_after_internal()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_internal">aspect_terminate_before_internal()</a>]} | {application_name, undefined | atom()} | {init_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {request_pid_uses, infinity | pos_integer()} | {request_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {info_pid_uses, infinity | pos_integer()} | {info_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {duo_mode, boolean()} | {hibernate, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_min, number()}] | boolean()} | {reload, boolean()}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_proplist">service_proplist()</a></h3>
 <p><tt>service_proplist() = [{type, internal | external} | {prefix, <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>} | {module, atom() | <a href="file.html#type-filename">file:filename()</a>} | {file_path, <a href="file.html#type-filename">file:filename()</a>} | {args, list()} | {env, [{string(), string()}]} | {dest_refresh, <a href="#type-dest_refresh">dest_refresh()</a>} | {protocol, default | local | tcp | udp} | {buffer_size, default | pos_integer()} | {timeout_init, <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>} | {timeout_async, <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>} | {timeout_sync, <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>} | {dest_list_deny, <a href="#type-dest_list">dest_list()</a>} | {dest_list_allow, <a href="#type-dest_list">dest_list()</a>} | {count_process, pos_integer() | float()} | {count_thread, pos_integer() | float()} | {max_r, non_neg_integer()} | {max_t, <a href="#type-seconds">seconds()</a>} | {options, <a href="#type-service_options_internal">service_options_internal()</a> | <a href="#type-service_options_external">service_options_external()</a>}, ...]</tt></p>
+
+
+<h3 class="typedecl"><a name="type-service_update_plan">service_update_plan()</a></h3>
+<p><tt>service_update_plan() = <a href="#type-service_update_plan_internal">service_update_plan_internal()</a> | <a href="#type-service_update_plan_external">service_update_plan_external()</a></tt></p>
+
+
+<h3 class="typedecl"><a name="type-service_update_plan_external">service_update_plan_external()</a></h3>
+<p><tt>service_update_plan_external() = [{type, external} | {file_path, <a href="file.html#type-filename">file:filename()</a>} | {args, string()} | {env, [{string(), string()}]} | {sync, boolean()} | {modules_load, [atom()]} | {modules_unload, [atom()]} | {code_paths_add, [string()]} | {code_paths_remove, [string()]} | {dest_refresh, <a href="#type-dest_refresh">dest_refresh()</a>} | {timeout_init, <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>} | {timeout_async, <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>} | {timeout_sync, <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>} | {dest_list_deny, <a href="#type-dest_list">dest_list()</a>} | {dest_list_allow, <a href="#type-dest_list">dest_list()</a>} | {options, <a href="#type-service_update_plan_options_external">service_update_plan_options_external()</a>}, ...]</tt></p>
+
+
+<h3 class="typedecl"><a name="type-service_update_plan_internal">service_update_plan_internal()</a></h3>
+<p><tt>service_update_plan_internal() = [{type, internal} | {module, atom()} | {module_state, <a href="#type-module_state_internal">module_state_internal()</a>} | {sync, boolean()} | {modules_load, [atom()]} | {modules_unload, [atom()]} | {code_paths_add, [string()]} | {code_paths_remove, [string()]} | {dest_refresh, <a href="#type-dest_refresh">dest_refresh()</a>} | {timeout_init, <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>} | {timeout_async, <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>} | {timeout_sync, <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>} | {dest_list_deny, <a href="#type-dest_list">dest_list()</a>} | {dest_list_allow, <a href="#type-dest_list">dest_list()</a>} | {options, <a href="#type-service_update_plan_options_internal">service_update_plan_options_internal()</a>}, ...]</tt></p>
+
+
+<h3 class="typedecl"><a name="type-service_update_plan_options_external">service_update_plan_options_external()</a></h3>
+<p><tt>service_update_plan_options_external() = [{priority_default, -128..127} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {rate_request_max, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {value, number()}] | number() | undefined} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_stddev, float()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {dispatcher_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {aspects_init_after, [<a href="#type-aspect_init_after_external">aspect_init_after_external()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_external">aspect_request_before_external()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_external">aspect_request_after_external()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_external">aspect_terminate_before_external()</a>]} | {limit, <a href="#type-limit_external">limit_external()</a>}]</tt></p>
+
+
+<h3 class="typedecl"><a name="type-service_update_plan_options_internal">service_update_plan_options_internal()</a></h3>
+<p><tt>service_update_plan_options_internal() = [{priority_default, <a href="#type-priority">priority()</a>} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {rate_request_max, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {value, number()}] | number() | undefined} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>} | {time_gaussian_stddev, float()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {dispatcher_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {aspects_init_after, [<a href="#type-aspect_init_after_internal">aspect_init_after_internal()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_internal">aspect_request_before_internal()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_internal">aspect_request_after_internal()</a>]} | {aspects_info_before, [<a href="#type-aspect_info_before_internal">aspect_info_before_internal()</a>]} | {aspects_info_after, [<a href="#type-aspect_info_after_internal">aspect_info_after_internal()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_internal">aspect_terminate_before_internal()</a>]} | {init_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {request_pid_uses, infinity | pos_integer()} | {request_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {info_pid_uses, infinity | pos_integer()} | {info_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, non_neg_integer() | #{}} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {hibernate, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_min, number()}] | boolean()} | {reload, boolean()}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-timeout_milliseconds">timeout_milliseconds()</a></h3>
@@ -312,6 +364,10 @@
 <tr><td valign="top"><a href="#services_search-2">services_search/2</a></td><td>
   <h4><a name="Search_service_instances_for_matches_on_the_provided_service_name.">Search service instances for matches on the provided service name.</a></h4>
   Multiple services may be returned for a single service name.</td></tr>
+<tr><td valign="top"><a href="#services_update-2">services_update/2</a></td><td>
+  <h4><a name="Update_service_instances.">Update service instances.</a></h4>
+  Update service instances without losing service requests and other
+  service-specific data within the Erlang VM.</td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
@@ -536,9 +592,17 @@
   (e.g., cloudi_service_http_cowboy websocket connection pids) will not
   return the service's configuration with this function.  Provide a scope
   within a 2 element tuple with the service name to check a custom scope.</p>
+
+<h3 class="function"><a name="services_update-2">services_update/2</a></h3>
+<div class="spec">
+<p><tt>services_update(L::[{string() | binary(), <a href="#type-service_update_plan">service_update_plan()</a>}, ...], Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; {ok, ServiceIdsSetsSuccess::[[<a href="#type-service_id">service_id()</a>, ...], ...]} | {error, {ServiceIdsSetError::[<a href="#type-service_id">service_id()</a>, ...], Reason::{service_internal_update_failed | service_external_update_failed, any()}}, ServiceIdsSetsSuccess::[[<a href="#type-service_id">service_id()</a>, ...], ...]} | {error, timeout | noproc | {service_id_invalid, any()} | <a href="cloudi_core_i_configuration.html#type-error_reason_services_update">cloudi_core_i_configuration:error_reason_services_update()</a>}</tt><br></p>
+</div><p>
+  <h4><a name="Update_service_instances.">Update service instances.</a></h4>
+  Update service instances without losing service requests and other
+  service-specific data within the Erlang VM.</p>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Dec 23 2015, 13:31:29.</i></p>
+<p><i>Generated by EDoc, Sep 14 2016, 16:25:21.</i></p>
 </body>
 </html>
