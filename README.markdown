@@ -1,4 +1,4 @@
-#[`cloudi_core` 1.5.2](http://cloudi.org)
+#[`cloudi_core` 1.5.3](http://cloudi.org)
 
 [![Build Status](https://secure.travis-ci.org/CloudI/cloudi_core.png?branch=master)](http://travis-ci.org/CloudI/cloudi_core)
 [![hex.pm version](https://img.shields.io/hexpm/v/cloudi_core.svg)](https://hex.pm/packages/cloudi_core)
