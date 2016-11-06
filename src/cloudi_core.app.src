@@ -80,6 +80,7 @@
         cpg,
         msgpack,
         sasl,
+        syntax_tools,
         stdlib,
         kernel
         ]},
