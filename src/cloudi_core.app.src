@@ -63,9 +63,6 @@
         cloudi_core_i_services_internal_sup,
         cloudi_core_i_services_monitor
         ]},
-   {included_applications, [
-        syslog
-        ]},
    {applications, [
         nodefinder,
         pqueue,
@@ -80,6 +77,7 @@
         erlang_term,
         cpg,
         msgpack,
+        syslog_socket,
         sasl,
         syntax_tools,
         stdlib,
