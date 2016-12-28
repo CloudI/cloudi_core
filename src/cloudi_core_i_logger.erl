@@ -1748,9 +1748,11 @@ syslog_open(#config_logging_syslog{identity = SyslogIdentity,
                {transport, SyslogTransport},
                {transport_options, SyslogTransportOptions},
                {protocol, SyslogProtocol},
+               {utf8, true},
                {path, SyslogPath},
                {host, SyslogHost},
-               {port, SyslogPort}],
+               {port, SyslogPort},
+               {timeout, 5000}],
     {ok, Syslog} = syslog_socket:start_link(Options),
     Syslog.
 
