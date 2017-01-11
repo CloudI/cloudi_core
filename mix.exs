@@ -3,17 +3,16 @@ defmodule CloudICore.Mixfile do
 
   def project do
     [app: :cloudi_core,
-     version: "1.5.4",
+     version: "1.6.0",
      language: :erlang,
-     description: description,
-     package: package,
-     deps: deps]
+     description: description(),
+     package: package(),
+     deps: deps()]
   end
 
   def application do
     [applications: [
        :nodefinder,
-       :dynamic_compile,
        :pqueue,
        :quickrand,
        :supool,
@@ -25,10 +24,10 @@ defmodule CloudICore.Mixfile do
        :uuid,
        :erlang_term,
        :cpg,
+       :syslog_socket,
        :msgpack,
-       :sasl],
-     included_applications: [
-       :syslog],
+       :sasl,
+       :syntax_tools],
      mod: {:cloudi_core_i_app, []},
      registered: [
        :cloudi_core_i_configurator,
@@ -43,19 +42,19 @@ defmodule CloudICore.Mixfile do
   end
 
   defp deps do
-    [{:cpg, "~> 1.5.4"},
-     {:uuid, "~> 1.5.4", hex: :uuid_erl},
-     {:reltool_util, "~> 1.5.4"},
-     {:trie, "~> 1.5.4"},
-     {:erlang_term, "~> 1.5.4"},
-     {:quickrand, "~> 1.5.4"},
-     {:pqueue, "~> 1.5.4"},
-     {:key2value, "~> 1.5.4"},
-     {:keys1value, "~> 1.5.4"},
-     {:nodefinder, "~> 1.5.4"},
-     {:supool, "~> 1.5.4"},
-     {:varpool, "~> 1.5.4"},
-     {:syslog, "~> 1.0.2"},
+    [{:cpg, "~> 1.6.0"},
+     {:uuid, "~> 1.6.0", hex: :uuid_erl},
+     {:reltool_util, "~> 1.6.0"},
+     {:trie, "~> 1.6.0"},
+     {:erlang_term, "~> 1.6.0"},
+     {:quickrand, "~> 1.6.0"},
+     {:pqueue, "~> 1.6.0"},
+     {:key2value, "~> 1.6.0"},
+     {:keys1value, "~> 1.6.0"},
+     {:nodefinder, "~> 1.6.0"},
+     {:supool, "~> 1.6.0"},
+     {:varpool, "~> 1.6.0"},
+     {:syslog_socket, "~> 1.6.0"},
      {:msgpack, "~> 0.6.0"}]
   end
 

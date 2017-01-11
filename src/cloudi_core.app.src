@@ -3,7 +3,7 @@
 
 {application, cloudi_core, 
   [{description, "CloudI Core Application"},
-   {vsn, "1.5.4"},
+   {vsn, "1.6.0"},
    {modules, [
         cloudi,
         cloudi_args_type,
@@ -76,8 +76,8 @@
         uuid,
         erlang_term,
         cpg,
-        msgpack,
         syslog_socket,
+        msgpack,
         sasl,
         syntax_tools,
         stdlib,
