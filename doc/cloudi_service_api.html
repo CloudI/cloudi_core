@@ -15,7 +15,7 @@
    A module that exposes dynamic configuration of CloudI.
 <p>Copyright © 2011-2017 Michael Truog</p>
 
-<p><b>Version:</b> 1.5.5 Jan 10 2017 17:27:58
+<p><b>Version:</b> 1.6.1 Mar 28 2017 19:21:38
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog [at] gmail (dot) com"><tt>mjtruog [at] gmail (dot) com</tt></a>).</p>
 
@@ -81,7 +81,7 @@
 
 
 <h3 class="typedecl"><a name="type-aspect_log_f">aspect_log_f()</a></h3>
-<p><tt>aspect_log_f() = fun((Level::<a href="#type-loglevel_on">loglevel_on()</a>, Timestamp::<a href="erlang.html#type-timestamp">erlang:timestamp()</a>, Node::node(), Pid::pid(), Module::module(), Line::pos_integer(), Function::atom() | undefined, Arity::arity() | undefined, MetaData::[{atom(), any()}], LogMessage::string()) -&gt; ok)</tt></p>
+<p><tt>aspect_log_f() = fun((Level::<a href="#type-loglevel_on">loglevel_on()</a>, Timestamp::<a href="erlang.html#type-timestamp">erlang:timestamp()</a>, Node::node(), Pid::pid(), Module::module(), Line::pos_integer(), Function::atom() | undefined, Arity::arity() | undefined, MetaData::[{atom(), any()}], LogMessage::iodata()) -&gt; ok)</tt></p>
 
 
 <h3 class="typedecl"><a name="type-aspect_request_after_external">aspect_request_after_external()</a></h3>
@@ -205,7 +205,7 @@
 
 
 <h3 class="typedecl"><a name="type-logging_proplist">logging_proplist()</a></h3>
-<p><tt>logging_proplist() = [{file, string() | undefined} | {level, <a href="#type-loglevel">loglevel()</a>} | {redirect, node() | undefined} | {syslog, <a href="#type-logging_syslog_set_proplist">logging_syslog_set_proplist()</a> | undefined} | {formatters, <a href="#type-logging_formatters_set_proplist">logging_formatters_set_proplist()</a> | undefined} | {aspects_log_before, [<a href="#type-aspect_log_before">aspect_log_before()</a>]} | {aspects_log_after, [<a href="#type-aspect_log_after">aspect_log_after()</a>]}, ...]</tt></p>
+<p><tt>logging_proplist() = [{file, string() | undefined} | {stdout, boolean()} | {level, <a href="#type-loglevel">loglevel()</a>} | {redirect, node() | undefined} | {syslog, <a href="#type-logging_syslog_set_proplist">logging_syslog_set_proplist()</a> | undefined} | {formatters, <a href="#type-logging_formatters_set_proplist">logging_formatters_set_proplist()</a> | undefined} | {aspects_log_before, [<a href="#type-aspect_log_before">aspect_log_before()</a>]} | {aspects_log_after, [<a href="#type-aspect_log_after">aspect_log_after()</a>]}, ...]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-logging_syslog_facility">logging_syslog_facility()</a></h3>
@@ -337,7 +337,7 @@
 
 
 <h3 class="typedecl"><a name="type-service_options_external">service_options_external()</a></h3>
-<p><tt>service_options_external() = [{priority_default, -128..127} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {rate_request_max, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {value, number()}] | number() | undefined} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {count_process_dynamic, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_max, number()} | {rate_request_min, number()} | {count_max, number()} | {count_min, number()}] | false} | {timeout_terminate, undefined | <a href="#type-timeout_terminate_milliseconds">timeout_terminate_milliseconds()</a>} | {restart_delay, [{time_exponential_min, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_exponential_max, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_linear_min, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_linear_slope, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_linear_max, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_absolute, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>}] | false} | {scope, atom()} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_min_time_milliseconds">latency_min_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_max_time_milliseconds">latency_max_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_mean_time_milliseconds">latency_mean_time_milliseconds()</a>} | {time_gaussian_stddev, float() | pos_integer()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {automatic_loading, boolean()} | {dispatcher_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, <a href="#type-max_heap_size_options">max_heap_size_options()</a>} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {aspects_init_after, [<a href="#type-aspect_init_after_external">aspect_init_after_external()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_external">aspect_request_before_external()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_external">aspect_request_after_external()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_external">aspect_terminate_before_external()</a>]} | {limit, <a href="#type-limit_external">limit_external()</a>} | {owner, <a href="#type-owner_external">owner_external()</a>} | {directory, <a href="#type-directory_external">directory_external()</a>}]</tt></p>
+<p><tt>service_options_external() = [{priority_default, -128..127} | {queue_limit, undefined | non_neg_integer()} | {queue_size, undefined | pos_integer()} | {rate_request_max, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {value, number()}] | number() | undefined} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {request_timeout_adjustment, boolean()} | {request_timeout_immediate_max, <a href="#type-request_timeout_immediate_max_milliseconds">request_timeout_immediate_max_milliseconds()</a>} | {response_timeout_adjustment, boolean()} | {response_timeout_immediate_max, <a href="#type-response_timeout_immediate_max_milliseconds">response_timeout_immediate_max_milliseconds()</a>} | {count_process_dynamic, [{period, <a href="#type-period_seconds">period_seconds()</a>} | {rate_request_max, number()} | {rate_request_min, number()} | {count_max, number()} | {count_min, number()}] | false} | {timeout_terminate, undefined | <a href="#type-timeout_terminate_milliseconds">timeout_terminate_milliseconds()</a>} | {restart_delay, [{time_exponential_min, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_exponential_max, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_linear_min, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_linear_slope, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_linear_max, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>} | {time_absolute, <a href="#type-restart_delay_milliseconds">restart_delay_milliseconds()</a>}] | false} | {scope, atom()} | {monkey_latency, [{time_uniform_min, <a href="#type-latency_min_time_milliseconds">latency_min_time_milliseconds()</a>} | {time_uniform_max, <a href="#type-latency_max_time_milliseconds">latency_max_time_milliseconds()</a>} | {time_gaussian_mean, <a href="#type-latency_mean_time_milliseconds">latency_mean_time_milliseconds()</a>} | {time_gaussian_stddev, float() | pos_integer()} | {time_absolute, <a href="#type-latency_time_milliseconds">latency_time_milliseconds()</a>}] | system | false} | {monkey_chaos, [{probability_request, float()} | {probability_day, float()}] | system | false} | {automatic_loading, boolean()} | {dispatcher_pid_options, [{priority, low | normal | high} | {fullsweep_after, non_neg_integer()} | {min_heap_size, non_neg_integer()} | {min_bin_vheap_size, non_neg_integer()} | {max_heap_size, <a href="#type-max_heap_size_options">max_heap_size_options()</a>} | {sensitive, boolean()} | {message_queue_data, off_heap | on_heap | mixed}]} | {aspects_init_after, [<a href="#type-aspect_init_after_external">aspect_init_after_external()</a>]} | {aspects_request_before, [<a href="#type-aspect_request_before_external">aspect_request_before_external()</a>]} | {aspects_request_after, [<a href="#type-aspect_request_after_external">aspect_request_after_external()</a>]} | {aspects_terminate_before, [<a href="#type-aspect_terminate_before_external">aspect_terminate_before_external()</a>]} | {limit, <a href="#type-limit_external">limit_external()</a>} | {owner, <a href="#type-owner_external">owner_external()</a>} | {nice, <a href="#type-nice_external">nice_external()</a>} | {cgroup, <a href="#type-cgroup_external">cgroup_external()</a>} | {directory, <a href="#type-directory_external">directory_external()</a>}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_options_internal">service_options_internal()</a></h3>
@@ -438,6 +438,8 @@
   Redirect all local log output to a remote CloudI node.</td></tr>
 <tr><td valign="top"><a href="#logging_set-2">logging_set/2</a></td><td>
   <h4><a name="Set_CloudI_logging_configuration.">Set CloudI logging configuration.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#logging_stdout_set-2">logging_stdout_set/2</a></td><td>
+  <h4><a name="Modify_the_current_log_stdout_usage.">Modify the current log stdout usage.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#logging_syslog_set-2">logging_syslog_set/2</a></td><td>
   <h4><a name="Set_the_CloudI_syslog_configuration.">Set the CloudI syslog configuration.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#nodes-1">nodes/1</a></td><td>
@@ -581,6 +583,13 @@
   <h4><a name="Set_CloudI_logging_configuration.">Set CloudI logging configuration.</a></h4>
 </p>
 
+<h3 class="function"><a name="logging_stdout_set-2">logging_stdout_set/2</a></h3>
+<div class="spec">
+<p><tt>logging_stdout_set(Stdout::boolean(), Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; ok</tt><br></p>
+</div><p>
+  <h4><a name="Modify_the_current_log_stdout_usage.">Modify the current log stdout usage.</a></h4>
+</p>
+
 <h3 class="function"><a name="logging_syslog_set-2">logging_syslog_set/2</a></h3>
 <div class="spec">
 <p><tt>logging_syslog_set(L::<a href="#type-logging_syslog_set_proplist">logging_syslog_set_proplist()</a>, Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; ok | {error, timeout | noproc | <a href="cloudi_core_i_configuration.html#type-error_reason_logging_syslog_set">cloudi_core_i_configuration:error_reason_logging_syslog_set()</a>}</tt><br></p>
@@ -710,6 +719,6 @@
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Jan 10 2017, 17:27:59.</i></p>
+<p><i>Generated by EDoc, Mar 28 2017, 19:21:38.</i></p>
 </body>
 </html>
