@@ -120,10 +120,9 @@
             key2value:
             key2value(cloudi_service_api:service_id(),
                                pid(), #service{}),
-        changes = maps:new() ::
-            maps_proxy(cloudi_service_api:service_id(),
-                       list({increase | decrease,
-                             number(), number(), number()}))
+        changes = #{} ::
+            #{cloudi_service_api:service_id() :=
+              list({increase | decrease, number(), number(), number()})}
     }).
 
 %%%------------------------------------------------------------------------
