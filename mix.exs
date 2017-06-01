@@ -69,7 +69,7 @@ defmodule CloudICore.Mixfile do
     [files: ~w(src include doc test rebar.config README.markdown LICENSE
                cloudi.conf),
      maintainers: ["Michael Truog"],
-     licenses: ["BSD"],
+     licenses: ["MIT"],
      links: %{"Website" => "http://cloudi.org",
               "GitHub" => "https://github.com/CloudI/cloudi_core"}]
    end

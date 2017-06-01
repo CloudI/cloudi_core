@@ -5,7 +5,7 @@
 
 ## LICENSE
 
-[BSD License](https://github.com/CloudI/CloudI/blob/master/src/LICENSE)
+[MIT License](https://github.com/CloudI/CloudI/blob/master/src/LICENSE)
 
 ## ABOUT
 
