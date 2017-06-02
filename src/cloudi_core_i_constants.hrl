@@ -30,6 +30,8 @@
 
 % for using cloudi_core as an isolated Erlang application
 % outside of the CloudI repository
+% (only internal services are supported,
+%  due to the extra compilation required for external services support)
 -define(CLOUDI_CORE_STANDALONE, true).
 
 % used to calculate the timeout_terminate based on MaxT / MaxR
