@@ -1,7 +1,6 @@
 language: erlang
 otp_release:
-  - 19.2
-  - 19.0
+  - 19.3
 before_script:
   - kerl list installations
   - rebar get-deps

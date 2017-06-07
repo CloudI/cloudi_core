@@ -6,7 +6,7 @@ defmodule CloudICore.Mixfile do
 
   def project do
     [app: :cloudi_core,
-     version: "1.7.0",
+     version: "1.7.1",
      language: :erlang,
      description: description(),
      package: package(),
@@ -45,20 +45,20 @@ defmodule CloudICore.Mixfile do
   end
 
   defp deps do
-    [{:cpg, "~> 1.7.0"},
-     {:uuid, "~> 1.7.0", hex: :uuid_erl},
-     {:reltool_util, "~> 1.7.0"},
-     {:trie, "~> 1.7.0"},
-     {:erlang_term, "~> 1.7.0"},
-     {:quickrand, "~> 1.7.0"},
-     {:pqueue, "~> 1.7.0"},
-     {:key2value, "~> 1.7.0"},
-     {:keys1value, "~> 1.7.0"},
-     {:nodefinder, "~> 1.7.0"},
-     {:supool, "~> 1.7.0"},
-     {:varpool, "~> 1.7.0"},
-     {:syslog_socket, "~> 1.7.0"},
-     {:msgpack, "~> 0.6.0"}]
+    [{:cpg, "~> 1.7.1"},
+     {:uuid, "~> 1.7.1", hex: :uuid_erl},
+     {:reltool_util, "~> 1.7.1"},
+     {:trie, "~> 1.7.1"},
+     {:erlang_term, "~> 1.7.1"},
+     {:quickrand, "~> 1.7.1"},
+     {:pqueue, "~> 1.7.1"},
+     {:key2value, "~> 1.7.1"},
+     {:keys1value, "~> 1.7.1"},
+     {:nodefinder, "~> 1.7.1"},
+     {:supool, "~> 1.7.1"},
+     {:varpool, "~> 1.7.1"},
+     {:syslog_socket, "~> 1.7.1"},
+     {:msgpack, "~> 0.7.0"}]
   end
 
   defp description do
