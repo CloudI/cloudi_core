@@ -30,5 +30,5 @@ for external service support.
 
 ## CONTACT
 
-Michael Truog (mjtruog [at] gmail (dot) com)
+Michael Truog (mjtruog at protonmail dot com)
 
