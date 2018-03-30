@@ -70,7 +70,7 @@ defmodule CloudICore.Mixfile do
                cloudi.conf),
      maintainers: ["Michael Truog"],
      licenses: ["MIT"],
-     links: %{"Website" => "http://cloudi.org",
+     links: %{"Website" => "https://cloudi.org",
               "GitHub" => "https://github.com/CloudI/cloudi_core"}]
    end
 end
