@@ -81,8 +81,9 @@
         cpg,
         syslog_socket,
         msgpack,
-        sasl,
         syntax_tools,
+        compiler,
+        sasl,
         stdlib,
         kernel
         ]},
