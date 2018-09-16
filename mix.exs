@@ -6,7 +6,7 @@ defmodule CloudICore.Mixfile do
 
   def project do
     [app: :cloudi_core,
-     version: "1.7.3",
+     version: "1.7.4",
      language: :erlang,
      erlc_options: [
        {:d, :erlang.list_to_atom('ERLANG_OTP_VERSION_' ++ :erlang.system_info(:otp_release))},
@@ -44,9 +44,9 @@ defmodule CloudICore.Mixfile do
        :erlang_term,
        :cpg,
        :syslog_socket,
-       :msgpack,
-       :sasl,
-       :syntax_tools],
+       :syntax_tools,
+       :compiler,
+       :sasl],
      mod: {:cloudi_core_i_app, []},
      registered: [
        :cloudi_core_i_configurator,
@@ -61,20 +61,19 @@ defmodule CloudICore.Mixfile do
   end
 
   defp deps do
-    [{:cpg, "~> 1.7.3"},
-     {:uuid, "~> 1.7.3", hex: :uuid_erl},
-     {:reltool_util, "~> 1.7.3"},
-     {:trie, "~> 1.7.3"},
-     {:erlang_term, "~> 1.7.3"},
-     {:quickrand, "~> 1.7.3"},
-     {:pqueue, "~> 1.7.3"},
-     {:key2value, "~> 1.7.3"},
-     {:keys1value, "~> 1.7.3"},
-     {:nodefinder, "~> 1.7.3"},
-     {:supool, "~> 1.7.3"},
-     {:varpool, "~> 1.7.3"},
-     {:syslog_socket, "~> 1.7.3"},
-     {:msgpack, "~> 0.7.0"}]
+    [{:cpg, "~> 1.7.4"},
+     {:uuid, "~> 1.7.4", hex: :uuid_erl},
+     {:reltool_util, "~> 1.7.4"},
+     {:trie, "~> 1.7.4"},
+     {:erlang_term, "~> 1.7.4"},
+     {:quickrand, "~> 1.7.4"},
+     {:pqueue, "~> 1.7.4"},
+     {:key2value, "~> 1.7.4"},
+     {:keys1value, "~> 1.7.4"},
+     {:nodefinder, "~> 1.7.4"},
+     {:supool, "~> 1.7.4"},
+     {:varpool, "~> 1.7.4"},
+     {:syslog_socket, "~> 1.7.4"}]
   end
 
   defp description do

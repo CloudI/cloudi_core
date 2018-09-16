@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Configurator">CloudI Configurator</a></h3>
    Use the configuration information to start CloudI processes.
-<p>Copyright © 2011-2017 Michael Truog</p>
+<p>Copyright © 2011-2018 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.3 Feb 26 2018 17:29:21
+<p><b>Version:</b> 1.7.4 Sep 15 2018 18:08:26
   ------------------------------------------------------------------------</p>
 <p><b>Behaviours:</b> <a href="gen_server.html"><tt>gen_server</tt></a>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
@@ -24,6 +24,10 @@
    <h3><a name="CloudI_Configurator">CloudI Configurator</a></h3>
    Use the configuration information to start CloudI processes.
 <h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-error_reason_code_status">error_reason_code_status()</a></h3>
+<p><tt>error_reason_code_status() = {file, {<a href="file.html#type-filename">file:filename()</a>, <a href="file.html#type-posix">file:posix()</a> | badarg}}</tt></p>
+
 
 <h3 class="typedecl"><a name="type-error_reason_service_restart">error_reason_service_restart()</a></h3>
 <p><tt>error_reason_service_restart() = {service_internal_restart_failed | service_external_restart_failed, any()}</tt></p>
@@ -41,11 +45,16 @@
 <p><tt>error_reason_service_update() = {service_internal_update_failed | service_external_update_failed, any()}</tt></p>
 
 
+<h3 class="typedecl"><a name="type-error_reason_services_search">error_reason_services_search()</a></h3>
+<p><tt>error_reason_services_search() = service_scope_invalid</tt></p>
+
+
 <h2><a name="index">Function Index</a></h2>
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#acl-1">acl/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#acl_add-2">acl_add/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#acl_remove-2">acl_remove/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#code_change-3">code_change/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#code_status-3">code_status/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#configure-0">configure/0</a></td><td></td></tr>
 <tr><td valign="top"><a href="#handle_call-3">handle_call/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#handle_cast-2">handle_cast/2</a></td><td></td></tr>
@@ -63,12 +72,13 @@
 <tr><td valign="top"><a href="#nodes_get-1">nodes_get/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#nodes_remove-2">nodes_remove/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#nodes_set-2">nodes_set/2</a></td><td></td></tr>
-<tr><td valign="top"><a href="#service_dead-1">service_dead/1</a></td><td></td></tr>
-<tr><td valign="top"><a href="#service_initialized_process-1">service_initialized_process/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#service_ids-1">service_ids/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#service_process_init_end-1">service_process_init_end/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#service_restart-2">service_restart/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#service_start-2">service_start/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#service_stop-3">service_stop/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#service_subscriptions-2">service_subscriptions/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#service_terminated-1">service_terminated/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#service_update-2">service_update/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#service_update_external-5">service_update_external/5</a></td><td></td></tr>
 <tr><td valign="top"><a href="#services-1">services/1</a></td><td></td></tr>
@@ -101,6 +111,11 @@
 <h3 class="function"><a name="code_change-3">code_change/3</a></h3>
 <div class="spec">
 <p><tt>code_change(X1, State, X3) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="code_status-3">code_status/3</a></h3>
+<div class="spec">
+<p><tt>code_status(TimeNative, TimeOffset, Timeout) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="configure-0">configure/0</a></h3>
@@ -188,14 +203,14 @@
 <p><tt>nodes_set(L, Timeout) -&gt; any()</tt></p>
 </div>
 
-<h3 class="function"><a name="service_dead-1">service_dead/1</a></h3>
+<h3 class="function"><a name="service_ids-1">service_ids/1</a></h3>
 <div class="spec">
-<p><tt>service_dead(ID) -&gt; any()</tt></p>
+<p><tt>service_ids(Timeout) -&gt; any()</tt></p>
 </div>
 
-<h3 class="function"><a name="service_initialized_process-1">service_initialized_process/1</a></h3>
+<h3 class="function"><a name="service_process_init_end-1">service_process_init_end/1</a></h3>
 <div class="spec">
-<p><tt>service_initialized_process(Pid) -&gt; any()</tt></p>
+<p><tt>service_process_init_end(Pid) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="service_restart-2">service_restart/2</a></h3>
@@ -216,6 +231,11 @@
 <h3 class="function"><a name="service_subscriptions-2">service_subscriptions/2</a></h3>
 <div class="spec">
 <p><tt>service_subscriptions(ServiceId, Timeout) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="service_terminated-1">service_terminated/1</a></h3>
+<div class="spec">
+<p><tt>service_terminated(ID::binary()) -&gt; ok</tt><br></p>
 </div>
 
 <h3 class="function"><a name="service_update-2">service_update/2</a></h3>
@@ -270,6 +290,6 @@
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Feb 26 2018, 17:29:21.</i></p>
+<p><i>Generated by EDoc</i></p>
 </body>
 </html>

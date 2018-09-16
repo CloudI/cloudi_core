@@ -19,7 +19,7 @@ provide an eventually consistent data store among internal CloudI service
 processes.</p>.
 <p>Copyright © 2017-2018 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.3 Feb 26 2018 17:29:20
+<p><b>Version:</b> 1.7.4 Sep 15 2018 18:08:03
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -72,8 +72,16 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
    http://research.microsoft.com/en-us/um/people/lamport/pubs/time-clocks.pdf
 <h2><a name="types">Data Types</a></h2>
 
+<h3 class="typedecl"><a name="type-bootstrap_state">bootstrap_state()</a></h3>
+<p><tt>bootstrap_state() = {VClockAvg::float(), NodeId::<a href="#type-node_id">node_id()</a>, VClock::<a href="#type-vclock">vclock()</a>, VClocks::<a href="#type-vclocks">vclocks()</a>, POLogMode::<a href="#type-polog_mode">polog_mode()</a>, POLog::<a href="#type-polog">polog()</a>, Data::<a href="#type-data">data()</a>}</tt></p>
+
+
 <h3 class="typedecl"><a name="type-data">data()</a></h3>
 <p><tt>data() = #{<a href="#type-key">key()</a> := <a href="#type-value">value()</a>}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-event_id">event_id()</a></h3>
+<p><tt>event_id() = <a href="cloudi_service.html#type-trans_id">cloudi_service:trans_id()</a> | any()</tt></p>
 
 
 <h3 class="typedecl"><a name="type-event_type">event_type()</a></h3>
@@ -93,11 +101,11 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
 
 
 <h3 class="typedecl"><a name="type-operation_write">operation_write()</a></h3>
-<p><tt>operation_write() = {assign, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>} | {incr, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>} | {decr, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>} | {update, Key::<a href="#type-key">key()</a>, ModuleVersion::list(), Module::module(), Function::atom()} | {update, Key::<a href="#type-key">key()</a>, ModuleVersion::list(), Module::module(), Function::atom(), Argument1::any()} | {put, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>} | {clear, Key::<a href="#type-key">key()</a>} | clear_all</tt></p>
+<p><tt>operation_write() = {assign, Id::<a href="#type-event_id">event_id()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>} | {incr, Id::<a href="#type-event_id">event_id()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>} | {decr, Id::<a href="#type-event_id">event_id()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>} | {update, Id::<a href="#type-event_id">event_id()</a>, Key::<a href="#type-key">key()</a>, ModuleVersion::list(), Module::module(), Function::atom()} | {update, Id::<a href="#type-event_id">event_id()</a>, Key::<a href="#type-key">key()</a>, ModuleVersion::list(), Module::module(), Function::atom(), Argument1::any()} | {update_assign, Id::<a href="#type-event_id">event_id()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>, ModuleVersion::list(), Module::module(), Function::atom()} | {update_assign, Id::<a href="#type-event_id">event_id()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>, ModuleVersion::list(), Module::module(), Function::atom(), Argument1::any()} | {put, Id::<a href="#type-event_id">event_id()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>} | {clear, Id::<a href="#type-event_id">event_id()</a>, Key::<a href="#type-key">key()</a>} | {clear_all, Id::<a href="#type-event_id">event_id()</a>}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-options">options()</a></h3>
-<p><tt>options() = [{service_name, string()} | {clean_vclocks, <a href="#type-seconds">seconds()</a>} | {clean_vclocks_failure, float() | 1..100} | {retry, non_neg_integer()} | {retry_delay, non_neg_integer()}]</tt></p>
+<p><tt>options() = [{service_name, string()} | {clean_vclocks, <a href="#type-seconds">seconds()</a>} | {clean_vclocks_failure, float() | 1..100} | {retry, non_neg_integer()} | {retry_delay, non_neg_integer()} | {timeout_default, <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>} | {priority_default, <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>} | {priority_default_offset, -255..255 | undefined}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-polog">polog()</a></h3>
@@ -113,7 +121,7 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
 
 
 <h3 class="typedecl"><a name="type-state">state()</a></h3>
-<p><tt>state() = #cloudi_crdt{service_name_full = <a href="cloudi_service.html#type-service_name">cloudi_service:service_name()</a>, clean_vclocks_interval = <a href="#type-seconds">seconds()</a>, clean_vclocks_failure = number(), queue = <a href="cloudi_queue.html#type-state">cloudi_queue:state()</a>, word_size = pos_integer(), node_id = <a href="#type-node_id">node_id()</a>, node_ids = [<a href="#type-node_id">node_id()</a>], vclock = <a href="#type-vclock">vclock()</a>, vclocks = <a href="#type-vclocks">vclocks()</a>, polog_mode = <a href="#type-polog_mode">polog_mode()</a>, polog = <a href="#type-polog">polog()</a>, data = <a href="#type-data">data()</a>, events = <a href="#type-events">events()</a>}</tt></p>
+<p><tt>state() = #cloudi_crdt{service_name_full = <a href="cloudi_service.html#type-service_name">cloudi_service:service_name()</a>, clean_vclocks_interval = <a href="#type-seconds">seconds()</a>, clean_vclocks_failure = number(), queue = <a href="cloudi_queue.html#type-state">cloudi_queue:state()</a>, word_size = pos_integer(), node_id = <a href="#type-node_id">node_id()</a>, node_ids = [<a href="#type-node_id">node_id()</a>], vclock = <a href="#type-vclock">vclock()</a>, vclocks = <a href="#type-vclocks">vclocks()</a>, polog_mode = <a href="#type-polog_mode">polog_mode()</a>, bootstrap_node_id = undefined | <a href="#type-node_id">node_id()</a>, bootstrap_states = [<a href="#type-bootstrap_state">bootstrap_state()</a>], bootstrap_requests = non_neg_integer(), polog = <a href="#type-polog">polog()</a>, data = <a href="#type-data">data()</a>, events = <a href="#type-events">events()</a>}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-value">value()</a></h3>
@@ -131,16 +139,26 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
 <h2><a name="index">Function Index</a></h2>
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#assign-4">assign/4</a></td><td>
   <h4><a name="Assign_a_value_iff_none_exists_in_the_CloudI_CRDT.">Assign a value iff none exists in the CloudI CRDT.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#assign_id-5">assign_id/5</a></td><td>
+  <h4><a name="Assign_a_value_iff_none_exists_in_the_CloudI_CRDT_with_an_event_id.">Assign a value iff none exists in the CloudI CRDT with an event_id.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#byte_size-2">byte_size/2</a></td><td>
   <h4><a name="Return_the_size_of_the_CloudI_CRDT_in_bytes.">Return the size of the CloudI CRDT in bytes.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#clear-2">clear/2</a></td><td>
   <h4><a name="Clear_the_CloudI_CRDT.">Clear the CloudI CRDT.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#clear-3">clear/3</a></td><td>
   <h4><a name="Clear_a_key_in_the_CloudI_CRDT.">Clear a key in the CloudI CRDT.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#clear_id-3">clear_id/3</a></td><td>
+  <h4><a name="Clear_the_CloudI_CRDT_with_an_event_id.">Clear the CloudI CRDT with an event_id.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#clear_id-4">clear_id/4</a></td><td>
+  <h4><a name="Clear_a_key_in_the_CloudI_CRDT_with_an_event_id.">Clear a key in the CloudI CRDT with an event_id.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#decr-3">decr/3</a></td><td>
   <h4><a name="Decrement_a_numerical_value_by_1_in_the_CloudI_CRDT.">Decrement a numerical value by 1 in the CloudI CRDT.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#decr-4">decr/4</a></td><td>
   <h4><a name="Decrement_a_numerical_value_in_the_CloudI_CRDT.">Decrement a numerical value in the CloudI CRDT.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#decr_id-4">decr_id/4</a></td><td>
+  <h4><a name="Decrement_a_numerical_value_by_1_in_the_CloudI_CRDT_with_an_event_id.">Decrement a numerical value by 1 in the CloudI CRDT with an event_id.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#decr_id-5">decr_id/5</a></td><td>
+  <h4><a name="Decrement_a_numerical_value_in_the_CloudI_CRDT_with_an_event_id.">Decrement a numerical value in the CloudI CRDT with an event_id.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#events_clear-3">events_clear/3</a></td><td>
   <h4><a name="Clear_a_subscription_to_events_from_the_CloudI_CRDT.">Clear a subscription to events from the CloudI CRDT.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#events_subscribe-3">events_subscribe/3</a></td><td>
@@ -163,6 +181,10 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
   <h4><a name="Increment_a_numerical_value_by_1_in_the_CloudI_CRDT.">Increment a numerical value by 1 in the CloudI CRDT.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#incr-4">incr/4</a></td><td>
   <h4><a name="Increment_a_numerical_value_in_the_CloudI_CRDT.">Increment a numerical value in the CloudI CRDT.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#incr_id-4">incr_id/4</a></td><td>
+  <h4><a name="Increment_a_numerical_value_by_1_in_the_CloudI_CRDT_with_an_event_id.">Increment a numerical value by 1 in the CloudI CRDT with an event_id.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#incr_id-5">incr_id/5</a></td><td>
+  <h4><a name="Increment_a_numerical_value_in_the_CloudI_CRDT_with_an_event_id.">Increment a numerical value in the CloudI CRDT with an event_id.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#is_key-3">is_key/3</a></td><td>
   <h4><a name="Check_if_a_key_is_in_the_CloudI_CRDT.">Check if a key is in the CloudI CRDT.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#keys-2">keys/2</a></td><td>
@@ -173,6 +195,8 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
   <h4><a name="Create_a_CloudI_CRDT.">Create a CloudI CRDT.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#put-4">put/4</a></td><td>
   <h4><a name="Put_a_value_into_the_CloudI_CRDT.">Put a value into the CloudI CRDT.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#put_id-5">put_id/5</a></td><td>
+  <h4><a name="Put_a_value_into_the_CloudI_CRDT_with_an_event_id.">Put a value into the CloudI CRDT with an event_id.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#size-2">size/2</a></td><td>
   <h4><a name="Get_the_size_of_the_CloudI_CRDT.">Get the size of the CloudI CRDT.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#update-5">update/5</a></td><td>
@@ -183,10 +207,36 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
   <h4><a name="Update_a_value_iff_it_exists_in_the_CloudI_CRDT.">Update a value iff it exists in the CloudI CRDT.</a></h4>
   Function Module:Function/2 must exist with the same version
   for every CloudI service process that shares this CloudI CRDT.</td></tr>
+<tr><td valign="top"><a href="#update_assign-6">update_assign/6</a></td><td>
+  <h4><a name="Update_a_value_or_assign_a_value_in_the_CloudI_CRDT.">Update a value or assign a value in the CloudI CRDT.</a></h4>
+  Function Module:Function/1 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.</td></tr>
+<tr><td valign="top"><a href="#update_assign-7">update_assign/7</a></td><td>
+  <h4><a name="Update_a_value_or_assign_a_value_in_the_CloudI_CRDT.">Update a value or assign a value in the CloudI CRDT.</a></h4>
+  Function Module:Function/2 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.</td></tr>
+<tr><td valign="top"><a href="#update_assign_id-7">update_assign_id/7</a></td><td>
+  <h4><a name="Update_a_value_or_assign_a_value_in_the_CloudI_CRDT_with_an_event_id.">Update a value or assign a value in the CloudI CRDT with an event_id.</a></h4>
+  Function Module:Function/1 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.</td></tr>
+<tr><td valign="top"><a href="#update_assign_id-8">update_assign_id/8</a></td><td>
+  <h4><a name="Update_a_value_or_assign_a_value_in_the_CloudI_CRDT_with_an_event_id.">Update a value or assign a value in the CloudI CRDT with an event_id.</a></h4>
+  Function Module:Function/2 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.</td></tr>
+<tr><td valign="top"><a href="#update_id-6">update_id/6</a></td><td>
+  <h4><a name="Update_a_value_iff_it_exists_in_the_CloudI_CRDT_with_an_event_id.">Update a value iff it exists in the CloudI CRDT with an event_id.</a></h4>
+  Function Module:Function/1 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.</td></tr>
+<tr><td valign="top"><a href="#update_id-7">update_id/7</a></td><td>
+  <h4><a name="Update_a_value_iff_it_exists_in_the_CloudI_CRDT_with_an_event_id.">Update a value iff it exists in the CloudI CRDT with an event_id.</a></h4>
+  Function Module:Function/2 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.</td></tr>
 <tr><td valign="top"><a href="#values-2">values/2</a></td><td>
   <h4><a name="Get_all_values_in_the_CloudI_CRDT.">Get all values in the CloudI CRDT.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#zero-3">zero/3</a></td><td>
   <h4><a name="Put_a_zero_value_in_the_CloudI_CRDT.">Put a zero value in the CloudI CRDT.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#zero_id-4">zero_id/4</a></td><td>
+  <h4><a name="Put_a_zero_value_in_the_CloudI_CRDT_with_an_event_id.">Put a zero value in the CloudI CRDT with an event_id.</a></h4>.</td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
@@ -196,6 +246,13 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
 <p><tt>assign(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
 </div><p>
   <h4><a name="Assign_a_value_iff_none_exists_in_the_CloudI_CRDT.">Assign a value iff none exists in the CloudI CRDT.</a></h4>
+</p>
+
+<h3 class="function"><a name="assign_id-5">assign_id/5</a></h3>
+<div class="spec">
+<p><tt>assign_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>, Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Assign_a_value_iff_none_exists_in_the_CloudI_CRDT_with_an_event_id.">Assign a value iff none exists in the CloudI CRDT with an event_id.</a></h4>
 </p>
 
 <h3 class="function"><a name="byte_size-2">byte_size/2</a></h3>
@@ -219,6 +276,20 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
   <h4><a name="Clear_a_key_in_the_CloudI_CRDT.">Clear a key in the CloudI CRDT.</a></h4>
 </p>
 
+<h3 class="function"><a name="clear_id-3">clear_id/3</a></h3>
+<div class="spec">
+<p><tt>clear_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Clear_the_CloudI_CRDT_with_an_event_id.">Clear the CloudI CRDT with an event_id.</a></h4>
+</p>
+
+<h3 class="function"><a name="clear_id-4">clear_id/4</a></h3>
+<div class="spec">
+<p><tt>clear_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Clear_a_key_in_the_CloudI_CRDT_with_an_event_id.">Clear a key in the CloudI CRDT with an event_id.</a></h4>
+</p>
+
 <h3 class="function"><a name="decr-3">decr/3</a></h3>
 <div class="spec">
 <p><tt>decr(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
@@ -231,6 +302,20 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
 <p><tt>decr(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::number(), State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
 </div><p>
   <h4><a name="Decrement_a_numerical_value_in_the_CloudI_CRDT.">Decrement a numerical value in the CloudI CRDT.</a></h4>
+</p>
+
+<h3 class="function"><a name="decr_id-4">decr_id/4</a></h3>
+<div class="spec">
+<p><tt>decr_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Decrement_a_numerical_value_by_1_in_the_CloudI_CRDT_with_an_event_id.">Decrement a numerical value by 1 in the CloudI CRDT with an event_id.</a></h4>
+</p>
+
+<h3 class="function"><a name="decr_id-5">decr_id/5</a></h3>
+<div class="spec">
+<p><tt>decr_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::number(), Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Decrement_a_numerical_value_in_the_CloudI_CRDT_with_an_event_id.">Decrement a numerical value in the CloudI CRDT with an event_id.</a></h4>
 </p>
 
 <h3 class="function"><a name="events_clear-3">events_clear/3</a></h3>
@@ -303,6 +388,20 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
   <h4><a name="Increment_a_numerical_value_in_the_CloudI_CRDT.">Increment a numerical value in the CloudI CRDT.</a></h4>
 </p>
 
+<h3 class="function"><a name="incr_id-4">incr_id/4</a></h3>
+<div class="spec">
+<p><tt>incr_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Increment_a_numerical_value_by_1_in_the_CloudI_CRDT_with_an_event_id.">Increment a numerical value by 1 in the CloudI CRDT with an event_id.</a></h4>
+</p>
+
+<h3 class="function"><a name="incr_id-5">incr_id/5</a></h3>
+<div class="spec">
+<p><tt>incr_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::number(), Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Increment_a_numerical_value_in_the_CloudI_CRDT_with_an_event_id.">Increment a numerical value in the CloudI CRDT with an event_id.</a></h4>
+</p>
+
 <h3 class="function"><a name="is_key-3">is_key/3</a></h3>
 <div class="spec">
 <p><tt>is_key(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, State::<a href="#type-state">state()</a>) -&gt; boolean()</tt><br></p>
@@ -338,6 +437,13 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
   <h4><a name="Put_a_value_into_the_CloudI_CRDT.">Put a value into the CloudI CRDT.</a></h4>
 </p>
 
+<h3 class="function"><a name="put_id-5">put_id/5</a></h3>
+<div class="spec">
+<p><tt>put_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>, Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Put_a_value_into_the_CloudI_CRDT_with_an_event_id.">Put a value into the CloudI CRDT with an event_id.</a></h4>
+</p>
+
 <h3 class="function"><a name="size-2">size/2</a></h3>
 <div class="spec">
 <p><tt>size(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, State::<a href="#type-state">state()</a>) -&gt; non_neg_integer()</tt><br></p>
@@ -371,6 +477,84 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
   all read operations
   (inconsistencies which would only be resolvable manually).</p>
 
+<h3 class="function"><a name="update_assign-6">update_assign/6</a></h3>
+<div class="spec">
+<p><tt>update_assign(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>, Module::module(), Function::atom(), State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Update_a_value_or_assign_a_value_in_the_CloudI_CRDT.">Update a value or assign a value in the CloudI CRDT.</a></h4>
+  Function Module:Function/1 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.
+  If the function does not execute to return the same result
+  (when given the same value) for each instance of the CloudI CRDT,
+  it can create inconsistencies in the Erlang map that is used for
+  all read operations
+  (inconsistencies which would only be resolvable manually).</p>
+
+<h3 class="function"><a name="update_assign-7">update_assign/7</a></h3>
+<div class="spec">
+<p><tt>update_assign(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>, Module::module(), Function::atom(), Argument1::any(), State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Update_a_value_or_assign_a_value_in_the_CloudI_CRDT.">Update a value or assign a value in the CloudI CRDT.</a></h4>
+  Function Module:Function/2 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.
+  If the function does not execute to return the same result
+  (when given the same value) for each instance of the CloudI CRDT,
+  it can create inconsistencies in the Erlang map that is used for
+  all read operations
+  (inconsistencies which would only be resolvable manually).</p>
+
+<h3 class="function"><a name="update_assign_id-7">update_assign_id/7</a></h3>
+<div class="spec">
+<p><tt>update_assign_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>, Module::module(), Function::atom(), Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Update_a_value_or_assign_a_value_in_the_CloudI_CRDT_with_an_event_id.">Update a value or assign a value in the CloudI CRDT with an event_id.</a></h4>
+  Function Module:Function/1 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.
+  If the function does not execute to return the same result
+  (when given the same value) for each instance of the CloudI CRDT,
+  it can create inconsistencies in the Erlang map that is used for
+  all read operations
+  (inconsistencies which would only be resolvable manually).</p>
+
+<h3 class="function"><a name="update_assign_id-8">update_assign_id/8</a></h3>
+<div class="spec">
+<p><tt>update_assign_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Value::<a href="#type-value">value()</a>, Module::module(), Function::atom(), Argument1::any(), Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Update_a_value_or_assign_a_value_in_the_CloudI_CRDT_with_an_event_id.">Update a value or assign a value in the CloudI CRDT with an event_id.</a></h4>
+  Function Module:Function/2 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.
+  If the function does not execute to return the same result
+  (when given the same value) for each instance of the CloudI CRDT,
+  it can create inconsistencies in the Erlang map that is used for
+  all read operations
+  (inconsistencies which would only be resolvable manually).</p>
+
+<h3 class="function"><a name="update_id-6">update_id/6</a></h3>
+<div class="spec">
+<p><tt>update_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Module::module(), Function::atom(), Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Update_a_value_iff_it_exists_in_the_CloudI_CRDT_with_an_event_id.">Update a value iff it exists in the CloudI CRDT with an event_id.</a></h4>
+  Function Module:Function/1 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.
+  If the function does not execute to return the same result
+  (when given the same value) for each instance of the CloudI CRDT,
+  it can create inconsistencies in the Erlang map that is used for
+  all read operations
+  (inconsistencies which would only be resolvable manually).</p>
+
+<h3 class="function"><a name="update_id-7">update_id/7</a></h3>
+<div class="spec">
+<p><tt>update_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Module::module(), Function::atom(), Argument1::any(), Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Update_a_value_iff_it_exists_in_the_CloudI_CRDT_with_an_event_id.">Update a value iff it exists in the CloudI CRDT with an event_id.</a></h4>
+  Function Module:Function/2 must exist with the same version
+  for every CloudI service process that shares this CloudI CRDT.
+  If the function does not execute to return the same result
+  (when given the same value) for each instance of the CloudI CRDT,
+  it can create inconsistencies in the Erlang map that is used for
+  all read operations
+  (inconsistencies which would only be resolvable manually).</p>
+
 <h3 class="function"><a name="values-2">values/2</a></h3>
 <div class="spec">
 <p><tt>values(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, State::<a href="#type-state">state()</a>) -&gt; [<a href="#type-value">value()</a>]</tt><br></p>
@@ -384,9 +568,16 @@ http://homes.cs.washington.edu/~arvind/cs425/doc/mattern89virtual.pdf</p>
 </div><p>
   <h4><a name="Put_a_zero_value_in_the_CloudI_CRDT.">Put a zero value in the CloudI CRDT.</a></h4>
 </p>
+
+<h3 class="function"><a name="zero_id-4">zero_id/4</a></h3>
+<div class="spec">
+<p><tt>zero_id(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Key::<a href="#type-key">key()</a>, Id::<a href="#type-event_id">event_id()</a>, State::<a href="#type-state">state()</a>) -&gt; <a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Put_a_zero_value_in_the_CloudI_CRDT_with_an_event_id.">Put a zero value in the CloudI CRDT with an event_id.</a></h4>
+</p>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Feb 26 2018, 17:29:20.</i></p>
+<p><i>Generated by EDoc</i></p>
 </body>
 </html>

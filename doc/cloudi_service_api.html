@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Service_API_Module">CloudI Service API Module</a></h3>
    A module that exposes dynamic configuration of CloudI.
-<p>Copyright © 2011-2017 Michael Truog</p>
+<p>Copyright © 2011-2018 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.2 Feb 26 2018 17:29:20
+<p><b>Version:</b> 1.7.4 Sep 15 2018 18:07:12
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -142,6 +142,10 @@
 
 <h3 class="typedecl"><a name="type-chroot_external">chroot_external()</a></h3>
 <p><tt>chroot_external() = <a href="file.html#type-filename">file:filename()</a> | undefined</tt></p>
+
+
+<h3 class="typedecl"><a name="type-code_status">code_status()</a></h3>
+<p><tt>code_status() = [{build_machine, nonempty_string()} | {build_kernel_version, nonempty_string()} | {build_operating_system, nonempty_string()} | {build_erlang_otp_release, nonempty_string()} | {build_cloudi_time, nonempty_string()} | {build_cloudi_cxx_compiler_version, nonempty_string()} | {build_cloudi_cxx_dependencies_versions, nonempty_string()} | {build_erts_c_compiler_version, nonempty_string()} | {install_erlang_erts_time, nonempty_string()} | {install_erlang_kernel_time, nonempty_string()} | {install_erlang_stdlib_time, nonempty_string()} | {install_erlang_sasl_time, nonempty_string()} | {install_erlang_compiler_time, nonempty_string()} | {install_cloudi_time, nonempty_string()} | {runtime_erlang_erts_version, nonempty_string()} | {runtime_erlang_kernel_version, nonempty_string()} | {runtime_erlang_stdlib_version, nonempty_string()} | {runtime_erlang_sasl_version, nonempty_string()} | {runtime_erlang_compiler_version, nonempty_string()} | {runtime_cloudi_version, nonempty_string()} | {runtime_machine_processors, pos_integer()} | {runtime_start, nonempty_string()} | {runtime_clock, nonempty_string()} | {runtime_clock_offset, nonempty_string()} | {runtime_total, nonempty_string()} | {runtime_cloudi_start, nonempty_string()} | {runtime_cloudi_total, nonempty_string()} | {runtime_cloudi_changes, [[{type, internal | external} | {file_age, nonempty_string()} | {file_path, nonempty_string()} | {service_ids, [<a href="#type-service_id">service_id()</a>, ...]}, ...]]}, ...]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-dest_list">dest_list()</a></h3>
@@ -352,6 +356,18 @@
 <p><tt>service_proplist() = [{type, internal | external} | {prefix, <a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>} | {module, atom() | <a href="file.html#type-filename">file:filename()</a>} | {file_path, <a href="file.html#type-filename">file:filename()</a>} | {args, list()} | {env, [{string(), string()}]} | {dest_refresh, <a href="#type-dest_refresh">dest_refresh()</a>} | {protocol, default | local | tcp | udp} | {buffer_size, default | pos_integer()} | {timeout_init, <a href="#type-timeout_initialize_value_milliseconds">timeout_initialize_value_milliseconds()</a>} | {timeout_async, <a href="#type-timeout_send_async_value_milliseconds">timeout_send_async_value_milliseconds()</a>} | {timeout_sync, <a href="#type-timeout_send_sync_value_milliseconds">timeout_send_sync_value_milliseconds()</a>} | {dest_list_deny, <a href="#type-dest_list">dest_list()</a>} | {dest_list_allow, <a href="#type-dest_list">dest_list()</a>} | {count_process, pos_integer() | float()} | {count_thread, pos_integer() | float()} | {max_r, non_neg_integer()} | {max_t, <a href="#type-seconds">seconds()</a>} | {options, <a href="#type-service_options_internal">service_options_internal()</a> | <a href="#type-service_options_external">service_options_external()</a>}, ...]</tt></p>
 
 
+<h3 class="typedecl"><a name="type-service_status">service_status()</a></h3>
+<p><tt>service_status() = <a href="#type-service_status_internal">service_status_internal()</a> | <a href="#type-service_status_external">service_status_external()</a></tt></p>
+
+
+<h3 class="typedecl"><a name="type-service_status_external">service_status_external()</a></h3>
+<p><tt>service_status_external() = [{count_process, pos_integer()} | {count_thread, pos_integer()} | {uptime_total, nonempty_string()} | {uptime_running, nonempty_string()} | {uptime_restarts, nonempty_string()} | {downtime_day_restarting, nonempty_string()} | {downtime_week_restarting, nonempty_string()} | {downtime_month_restarting, nonempty_string()} | {downtime_year_restarting, nonempty_string()} | {interrupt_day_updating, nonempty_string()} | {interrupt_week_updating, nonempty_string()} | {interrupt_month_updating, nonempty_string()} | {interrupt_year_updating, nonempty_string()} | {availability_day_total, nonempty_string()} | {availability_day_running, nonempty_string()} | {availability_day_updated, nonempty_string()} | {availability_week_total, nonempty_string()} | {availability_week_running, nonempty_string()} | {availability_week_updated, nonempty_string()} | {availability_month_total, nonempty_string()} | {availability_month_running, nonempty_string()} | {availability_month_updated, nonempty_string()} | {availability_year_total, nonempty_string()} | {availability_year_running, nonempty_string()} | {availability_year_updated, nonempty_string()}, ...]</tt></p>
+
+
+<h3 class="typedecl"><a name="type-service_status_internal">service_status_internal()</a></h3>
+<p><tt>service_status_internal() = [{count_process, pos_integer()} | {uptime_total, nonempty_string()} | {uptime_running, nonempty_string()} | {uptime_restarts, nonempty_string()} | {downtime_day_restarting, nonempty_string()} | {downtime_week_restarting, nonempty_string()} | {downtime_month_restarting, nonempty_string()} | {downtime_year_restarting, nonempty_string()} | {interrupt_day_updating, nonempty_string()} | {interrupt_week_updating, nonempty_string()} | {interrupt_month_updating, nonempty_string()} | {interrupt_year_updating, nonempty_string()} | {availability_day_total, nonempty_string()} | {availability_day_running, nonempty_string()} | {availability_day_updated, nonempty_string()} | {availability_week_total, nonempty_string()} | {availability_week_running, nonempty_string()} | {availability_week_updated, nonempty_string()} | {availability_month_total, nonempty_string()} | {availability_month_running, nonempty_string()} | {availability_month_updated, nonempty_string()} | {availability_year_total, nonempty_string()} | {availability_year_running, nonempty_string()} | {availability_year_updated, nonempty_string()}, ...]</tt></p>
+
+
 <h3 class="typedecl"><a name="type-service_update_plan">service_update_plan()</a></h3>
 <p><tt>service_update_plan() = <a href="#type-service_update_plan_internal">service_update_plan_internal()</a> | <a href="#type-service_update_plan_external">service_update_plan_external()</a></tt></p>
 
@@ -424,6 +440,11 @@
   <h4><a name="Remove_a_directory_from_the_CloudI_Erlang_VM_code_server's_search_paths.">Remove a directory from the CloudI Erlang VM code server's search paths.</a></h4>
   This doesn't impact any running services, only services that will be
   started in the future.</td></tr>
+<tr><td valign="top"><a href="#code_status-1">code_status/1</a></td><td>
+  <h4><a name="Provide_the_current_CloudI_Erlang_VM_code_status.">Provide the current CloudI Erlang VM code status.</a></h4>
+  Both build and runtime information is provided with the
+  service files changed after CloudI was started
+  (probably due to service updates).</td></tr>
 <tr><td valign="top"><a href="#logging-1">logging/1</a></td><td>
   <h4><a name="Provide_the_current_logging_configuration.">Provide the current logging configuration.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#logging_file_set-2">logging_file_set/2</a></td><td>
@@ -482,6 +503,8 @@
 <tr><td valign="top"><a href="#services_search-2">services_search/2</a></td><td>
   <h4><a name="Search_service_instances_for_matches_on_the_provided_service_name.">Search service instances for matches on the provided service name.</a></h4>
   Multiple services may be returned for a single service name.</td></tr>
+<tr><td valign="top"><a href="#services_status-2">services_status/2</a></td><td>
+  <h4><a name="List_the_current_status_of_specific_services.">List the current status of specific services.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#services_update-2">services_update/2</a></td><td>
   <h4><a name="Update_service_instances.">Update service instances.</a></h4>
   Update service instances without losing service requests and other
@@ -541,6 +564,15 @@
   This doesn't impact any running services, only services that will be
   started in the future.</p>
 
+<h3 class="function"><a name="code_status-1">code_status/1</a></h3>
+<div class="spec">
+<p><tt>code_status(Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; {ok, <a href="#type-code_status">code_status()</a>} | {error, timeout | noproc | <a href="cloudi_core_i_configuration.html#type-error_reason_code_status">cloudi_core_i_configuration:error_reason_code_status()</a>}</tt><br></p>
+</div><p>
+  <h4><a name="Provide_the_current_CloudI_Erlang_VM_code_status.">Provide the current CloudI Erlang VM code status.</a></h4>
+  Both build and runtime information is provided with the
+  service files changed after CloudI was started
+  (probably due to service updates).</p>
+
 <h3 class="function"><a name="logging-1">logging/1</a></h3>
 <div class="spec">
 <p><tt>logging(Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; {ok, <a href="#type-logging_proplist">logging_proplist()</a>} | {error, timeout | noproc}</tt><br></p>
@@ -557,7 +589,7 @@
 
 <h3 class="function"><a name="logging_formatters_set-2">logging_formatters_set/2</a></h3>
 <div class="spec">
-<p><tt>logging_formatters_set(L::<a href="#type-logging_formatters_set_proplist">logging_formatters_set_proplist()</a>, Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; ok | {error, timeout | noproc | <a href="cloudi_core_i_configuration.html#type-error_reason_logging_formatters_set">cloudi_core_i_configuration:error_reason_logging_formatters_set()</a>}</tt><br></p>
+<p><tt>logging_formatters_set(L::<a href="#type-logging_formatters_set_proplist">logging_formatters_set_proplist()</a> | undefined, Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; ok | {error, timeout | noproc | <a href="cloudi_core_i_configuration.html#type-error_reason_logging_formatters_set">cloudi_core_i_configuration:error_reason_logging_formatters_set()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Set_the_CloudI_log_formatters.">Set the CloudI log formatters.</a></h4>
   lager backend (gen_event) modules are supported as 'output' modules and
@@ -596,7 +628,7 @@
 
 <h3 class="function"><a name="logging_syslog_set-2">logging_syslog_set/2</a></h3>
 <div class="spec">
-<p><tt>logging_syslog_set(L::<a href="#type-logging_syslog_set_proplist">logging_syslog_set_proplist()</a>, Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; ok | {error, timeout | noproc | <a href="cloudi_core_i_configuration.html#type-error_reason_logging_syslog_set">cloudi_core_i_configuration:error_reason_logging_syslog_set()</a>}</tt><br></p>
+<p><tt>logging_syslog_set(L::<a href="#type-logging_syslog_set_proplist">logging_syslog_set_proplist()</a> | undefined, Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; ok | {error, timeout | noproc | <a href="cloudi_core_i_configuration.html#type-error_reason_logging_syslog_set">cloudi_core_i_configuration:error_reason_logging_syslog_set()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Set_the_CloudI_syslog_configuration.">Set the CloudI syslog configuration.</a></h4>
 </p>
@@ -703,7 +735,7 @@
 
 <h3 class="function"><a name="services_search-2">services_search/2</a></h3>
 <div class="spec">
-<p><tt>services_search(Name::{atom(), <a href="cloudi.html#type-service_name">cloudi:service_name()</a>} | <a href="cloudi.html#type-service_name">cloudi:service_name()</a>, Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; {ok, [{<a href="#type-service_id">service_id()</a>, <a href="#type-service_internal">service_internal()</a>} | {<a href="#type-service_id">service_id()</a>, <a href="#type-service_external">service_external()</a>}]} | {error, timeout | noproc | service_name_invalid}</tt><br></p>
+<p><tt>services_search(Name::{atom(), <a href="cloudi.html#type-service_name">cloudi:service_name()</a>} | <a href="cloudi.html#type-service_name">cloudi:service_name()</a>, Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; {ok, [{<a href="#type-service_id">service_id()</a>, <a href="#type-service_internal">service_internal()</a>} | {<a href="#type-service_id">service_id()</a>, <a href="#type-service_external">service_external()</a>}]} | {error, timeout | noproc | service_name_invalid | <a href="cloudi_core_i_configuration.html#type-error_reason_services_search">cloudi_core_i_configuration:error_reason_services_search()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Search_service_instances_for_matches_on_the_provided_service_name.">Search service instances for matches on the provided service name.</a></h4>
   Multiple services may be returned for a single service name.  Only service
@@ -712,6 +744,13 @@
   (e.g., cloudi_service_http_cowboy websocket connection pids) will not
   return the service's configuration with this function.  Provide a scope
   within a 2 element tuple with the service name to check a custom scope.</p>
+
+<h3 class="function"><a name="services_status-2">services_status/2</a></h3>
+<div class="spec">
+<p><tt>services_status(L::[binary() | string()], Timeout::<a href="#type-api_timeout_milliseconds">api_timeout_milliseconds()</a>) -&gt; {ok, [{<a href="#type-service_id">service_id()</a>, <a href="#type-service_status">service_status()</a>}, ...]} | {error, timeout | noproc | {service_id_invalid, any()} | {service_not_found, any()}}</tt><br></p>
+</div><p>
+  <h4><a name="List_the_current_status_of_specific_services.">List the current status of specific services.</a></h4>
+</p>
 
 <h3 class="function"><a name="services_update-2">services_update/2</a></h3>
 <div class="spec">
@@ -723,6 +762,6 @@
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Feb 26 2018, 17:29:20.</i></p>
+<p><i>Generated by EDoc</i></p>
 </body>
 </html>

@@ -14,9 +14,9 @@
    <h3><a name="CloudI_Services">CloudI Services</a></h3>
    Manage all cloudi_core_i_spawn processes with monitors and their
    configuration.
-<p>Copyright © 2011-2017 Michael Truog</p>
+<p>Copyright © 2011-2018 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.1 Feb 26 2018 17:29:21
+<p><b>Version:</b> 1.7.4 Sep 15 2018 18:08:40
   ------------------------------------------------------------------------</p>
 <p><b>Behaviours:</b> <a href="gen_server.html"><tt>gen_server</tt></a>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
@@ -34,15 +34,17 @@
 <tr><td valign="top"><a href="#handle_info-2">handle_info/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#increase-5">increase/5</a></td><td></td></tr>
 <tr><td valign="top"><a href="#init-1">init/1</a></td><td></td></tr>
-<tr><td valign="top"><a href="#initialize-1">initialize/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#monitor-13">monitor/13</a></td><td></td></tr>
 <tr><td valign="top"><a href="#pids-2">pids/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#process_init_begin-1">process_init_begin/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#process_init_end-1">process_init_end/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#process_terminate_begin-2">process_terminate_begin/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#restart-2">restart/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#search-2">search/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#shutdown-2">shutdown/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td></td></tr>
+<tr><td valign="top"><a href="#status-2">status/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#terminate-2">terminate/2</a></td><td></td></tr>
-<tr><td valign="top"><a href="#terminate_kill-2">terminate_kill/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#update-2">update/2</a></td><td></td></tr>
 </table>
 
@@ -65,12 +67,12 @@
 
 <h3 class="function"><a name="handle_cast-2">handle_cast/2</a></h3>
 <div class="spec">
-<p><tt>handle_cast(Request, State) -&gt; any()</tt></p>
+<p><tt>handle_cast(Cloudi_service_terminate_begin, State) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="handle_info-2">handle_info/2</a></h3>
 <div class="spec">
-<p><tt>handle_info(Request, State) -&gt; any()</tt></p>
+<p><tt>handle_info(Restart_stage2, State) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="increase-5">increase/5</a></h3>
@@ -83,11 +85,6 @@
 <p><tt>init(X1) -&gt; any()</tt></p>
 </div>
 
-<h3 class="function"><a name="initialize-1">initialize/1</a></h3>
-<div class="spec">
-<p><tt>initialize(Pids::[pid()]) -&gt; ok</tt><br></p>
-</div>
-
 <h3 class="function"><a name="monitor-13">monitor/13</a></h3>
 <div class="spec">
 <p><tt>monitor(M::cloudi_core_i_spawn, F::start_internal | start_external, A::list(), ProcessIndex::non_neg_integer(), CountProcess::pos_integer(), CountThread::pos_integer(), Scope::atom(), TimeoutTerm::<a href="cloudi_service_api.html#type-timeout_terminate_value_milliseconds">cloudi_service_api:timeout_terminate_value_milliseconds()</a>, RestartDelay::tuple() | false, MaxR::non_neg_integer(), MaxT::non_neg_integer(), ServiceId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>, Timeout::infinity | pos_integer()) -&gt; {ok, [pid()]} | {error, any()}</tt><br></p>
@@ -96,6 +93,21 @@
 <h3 class="function"><a name="pids-2">pids/2</a></h3>
 <div class="spec">
 <p><tt>pids(ServiceId, Timeout) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="process_init_begin-1">process_init_begin/1</a></h3>
+<div class="spec">
+<p><tt>process_init_begin(Pids::[pid() | [pid(), ...]]) -&gt; ok</tt><br></p>
+</div>
+
+<h3 class="function"><a name="process_init_end-1">process_init_end/1</a></h3>
+<div class="spec">
+<p><tt>process_init_end(Pid::pid()) -&gt; ok</tt><br></p>
+</div>
+
+<h3 class="function"><a name="process_terminate_begin-2">process_terminate_begin/2</a></h3>
+<div class="spec">
+<p><tt>process_terminate_begin(Pid::pid(), Reason::any()) -&gt; ok | {error, any()}</tt><br></p>
 </div>
 
 <h3 class="function"><a name="restart-2">restart/2</a></h3>
@@ -118,14 +130,14 @@
 <p><tt>start_link() -&gt; any()</tt></p>
 </div>
 
+<h3 class="function"><a name="status-2">status/2</a></h3>
+<div class="spec">
+<p><tt>status(ServiceIdList, Timeout) -&gt; any()</tt></p>
+</div>
+
 <h3 class="function"><a name="terminate-2">terminate/2</a></h3>
 <div class="spec">
 <p><tt>terminate(X1, X2) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="terminate_kill-2">terminate_kill/2</a></h3>
-<div class="spec">
-<p><tt>terminate_kill(Pid, Reason) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="update-2">update/2</a></h3>
@@ -135,6 +147,6 @@
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Feb 26 2018, 17:29:21.</i></p>
+<p><i>Generated by EDoc</i></p>
 </body>
 </html>

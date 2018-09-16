@@ -18,7 +18,7 @@ timeout period) with each send done asynchronously and all tracking done
 with in-memory data.</p>.
 <p>Copyright © 2015-2018 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.3 Feb 26 2018 17:29:20
+<p><b>Version:</b> 1.7.4 Sep 15 2018 18:07:36
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -40,12 +40,20 @@ So, cloudi_queue usage is necessary when multiple service requests must
 be sent concurrently and every request must receive a response   
 (receiving a response is the only proof the transaction was successful).</p>
   
-   Only one instance of cloudi_queue is necessary within a service's state
-   due to the transaction id being globally unique.
+   <p>Only one instance of cloudi_queue is necessary within a service's state   
+due to the transaction id being globally unique.</p>
+  
+   If retries are enabled (by default, no retries are attempted), it is
+   possible that a service request will be delivered more than once
+   (e.g., if the service request is processed but the response is not
+    sent before a timeout occurs).  Each retry sends a service request
+   with the same transaction id, so it may be used to detect a duplicate
+   receive (or a separate unique id could be used from within the
+   RequestInfo or Request data) by checking and modifying service state.
 <h2><a name="types">Data Types</a></h2>
 
 <h3 class="typedecl"><a name="type-options">options()</a></h3>
-<p><tt>options() = [{retry, non_neg_integer()} | {retry_delay, non_neg_integer()} | {ordered, boolean()} | {validate_request_info, fun((RequestInfo::<a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>) -&gt; boolean()) | {Module1::module(), Function1::atom()}} | {validate_request, fun((RequestInfo::<a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>, Request::<a href="cloudi_service.html#type-request">cloudi_service:request()</a>) -&gt; boolean()) | {Module2::module(), Function2::atom()}} | {validate_response_info, fun((ResponseInfo::<a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>) -&gt; boolean()) | {Module3::module(), Function3::atom()}} | {validate_response, fun((ResponseInfo::<a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>, Response::<a href="cloudi_service.html#type-response">cloudi_service:response()</a>) -&gt; boolean()) | {Module4::module(), Function4::atom()}} | {failures_source_die, boolean()} | {failures_source_max_count, pos_integer()} | {failures_source_max_period, infinity | pos_integer()}]</tt></p>
+<p><tt>options() = [{retry, non_neg_integer()} | {retry_delay, non_neg_integer()} | {ordered, boolean()} | {timeout_default, <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>} | {priority_default, <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>} | {validate_request_info, fun((RequestInfo::<a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>) -&gt; boolean()) | {Module1::module(), Function1::atom()}} | {validate_request, fun((RequestInfo::<a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>, Request::<a href="cloudi_service.html#type-request">cloudi_service:request()</a>) -&gt; boolean()) | {Module2::module(), Function2::atom()}} | {validate_response_info, fun((ResponseInfo::<a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>) -&gt; boolean()) | {Module3::module(), Function3::atom()}} | {validate_response, fun((ResponseInfo::<a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>, Response::<a href="cloudi_service.html#type-response">cloudi_service:response()</a>) -&gt; boolean()) | {Module4::module(), Function4::atom()}} | {failures_source_die, boolean()} | {failures_source_max_count, pos_integer()} | {failures_source_max_period, infinity | pos_integer()}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-ordered_requests">ordered_requests()</a></h3>
@@ -57,7 +65,7 @@ be sent concurrently and every request must receive a response
 
 
 <h3 class="typedecl"><a name="type-state">state()</a></h3>
-<p><tt>state() = #cloudi_queue{retry = non_neg_integer(), retry_delay = non_neg_integer(), ordered = boolean(), word_size = pos_integer(), service = undefined | pid(), validate_request_info = undefined | fun((any()) -&gt; boolean()), validate_request = undefined | fun((any(), any()) -&gt; boolean()), validate_response_info = undefined | fun((any()) -&gt; boolean()), validate_response = undefined | fun((any(), any()) -&gt; boolean()), failures_source_die = boolean(), failures_source_max_count = pos_integer(), failures_source_max_period = infinity | pos_integer(), failures_source = [<a href="cloudi_timestamp.html#type-seconds_monotonic">cloudi_timestamp:seconds_monotonic()</a>], ordered_requests = <a href="#type-ordered_requests">ordered_requests()</a>, ordered_pending = non_neg_integer(), requests = <a href="#type-requests">requests()</a>}</tt></p>
+<p><tt>state() = #cloudi_queue{retry = non_neg_integer(), retry_delay = non_neg_integer(), ordered = boolean(), timeout_default = <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>, priority_default = <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>, word_size = pos_integer(), service = undefined | pid(), validate_request_info = undefined | fun((any()) -&gt; boolean()), validate_request = undefined | fun((any(), any()) -&gt; boolean()), validate_response_info = undefined | fun((any()) -&gt; boolean()), validate_response = undefined | fun((any(), any()) -&gt; boolean()), failures_source_die = boolean(), failures_source_max_count = pos_integer(), failures_source_max_period = infinity | pos_integer(), failures_source = [<a href="cloudi_timestamp.html#type-seconds_monotonic">cloudi_timestamp:seconds_monotonic()</a>], ordered_requests = <a href="#type-ordered_requests">ordered_requests()</a>, ordered_pending = non_neg_integer(), requests = <a href="#type-requests">requests()</a>}</tt></p>
 
 
 <h2><a name="index">Function Index</a></h2>
@@ -315,6 +323,6 @@ be sent concurrently and every request must receive a response
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
-<p><i>Generated by EDoc, Feb 26 2018, 17:29:20.</i></p>
+<p><i>Generated by EDoc</i></p>
 </body>
 </html>
