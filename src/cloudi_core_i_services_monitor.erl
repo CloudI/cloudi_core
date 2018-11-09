@@ -108,17 +108,17 @@
 
 -record(state,
     {
-        services = key2value:new(maps) ::
-            key2value:
-            key2value(cloudi_service_api:service_id(),
-                               pid(), #service{}),
-        durations_update = cloudi_core_i_status:durations_new() ::
-            cloudi_core_i_status:durations(cloudi_service_api:service_id()),
-        durations_restart = cloudi_core_i_status:durations_new() ::
-            cloudi_core_i_status:durations(cloudi_service_api:service_id()),
-        changes = #{} ::
-            #{cloudi_service_api:service_id() :=
-              list({increase | decrease, number(), number(), number()})}
+        services = key2value:new(maps)
+            :: key2value:
+               key2value(cloudi_service_api:service_id(),
+                                  pid(), #service{}),
+        durations_update = cloudi_core_i_status:durations_new()
+            :: cloudi_core_i_status:durations(cloudi_service_api:service_id()),
+        durations_restart = cloudi_core_i_status:durations_new()
+            :: cloudi_core_i_status:durations(cloudi_service_api:service_id()),
+        changes = #{}
+            :: #{cloudi_service_api:service_id() :=
+                 list({increase | decrease, number(), number(), number()})}
     }).
 
 -record(cloudi_service_init_end,
