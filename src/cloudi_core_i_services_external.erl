@@ -32,7 +32,7 @@
 %%%
 %%% @author Michael Truog <mjtruog at protonmail dot com>
 %%% @copyright 2011-2018 Michael Truog
-%%% @version 1.7.4 {@date} {@time}
+%%% @version 1.7.5 {@date} {@time}
 %%%------------------------------------------------------------------------
 
 -module(cloudi_core_i_services_external).
@@ -483,7 +483,7 @@ handle_event(EventType, EventContent, StateName, State) ->
          count_process_dynamic_terminated(CountProcessDynamic) of
         false ->
             Pattern = Prefix ++ Suffix,
-            _ = trie:is_pattern(Pattern),
+            _ = trie:is_pattern2(Pattern),
             ok = cpg:join(Scope, Pattern,
                                    Dispatcher, infinity);
         true ->
@@ -499,7 +499,7 @@ handle_event(EventType, EventContent, StateName, State) ->
                     scope = Scope}} = State) ->
     true = is_list(Suffix),
     Pattern = Prefix ++ Suffix,
-    _ = trie:is_pattern(Pattern),
+    _ = trie:is_pattern2(Pattern),
     Count = cpg:join_count(Scope, Pattern,
                                     Dispatcher, infinity),
     ok = send('subscribe_count_out'(Count), State),
@@ -517,7 +517,7 @@ handle_event(EventType, EventContent, StateName, State) ->
          count_process_dynamic_terminated(CountProcessDynamic) of
         false ->
             Pattern = Prefix ++ Suffix,
-            _ = trie:is_pattern(Pattern),
+            _ = trie:is_pattern2(Pattern),
             case cpg:leave(Scope, Pattern,
                                     Dispatcher, infinity) of
                 ok ->
