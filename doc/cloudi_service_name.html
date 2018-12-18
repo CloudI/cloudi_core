@@ -12,9 +12,9 @@
 <h1>Module cloudi_service_name</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Service_Name_Creation_and_Parsing">CloudI Service Name Creation and Parsing</a></h3>.
-<p>Copyright © 2014-2017 Michael Truog</p>
+<p>Copyright © 2014-2018 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.1 Sep 15 2018 18:08:43
+<p><b>Version:</b> 1.7.5 Dec 17 2018 18:07:36
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -34,6 +34,10 @@
   <h4><a name="Parse_a_service_name_pattern_to_return_parameters.">Parse a service name pattern to return parameters.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#parse_with_suffix-2">parse_with_suffix/2</a></td><td>
   <h4><a name="Parse_a_service_name_pattern_and_return_the_common_suffix.">Parse a service name pattern and return the common suffix.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#pattern-1">pattern/1</a></td><td>
+  <h4><a name="Determine_if_a_service_name_pattern_contains_wildcard_characters.">Determine if a service name pattern contains wildcard characters.</a></h4>
+  If not, the service name pattern would only be used with a service name
+  that is an exact match.</td></tr>
 <tr><td valign="top"><a href="#suffix-2">suffix/2</a></td><td>
   <h4><a name="Provide_the_suffix_of_the_service_name_or_service_pattern_based_on_the_service's_configured_prefix.">Provide the suffix of the service name or service pattern based on the service's configured prefix.</a></h4>.</td></tr>
 </table>
@@ -69,6 +73,14 @@
 </div><p>
   <h4><a name="Parse_a_service_name_pattern_and_return_the_common_suffix.">Parse a service name pattern and return the common suffix.</a></h4>
 </p>
+
+<h3 class="function"><a name="pattern-1">pattern/1</a></h3>
+<div class="spec">
+<p><tt>pattern(Pattern::string()) -&gt; boolean()</tt><br></p>
+</div><p>
+  <h4><a name="Determine_if_a_service_name_pattern_contains_wildcard_characters.">Determine if a service name pattern contains wildcard characters.</a></h4>
+  If not, the service name pattern would only be used with a service name
+  that is an exact match.</p>
 
 <h3 class="function"><a name="suffix-2">suffix/2</a></h3>
 <div class="spec">
