@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Internal_Service_Behavior">CloudI Internal Service Behavior</a></h3>
    The interface which all internal services must implement.
-<p>Copyright © 2011-2017 Michael Truog</p>
+<p>Copyright © 2011-2019 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.3 Dec 17 2018 18:07:36
+<p><b>Version:</b> 1.8.0 Nov 28 2019 13:12:56
   ------------------------------------------------------------------------</p>
 <p><b>This module defines the <tt>cloudi_service</tt> behaviour.</b><br> Required callback functions: <tt>cloudi_service_init/4</tt>, <tt>cloudi_service_terminate/3</tt>.<br> Optional callback functions: <tt>cloudi_service_handle_request/11</tt>, <tt>cloudi_service_handle_info/3</tt>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
@@ -32,7 +32,7 @@
                  State = undefined, if not returned
                  Reason = restart | shutdown | Term, terminate(State) is called
   
-     cloudi_service_handle_request(Type, Name, Pattern,
+     cloudi_service_handle_request(RequestType, Name, Pattern,
                                    RequestInfo, Request, Timeout, Priority,
                                    TransId, Pid, State, Dispatcher)
       ==&gt; {reply, Response, NewState}
@@ -440,7 +440,7 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="forward-9">forward/9</a></h3>
 <div class="spec">
-<p><tt>forward(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Type::<a href="#type-request_type">request_type()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Pid::pid()) -&gt; no_return()</tt><br></p>
+<p><tt>forward(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, RequestType::<a href="#type-request_type">request_type()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Pid::pid()) -&gt; no_return()</tt><br></p>
 </div><p>
   <h4><a name="Forward_a_service_request.">Forward a service request.</a></h4>
 </p>
@@ -699,7 +699,7 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="return-9">return/9</a></h3>
 <div class="spec">
-<p><tt>return(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Type::<a href="#type-request_type">request_type()</a>, Name::<a href="#type-service_name">service_name()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, Timeout::<a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Pid::pid()) -&gt; no_return()</tt><br></p>
+<p><tt>return(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, RequestType::<a href="#type-request_type">request_type()</a>, Name::<a href="#type-service_name">service_name()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, Timeout::<a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Pid::pid()) -&gt; no_return()</tt><br></p>
 </div><p>
   <h4><a name="Return_a_service_response.">Return a service response.</a></h4>
 </p>
@@ -713,7 +713,7 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="return_nothrow-9">return_nothrow/9</a></h3>
 <div class="spec">
-<p><tt>return_nothrow(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Type::<a href="#type-request_type">request_type()</a>, Name::<a href="#type-service_name">service_name()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, Timeout::<a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Pid::pid()) -&gt; ok</tt><br></p>
+<p><tt>return_nothrow(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, RequestType::<a href="#type-request_type">request_type()</a>, Name::<a href="#type-service_name">service_name()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, Timeout::<a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Pid::pid()) -&gt; ok</tt><br></p>
 </div><p>
   <h4><a name="Return_a_service_response_without_exiting_the_request_handler.">Return a service response without exiting the request handler.</a></h4>
   Should rarely, if ever, be used.  If the service has the option

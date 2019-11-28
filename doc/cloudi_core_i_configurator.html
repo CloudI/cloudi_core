@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Configurator">CloudI Configurator</a></h3>
    Use the configuration information to start CloudI processes.
-<p>Copyright © 2011-2018 Michael Truog</p>
+<p>Copyright © 2011-2019 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.4 Dec 17 2018 18:07:36
+<p><b>Version:</b> 1.8.0 Nov 28 2019 13:12:56
   ------------------------------------------------------------------------</p>
 <p><b>Behaviours:</b> <a href="gen_server.html"><tt>gen_server</tt></a>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
@@ -34,7 +34,7 @@
 
 
 <h3 class="typedecl"><a name="type-error_reason_service_start">error_reason_service_start()</a></h3>
-<p><tt>error_reason_service_start() = {service_internal_module_invalid | service_internal_module_not_loaded | service_internal_module_not_found | service_internal_module_compile | service_internal_application_invalid | service_internal_release_not_found | service_internal_release_invalid | service_internal_file_extension_invalid | service_internal_file_path_invalid | service_internal_start_failed | service_external_start_failed | service_options_application_name_not_found, any()}</tt></p>
+<p><tt>error_reason_service_start() = {service_internal_module_invalid | service_internal_module_not_loaded | service_internal_module_not_found | service_internal_module_compile | service_internal_application_invalid | service_internal_release_not_found | service_internal_release_invalid | service_internal_file_extension_invalid | service_internal_file_path_invalid | service_options_application_name_not_found, any()} | {service_internal_start_failed, <a href="cloudi_core_i_spawn.html#type-error_reason_start_internal">cloudi_core_i_spawn:error_reason_start_internal()</a> | any()} | {service_external_start_failed, <a href="cloudi_core_i_spawn.html#type-error_reason_start_external">cloudi_core_i_spawn:error_reason_start_external()</a> | any()}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-error_reason_service_stop">error_reason_service_stop()</a></h3>

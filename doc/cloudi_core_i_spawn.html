@@ -10,44 +10,38 @@
 <hr>
 
 <h1>Module cloudi_core_i_spawn</h1>
-<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Spawn">CloudI Spawn</a></h3>.
-<p>Copyright © 2011-2018 Michael Truog</p>
+<p>Copyright © 2011-2019 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.4 Dec 17 2018 18:07:36
+<p><b>Version:</b> 1.8.0 Nov 28 2019 13:12:55
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
 <h2><a name="description">Description</a></h2>
    <h3><a name="CloudI_Spawn">CloudI Spawn</a></h3>
 
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-error_reason_start_external">error_reason_start_external()</a></h3>
+<p><tt>error_reason_start_external() = {service_external_file_path_invalid_expanded | service_external_file_path_invalid_unicode | service_external_args_invalid_quotes | service_external_args_invalid_unicode | service_external_env_invalid_expanded | service_external_env_invalid_unicode, any()}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-error_reason_start_internal">error_reason_start_internal()</a></h3>
+<p><tt>error_reason_start_internal() = {service_internal_module_not_loaded, any()}</tt></p>
+
+
 <h2><a name="index">Function Index</a></h2>
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#environment_lookup-0">environment_lookup/0</a></td><td></td></tr>
-<tr><td valign="top"><a href="#environment_transform-1">environment_transform/1</a></td><td></td></tr>
-<tr><td valign="top"><a href="#environment_transform-2">environment_transform/2</a></td><td></td></tr>
-<tr><td valign="top"><a href="#start_external-21">start_external/21</a></td><td></td></tr>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#start_external-21">start_external/21</a></td><td></td></tr>
 <tr><td valign="top"><a href="#start_internal-18">start_internal/18</a></td><td></td></tr>
+<tr><td valign="top"><a href="#status_external-4">status_external/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#status_internal-3">status_internal/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#update_external-3">update_external/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#update_external_f-12">update_external_f/12</a></td><td></td></tr>
 <tr><td valign="top"><a href="#update_internal_f-9">update_internal_f/9</a></td><td></td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
-
-<h3 class="function"><a name="environment_lookup-0">environment_lookup/0</a></h3>
-<div class="spec">
-<p><tt>environment_lookup() -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="environment_transform-1">environment_transform/1</a></h3>
-<div class="spec">
-<p><tt>environment_transform(String) -&gt; any()</tt></p>
-</div>
-
-<h3 class="function"><a name="environment_transform-2">environment_transform/2</a></h3>
-<div class="spec">
-<p><tt>environment_transform(String, EnvironmentLookup) -&gt; any()</tt></p>
-</div>
 
 <h3 class="function"><a name="start_external-21">start_external/21</a></h3>
 <div class="spec">
@@ -59,6 +53,16 @@
 <p><tt>start_internal(ProcessIndex, ProcessCount, TimeStart, TimeRestart, Restarts, GroupLeader, Module, Args, Timeout, Prefix, TimeoutAsync, TimeoutSync, TimeoutTerm, DestRefresh, DestListDeny, DestListAllow, ConfigOptions, ID) -&gt; any()</tt></p>
 </div>
 
+<h3 class="function"><a name="status_external-4">status_external/4</a></h3>
+<div class="spec">
+<p><tt>status_external(CountProcess, CountThread, X3, Status) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="status_internal-3">status_internal/3</a></h3>
+<div class="spec">
+<p><tt>status_internal(CountProcess, X2, Status) -&gt; any()</tt></p>
+</div>
+
 <h3 class="function"><a name="update_external-3">update_external/3</a></h3>
 <div class="spec">
 <p><tt>update_external(Pids, Ports, X3) -&gt; any()</tt></p>
@@ -66,12 +70,12 @@
 
 <h3 class="function"><a name="update_external_f-12">update_external_f/12</a></h3>
 <div class="spec">
-<p><tt>update_external_f(NewFilename, NewArguments, NewEnvironment, NewDestRefresh, NewTimeoutInit, NewTimeoutAsync, NewTimeoutSync, NewDestListDeny, NewDestListAllow, OptionsKeys, NewConfigOptions, X12) -&gt; any()</tt></p>
+<p><tt>update_external_f(FilenameNew, ArgumentsNew, EnvironmentNew, DestRefreshNew, TimeoutInitNew, TimeoutAsyncNew, TimeoutSyncNew, DestListDenyNew, DestListAllowNew, OptionsKeys, ConfigOptionsNew, X12) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="update_internal_f-9">update_internal_f/9</a></h3>
 <div class="spec">
-<p><tt>update_internal_f(NewDestRefresh, NewTimeoutInit, NewTimeoutAsync, NewTimeoutSync, NewDestListDeny, NewDestListAllow, OptionsKeys, NewConfigOptions, X9) -&gt; any()</tt></p>
+<p><tt>update_internal_f(DestRefreshNew, TimeoutInitNew, TimeoutAsyncNew, TimeoutSyncNew, DestListDenyNew, DestListAllowNew, OptionsKeys, ConfigOptionsNew, X9) -&gt; any()</tt></p>
 </div>
 <hr>
 

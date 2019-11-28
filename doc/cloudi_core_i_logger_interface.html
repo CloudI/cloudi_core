@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="Fake_CloudI_Logger_Interface">Fake CloudI Logger Interface</a></h3>
    These functions get replaced dynamically.
-<p>Copyright © 2011-2017 Michael Truog</p>
+<p>Copyright © 2011-2019 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.1 Dec 17 2018 18:07:35
+<p><b>Version:</b> 1.8.0 Nov 28 2019 13:12:55
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -40,6 +40,10 @@
 <tr><td valign="top"><a href="#info_apply-2">info_apply/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#info_apply-3">info_apply/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#info_sync-6">info_sync/6</a></td><td></td></tr>
+<tr><td valign="top"><a href="#log-7">log/7</a></td><td></td></tr>
+<tr><td valign="top"><a href="#log_apply-3">log_apply/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#log_apply-4">log_apply/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#log_sync-7">log_sync/7</a></td><td></td></tr>
 <tr><td valign="top"><a href="#trace-6">trace/6</a></td><td></td></tr>
 <tr><td valign="top"><a href="#trace_apply-2">trace_apply/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#trace_apply-3">trace_apply/3</a></td><td></td></tr>
@@ -130,6 +134,26 @@
 <h3 class="function"><a name="info_sync-6">info_sync/6</a></h3>
 <div class="spec">
 <p><tt>info_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="log-7">log/7</a></h3>
+<div class="spec">
+<p><tt>log(Module, Line, Function, Arity, Level, Format, Arguments) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="log_apply-3">log_apply/3</a></h3>
+<div class="spec">
+<p><tt>log_apply(Level, F, A) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="log_apply-4">log_apply/4</a></h3>
+<div class="spec">
+<p><tt>log_apply(Level, M, F, A) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="log_sync-7">log_sync/7</a></h3>
+<div class="spec">
+<p><tt>log_sync(Module, Line, Function, Arity, Level, Format, Arguments) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="trace-6">trace/6</a></h3>
