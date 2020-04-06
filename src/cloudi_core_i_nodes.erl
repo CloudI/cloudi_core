@@ -391,6 +391,10 @@ code_change(_, State, _) ->
 %%%------------------------------------------------------------------------
 
 applications_set(Listen, Connect, TimestampType) ->
+    true = (Listen =:= visible) orelse (Listen =:= all),
+    true = (Connect =:= visible) orelse (Connect =:= hidden),
+    true = (TimestampType =:= erlang) orelse
+           (TimestampType =:= os) orelse (TimestampType =:= warp),
     application:set_env(cpg, node_type, Listen),
     application:set_env(nodefinder, node_type, Connect),
     application:set_env(cloudi_core, timestamp_type, TimestampType),
