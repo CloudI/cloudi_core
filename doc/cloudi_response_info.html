@@ -10,19 +10,44 @@
 <hr>
 
 <h1>Module cloudi_response_info</h1>
-<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
-   <h3><a name="CloudI_ResponseInfo_Creation">CloudI ResponseInfo Creation</a></h3>.
-<p>Copyright © 2014-2017 Michael Truog</p>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
+   <h3><a name="CloudI_ResponseInfo_Creation_and_Parsing">CloudI ResponseInfo Creation and Parsing</a></h3>
+   The ResponseInfo format is consistent with the RequestInfo format,
+   defined in the cloudi_request_info module.
+<p>Copyright © 2014-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.1 Nov 28 2019 13:12:55
+<p><b>Version:</b> 1.8.1 Jun 3 2020 18:48:07
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
 <h2><a name="description">Description</a></h2>
-   <h3><a name="CloudI_ResponseInfo_Creation">CloudI ResponseInfo Creation</a></h3>
+   <h3><a name="CloudI_ResponseInfo_Creation_and_Parsing">CloudI ResponseInfo Creation and Parsing</a></h3>
+   The ResponseInfo format is consistent with the RequestInfo format,
+   defined in the cloudi_request_info module.
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-format">format()</a></h3>
+<p><tt>format() = <a href="cloudi_request_info.html#type-format">cloudi_request_info:format()</a></tt></p>
+
 
 <h2><a name="index">Function Index</a></h2>
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#lookup_content_type-0">lookup_content_type/0</a></td><td>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#key_value_new-1">key_value_new/1</a></td><td>
+  <h4><a name="New_ResponseInfo_key/value_data.">New ResponseInfo key/value data.</a></h4>
+  ResponseInfo is meant to contain key/value pairs that is response
+  meta-data.</td></tr>
+<tr><td valign="top"><a href="#key_value_new-2">key_value_new/2</a></td><td>
+  <h4><a name="New_ResponseInfo_key/value_data.">New ResponseInfo key/value data.</a></h4>
+  ResponseInfo is meant to contain key/value pairs that is response
+  meta-data.</td></tr>
+<tr><td valign="top"><a href="#key_value_parse-1">key_value_parse/1</a></td><td>
+  <h4><a name="Parse_ResponseInfo_key/value_data.">Parse ResponseInfo key/value data.</a></h4>
+  ResponseInfo is meant to contain key/value pairs that is response
+  meta-data.</td></tr>
+<tr><td valign="top"><a href="#key_value_parse-2">key_value_parse/2</a></td><td>
+  <h4><a name="Parse_ResponseInfo_key/value_data_to_the_return_type_specified.">Parse ResponseInfo key/value data to the return type specified.</a></h4>
+  ResponseInfo is meant to contain key/value pairs that is response
+  meta-data.</td></tr>
+<tr><td valign="top"><a href="#lookup_content_type-0">lookup_content_type/0</a></td><td>
   <h4><a name="Provide_a_lookup_with_common_content_types.">Provide a lookup with common content types.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#lookup_content_type-1">lookup_content_type/1</a></td><td>
   <h4><a name="Provide_a_lookup_with_common_content_types_while_setting_string_type_of_the_content_type_value.">Provide a lookup with common content types while setting string type of the content type value.</a></h4>.</td></tr>
@@ -31,6 +56,40 @@
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="key_value_new-1">key_value_new/1</a></h3>
+<div class="spec">
+<p><tt>key_value_new(ResponseInfo::<a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::binary()</tt><br></p>
+</div><p>
+  <h4><a name="New_ResponseInfo_key/value_data.">New ResponseInfo key/value data.</a></h4>
+  ResponseInfo is meant to contain key/value pairs that is response
+  meta-data.  Create the binary ResponseInfo data with any supported
+  data structure.</p>
+
+<h3 class="function"><a name="key_value_new-2">key_value_new/2</a></h3>
+<div class="spec">
+<p><tt>key_value_new(ResponseInfo::<a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, Format::<a href="#type-format">format()</a>) -&gt; Result::binary()</tt><br></p>
+</div><p>
+  <h4><a name="New_ResponseInfo_key/value_data.">New ResponseInfo key/value data.</a></h4>
+  ResponseInfo is meant to contain key/value pairs that is response
+  meta-data.  Create the binary ResponseInfo data with any supported
+  data structure.</p>
+
+<h3 class="function"><a name="key_value_parse-1">key_value_parse/1</a></h3>
+<div class="spec">
+<p><tt>key_value_parse(ResponseInfo::binary() | <a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::#{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}</tt><br></p>
+</div><p>
+  <h4><a name="Parse_ResponseInfo_key/value_data.">Parse ResponseInfo key/value data.</a></h4>
+  ResponseInfo is meant to contain key/value pairs that is response
+  meta-data.</p>
+
+<h3 class="function"><a name="key_value_parse-2">key_value_parse/2</a></h3>
+<div class="spec">
+<p><tt>key_value_parse(ResponseInfo::binary() | <a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, ResultType::map | list) -&gt; Result::#{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>} | [{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a>, <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}]</tt><br></p>
+</div><p>
+  <h4><a name="Parse_ResponseInfo_key/value_data_to_the_return_type_specified.">Parse ResponseInfo key/value data to the return type specified.</a></h4>
+  ResponseInfo is meant to contain key/value pairs that is response
+  meta-data.</p>
 
 <h3 class="function"><a name="lookup_content_type-0">lookup_content_type/0</a></h3>
 <div class="spec">

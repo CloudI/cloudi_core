@@ -12,9 +12,9 @@
 <h1>Module cloudi_core_i_status</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Status_Data">CloudI Status Data</a></h3>.
-<p>Copyright © 2018 Michael Truog</p>
+<p>Copyright © 2018-2019 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.5 Nov 28 2019 13:12:55
+<p><b>Version:</b> 1.8.1 Jun 3 2020 18:48:05
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -45,6 +45,7 @@
 <tr><td valign="top"><a href="#durations_new-0">durations_new/0</a></td><td></td></tr>
 <tr><td valign="top"><a href="#durations_state-2">durations_state/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#durations_store-3">durations_store/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#durations_store_difference-4">durations_store_difference/4</a></td><td></td></tr>
 <tr><td valign="top"><a href="#durations_sum-2">durations_sum/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#nanoseconds_to_availability_day-1">nanoseconds_to_availability_day/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#nanoseconds_to_availability_day-3">nanoseconds_to_availability_day/3</a></td><td></td></tr>
@@ -55,6 +56,7 @@
 <tr><td valign="top"><a href="#nanoseconds_to_availability_year-1">nanoseconds_to_availability_year/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#nanoseconds_to_availability_year-3">nanoseconds_to_availability_year/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#nanoseconds_to_string-2">nanoseconds_to_string/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#nanoseconds_to_string-3">nanoseconds_to_string/3</a></td><td></td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
@@ -82,6 +84,11 @@
 <h3 class="function"><a name="durations_store-3">durations_store/3</a></h3>
 <div class="spec">
 <p><tt>durations_store(KeyList::nonempty_list(), Duration::<a href="#type-duration">duration()</a>, DurationsLookup::<a href="#type-durations">durations</a>(any())) -&gt; <a href="#type-durations">durations</a>(any())</tt><br></p>
+</div>
+
+<h3 class="function"><a name="durations_store_difference-4">durations_store_difference/4</a></h3>
+<div class="spec">
+<p><tt>durations_store_difference(KeyList::nonempty_list(), Duration::<a href="#type-duration">duration()</a>, DurationsAddLookup::<a href="#type-durations">durations</a>(any()), DurationsSubtractLookup::<a href="#type-durations">durations</a>(any())) -&gt; <a href="#type-durations">durations</a>(any())</tt><br></p>
 </div>
 
 <h3 class="function"><a name="durations_sum-2">durations_sum/2</a></h3>
@@ -132,6 +139,11 @@
 <h3 class="function"><a name="nanoseconds_to_string-2">nanoseconds_to_string/2</a></h3>
 <div class="spec">
 <p><tt>nanoseconds_to_string(NanoSeconds::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean()) -&gt; string()</tt><br></p>
+</div>
+
+<h3 class="function"><a name="nanoseconds_to_string-3">nanoseconds_to_string/3</a></h3>
+<div class="spec">
+<p><tt>nanoseconds_to_string(NanoSeconds::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), ApproximateChar::char()) -&gt; string()</tt><br></p>
 </div>
 <hr>
 

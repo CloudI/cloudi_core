@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Internal_Service_Behavior">CloudI Internal Service Behavior</a></h3>
    The interface which all internal services must implement.
-<p>Copyright © 2011-2019 Michael Truog</p>
+<p>Copyright © 2011-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.8.0 Nov 28 2019 13:12:56
+<p><b>Version:</b> 1.8.1 Jun 3 2020 18:48:06
   ------------------------------------------------------------------------</p>
 <p><b>This module defines the <tt>cloudi_service</tt> behaviour.</b><br> Required callback functions: <tt>cloudi_service_init/4</tt>, <tt>cloudi_service_terminate/3</tt>.<br> Optional callback functions: <tt>cloudi_service_handle_request/11</tt>, <tt>cloudi_service_handle_info/3</tt>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
@@ -78,10 +78,6 @@
 
 <h3 class="typedecl"><a name="type-error_reason">error_reason()</a></h3>
 <p><tt>error_reason() = timeout</tt></p>
-
-
-<h3 class="typedecl"><a name="type-error_reason_sync">error_reason_sync()</a></h3>
-<p><tt>error_reason_sync() = <a href="#type-error_reason">error_reason()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-key_values">key_values()</a></h3>
@@ -634,14 +630,14 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="recv_async-1">recv_async/1</a></h3>
 <div class="spec">
-<p><tt>recv_async(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>recv_async(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Receive_an_asynchronous_service_request.">Receive an asynchronous service request.</a></h4>
   Use a null TransId to receive the oldest service request.</p>
 
 <h3 class="function"><a name="recv_async-2">recv_async/2</a></h3>
 <div class="spec">
-<p><tt>recv_async(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, TransId::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a> | <a href="#type-trans_id">trans_id()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>recv_async(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, TransId::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a> | <a href="#type-trans_id">trans_id()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Receive_an_asynchronous_service_request.">Receive an asynchronous service request.</a></h4>
   Either use the supplied TransId to receive the specific service request
@@ -649,7 +645,7 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="recv_async-3">recv_async/3</a></h3>
 <div class="spec">
-<p><tt>recv_async(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a> | <a href="#type-trans_id">trans_id()</a>, TransId::<a href="#type-trans_id">trans_id()</a> | boolean()) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>recv_async(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a> | <a href="#type-trans_id">trans_id()</a>, TransId::<a href="#type-trans_id">trans_id()</a> | boolean()) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Receive_an_asynchronous_service_request.">Receive an asynchronous service request.</a></h4>
   Either use the supplied TransId to receive the specific service request
@@ -657,28 +653,28 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="recv_async-4">recv_async/4</a></h3>
 <div class="spec">
-<p><tt>recv_async(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Consume::boolean()) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>recv_async(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Consume::boolean()) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Receive_an_asynchronous_service_request.">Receive an asynchronous service request.</a></h4>
 </p>
 
 <h3 class="function"><a name="recv_asyncs-2">recv_asyncs/2</a></h3>
 <div class="spec">
-<p><tt>recv_asyncs(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, TransIdList::[<a href="#type-trans_id">trans_id()</a>]) -&gt; {ok, [{ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>}]} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>recv_asyncs(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, TransIdList::[<a href="#type-trans_id">trans_id()</a>]) -&gt; {ok, [{ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>}]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Receive_asynchronous_service_requests.">Receive asynchronous service requests.</a></h4>
 </p>
 
 <h3 class="function"><a name="recv_asyncs-3">recv_asyncs/3</a></h3>
 <div class="spec">
-<p><tt>recv_asyncs(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, TransIdList::[<a href="#type-trans_id">trans_id()</a>]) -&gt; {ok, [{ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>}]} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>recv_asyncs(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, TransIdList::[<a href="#type-trans_id">trans_id()</a>]) -&gt; {ok, [{ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>}]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Receive_asynchronous_service_requests.">Receive asynchronous service requests.</a></h4>
 </p>
 
 <h3 class="function"><a name="recv_asyncs-4">recv_asyncs/4</a></h3>
 <div class="spec">
-<p><tt>recv_asyncs(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, TransIdList::[<a href="#type-trans_id">trans_id()</a>], Consume::boolean()) -&gt; {ok, [{ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>}]} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>recv_asyncs(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, TransIdList::[<a href="#type-trans_id">trans_id()</a>], Consume::boolean()) -&gt; {ok, [{ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>}]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Receive_asynchronous_service_requests.">Receive asynchronous service requests.</a></h4>
 </p>
@@ -886,35 +882,35 @@ The source pid can be found at:</p>
 
 <h3 class="function"><a name="send_sync-3">send_sync/3</a></h3>
 <div class="spec">
-<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
 </p>
 
 <h3 class="function"><a name="send_sync-4">send_sync/4</a></h3>
 <div class="spec">
-<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
 </p>
 
 <h3 class="function"><a name="send_sync-5">send_sync/5</a></h3>
 <div class="spec">
-<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
 </p>
 
 <h3 class="function"><a name="send_sync-6">send_sync/6</a></h3>
 <div class="spec">
-<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
 </p>
 
 <h3 class="function"><a name="send_sync-7">send_sync/7</a></h3>
 <div class="spec">
-<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason_sync">error_reason_sync()</a>}</tt><br></p>
+<p><tt>send_sync(Dispatcher::<a href="#type-dispatcher">dispatcher()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
 </p>

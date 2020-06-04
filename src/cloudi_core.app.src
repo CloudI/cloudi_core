@@ -3,7 +3,7 @@
 
 {application, cloudi_core, 
   [{description, "CloudI Core Application"},
-   {vsn, "1.8.0"},
+   {vsn, "2.0.0"},
    {modules, [
         cloudi,
         cloudi_args_type,

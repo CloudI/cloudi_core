@@ -21,9 +21,9 @@
    the 'text_pairs' format.  It is valid to have multiple entries for the
    same key within the RequestInfo data.  A key must be of size 1 or greater
    (<code>&lt;&lt;&gt;&gt;</code> will never exist as a key in text_pairs data).</p>.
-<p>Copyright © 2014-2018 Michael Truog</p>
+<p>Copyright © 2014-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.4 Nov 28 2019 13:12:55
+<p><b>Version:</b> 1.8.1 Jun 3 2020 18:48:07
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -72,6 +72,10 @@ and can utilize the same functions below.</p>
   <h4><a name="Parse_RequestInfo_key/value_data.">Parse RequestInfo key/value data.</a></h4>
   RequestInfo is meant to contain key/value pairs that is request
   meta-data.</td></tr>
+<tr><td valign="top"><a href="#key_value_parse-2">key_value_parse/2</a></td><td>
+  <h4><a name="Parse_RequestInfo_key/value_data_to_the_return_type_specified.">Parse RequestInfo key/value data to the return type specified.</a></h4>
+  RequestInfo is meant to contain key/value pairs that is request
+  meta-data.</td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
@@ -106,6 +110,14 @@ and can utilize the same functions below.</p>
 <p><tt>key_value_parse(RequestInfo::binary() | <a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::#{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}</tt><br></p>
 </div><p>
   <h4><a name="Parse_RequestInfo_key/value_data.">Parse RequestInfo key/value data.</a></h4>
+  RequestInfo is meant to contain key/value pairs that is request
+  meta-data.</p>
+
+<h3 class="function"><a name="key_value_parse-2">key_value_parse/2</a></h3>
+<div class="spec">
+<p><tt>key_value_parse(RequestInfo::binary() | <a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, ResultType::map | list) -&gt; Result::#{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>} | [{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a>, <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}]</tt><br></p>
+</div><p>
+  <h4><a name="Parse_RequestInfo_key/value_data_to_the_return_type_specified.">Parse RequestInfo key/value data to the return type specified.</a></h4>
   RequestInfo is meant to contain key/value pairs that is request
   meta-data.</p>
 <hr>
