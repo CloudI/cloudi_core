@@ -15,7 +15,7 @@
    Used interaction with the cloudi_os_spawn process.
 <p>Copyright © 2011-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.8.1 Jun 3 2020 18:48:05
+<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:55
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -28,7 +28,7 @@
 <tr><td valign="top"><a href="#handle_cast-2">handle_cast/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#handle_info-2">handle_info/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#init-1">init/1</a></td><td></td></tr>
-<tr><td valign="top"><a href="#spawn-15">spawn/15</a></td><td></td></tr>
+<tr><td valign="top"><a href="#spawn-16">spawn/16</a></td><td></td></tr>
 <tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td></td></tr>
 <tr><td valign="top"><a href="#terminate-2">terminate/2</a></td><td></td></tr>
 </table>
@@ -37,7 +37,7 @@
 
 <h3 class="function"><a name="code_change-3">code_change/3</a></h3>
 <div class="spec">
-<p><tt>code_change(X1, State, X3) -&gt; any()</tt></p>
+<p><tt>code_change(OldVsn, State, Extra) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="handle_call-3">handle_call/3</a></h3>
@@ -60,9 +60,9 @@
 <p><tt>init(X1) -&gt; any()</tt></p>
 </div>
 
-<h3 class="function"><a name="spawn-15">spawn/15</a></h3>
+<h3 class="function"><a name="spawn-16">spawn/16</a></h3>
 <div class="spec">
-<p><tt>spawn(SpawnProcess, SpawnProtocol, SpawnSocketPath, Ports, SpawnRlimits, SpawnUserI, SpawnUserStr, SpawnGroupI, SpawnGroupStr, SpawnNice, SpawnChroot, SpawnDirectory, SpawnFilename, SpawnArguments, SpawnEnvironment) -&gt; any()</tt></p>
+<p><tt>spawn(SpawnProcess, SpawnProtocol, SpawnSocketPath, Ports, SpawnRlimits, SpawnUserI, SpawnUserStr, SpawnGroupI, SpawnGroupStr, SpawnNice, SpawnChroot, SpawnSyscallLock, SpawnDirectory, SpawnFilename, SpawnArguments, SpawnEnvironment) -&gt; any()</tt></p>
 </div>
 
 <h3 class="function"><a name="start_link-0">start_link/0</a></h3>
@@ -72,7 +72,7 @@
 
 <h3 class="function"><a name="terminate-2">terminate/2</a></h3>
 <div class="spec">
-<p><tt>terminate(X1, State) -&gt; any()</tt></p>
+<p><tt>terminate(Reason, State) -&gt; any()</tt></p>
 </div>
 <hr>
 

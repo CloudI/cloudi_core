@@ -16,9 +16,9 @@ For internal services that need to have successful service request sends
 (i.e., a timeout does not occur because a response is received within the    
 timeout period) with each send done asynchronously and all tracking done   
 with in-memory data.</p>.
-<p>Copyright © 2015-2018 Michael Truog</p>
+<p>Copyright © 2015-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.4 Jun 3 2020 18:48:05
+<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:56
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -53,7 +53,7 @@ due to the transaction id being globally unique.</p>
 <h2><a name="types">Data Types</a></h2>
 
 <h3 class="typedecl"><a name="type-options">options()</a></h3>
-<p><tt>options() = [{retry, non_neg_integer()} | {retry_delay, non_neg_integer()} | {ordered, boolean()} | {timeout_default, <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>} | {priority_default, <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>} | {validate_request_info, fun((RequestInfo::<a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>) -&gt; boolean()) | {Module1::module(), Function1::atom()}} | {validate_request, fun((RequestInfo::<a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>, Request::<a href="cloudi_service.html#type-request">cloudi_service:request()</a>) -&gt; boolean()) | {Module2::module(), Function2::atom()}} | {validate_response_info, fun((ResponseInfo::<a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>) -&gt; boolean()) | {Module3::module(), Function3::atom()}} | {validate_response, fun((ResponseInfo::<a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>, Response::<a href="cloudi_service.html#type-response">cloudi_service:response()</a>) -&gt; boolean()) | {Module4::module(), Function4::atom()}} | {failures_source_die, boolean()} | {failures_source_max_count, pos_integer()} | {failures_source_max_period, infinity | pos_integer()}]</tt></p>
+<p><tt>options() = [{retry, non_neg_integer()} | {retry_delay, non_neg_integer()} | {suspended, boolean()} | {ordered, boolean()} | {timeout_default, <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>} | {priority_default, <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>} | {validate_request_info, fun((RequestInfo::<a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>) -&gt; boolean()) | {Module1::module(), Function1::atom()}} | {validate_request, fun((RequestInfo::<a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>, Request::<a href="cloudi_service.html#type-request">cloudi_service:request()</a>) -&gt; boolean()) | {Module2::module(), Function2::atom()}} | {validate_response_info, fun((ResponseInfo::<a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>) -&gt; boolean()) | {Module3::module(), Function3::atom()}} | {validate_response, fun((ResponseInfo::<a href="cloudi_service.html#type-response_info">cloudi_service:response_info()</a>, Response::<a href="cloudi_service.html#type-response">cloudi_service:response()</a>) -&gt; boolean()) | {Module4::module(), Function4::atom()}} | {failures_source_die, boolean()} | {failures_source_max_count, pos_integer()} | {failures_source_max_period, infinity | pos_integer()}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-ordered_requests">ordered_requests()</a></h3>
@@ -65,7 +65,11 @@ due to the transaction id being globally unique.</p>
 
 
 <h3 class="typedecl"><a name="type-state">state()</a></h3>
-<p><tt>state() = #cloudi_queue{retry = non_neg_integer(), retry_delay = non_neg_integer(), ordered = boolean(), timeout_default = <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>, priority_default = <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>, word_size = pos_integer(), service = undefined | pid(), validate_request_info = undefined | fun((any()) -&gt; boolean()), validate_request = undefined | fun((any(), any()) -&gt; boolean()), validate_response_info = undefined | fun((any()) -&gt; boolean()), validate_response = undefined | fun((any(), any()) -&gt; boolean()), failures_source_die = boolean(), failures_source_max_count = pos_integer(), failures_source_max_period = infinity | pos_integer(), failures_source = [<a href="cloudi_timestamp.html#type-seconds_monotonic">cloudi_timestamp:seconds_monotonic()</a>], ordered_requests = <a href="#type-ordered_requests">ordered_requests()</a>, ordered_pending = non_neg_integer(), requests = <a href="#type-requests">requests()</a>}</tt></p>
+<p><tt>state() = #cloudi_queue{retry = non_neg_integer(), retry_delay = non_neg_integer(), suspended = boolean(), ordered = boolean(), timeout_default = <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>, priority_default = <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>, word_size = pos_integer(), service = undefined | pid(), validate_request_info = undefined | fun((any()) -&gt; boolean()), validate_request = undefined | fun((any(), any()) -&gt; boolean()), validate_response_info = undefined | fun((any()) -&gt; boolean()), validate_response = undefined | fun((any(), any()) -&gt; boolean()), failures_source_die = boolean(), failures_source_max_count = pos_integer(), failures_source_max_period = infinity | pos_integer(), failures_source = [<a href="cloudi_timestamp.html#type-seconds_monotonic">cloudi_timestamp:seconds_monotonic()</a>], suspend_requests = <a href="#type-suspend_requests">suspend_requests()</a>, ordered_requests = <a href="#type-ordered_requests">ordered_requests()</a>, ordered_pending = non_neg_integer(), requests = <a href="#type-requests">requests()</a>}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-suspend_requests">suspend_requests()</a></h3>
+<p><tt>suspend_requests() = <a href="queue.html#type-queue">queue:queue</a>(#request_suspend_send{name = <a href="cloudi_service.html#type-service_name">cloudi_service:service_name()</a>, request_info = <a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>, request = <a href="cloudi_service.html#type-request">cloudi_service:request()</a>, timeout = <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>, priority = <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>, id = <a href="cloudi_service.html#type-trans_id">cloudi_service:trans_id()</a>, pattern_pid = <a href="cloudi_service.html#type-pattern_pid">cloudi_service:pattern_pid()</a> | undefined} | #request_suspend_mcast{name = <a href="cloudi_service.html#type-service_name">cloudi_service:service_name()</a>, request_info = <a href="cloudi_service.html#type-request_info">cloudi_service:request_info()</a>, request = <a href="cloudi_service.html#type-request">cloudi_service:request()</a>, timeout = <a href="cloudi_service.html#type-timeout_milliseconds">cloudi_service:timeout_milliseconds()</a>, priority = <a href="cloudi_service.html#type-priority">cloudi_service:priority()</a>})</tt></p>
 
 
 <h2><a name="index">Function Index</a></h2>
@@ -102,6 +106,8 @@ due to the transaction id being globally unique.</p>
 <tr><td valign="top"><a href="#recv_id-3">recv_id/3</a></td><td>
   <h4><a name="Receive_a_service_request_and_provide_the_first_transaction_id.">Receive a service request and provide the first transaction id.</a></h4>
   Must be called from the <code>cloudi_service_handle_info/3</code> callback function.</td></tr>
+<tr><td valign="top"><a href="#resume-2">resume/2</a></td><td>
+  <h4><a name="Resume_sending_service_requests.">Resume sending service requests.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#send-4">send/4</a></td><td>
   <h4><a name="Send_a_service_request.">Send a service request.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#send-5">send/5</a></td><td>
@@ -124,6 +130,8 @@ due to the transaction id being globally unique.</p>
   <h4><a name="Send_a_service_request_and_provide_the_first_transaction_id.">Send a service request and provide the first transaction id.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#size-2">size/2</a></td><td>
   <h4><a name="Return_the_size_of_the_CloudI_queue.">Return the size of the CloudI queue.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#suspend-2">suspend/2</a></td><td>
+  <h4><a name="Suspend_sending_service_requests.">Suspend sending service requests.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#timeout-3">timeout/3</a></td><td>
   <h4><a name="A_service_request_timeout.">A service request timeout.</a></h4>
   <code>ok</code> is returned if a service request is retried.</td></tr>
@@ -236,6 +244,13 @@ due to the transaction id being globally unique.</p>
   <h4><a name="Receive_a_service_request_and_provide_the_first_transaction_id.">Receive a service request and provide the first transaction id.</a></h4>
   Must be called from the <code>cloudi_service_handle_info/3</code> callback function.</p>
 
+<h3 class="function"><a name="resume-2">resume/2</a></h3>
+<div class="spec">
+<p><tt>resume(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, State::<a href="#type-state">state()</a>) -&gt; StateNew::<a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Resume_sending_service_requests.">Resume sending service requests.</a></h4>
+</p>
+
 <h3 class="function"><a name="send-4">send/4</a></h3>
 <div class="spec">
 <p><tt>send(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, Name::<a href="cloudi_service.html#type-service_name">cloudi_service:service_name()</a>, Request::<a href="cloudi_service.html#type-request">cloudi_service:request()</a>, State::<a href="#type-state">state()</a>) -&gt; {ok, StateNew::<a href="#type-state">state()</a>} | {{error, Reason::<a href="cloudi_service.html#type-error_reason">cloudi_service:error_reason()</a>}, StateNew::<a href="#type-state">state()</a>}</tt><br></p>
@@ -311,6 +326,13 @@ due to the transaction id being globally unique.</p>
 <p><tt>size(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, State::<a href="#type-state">state()</a>) -&gt; non_neg_integer()</tt><br></p>
 </div><p>
   <h4><a name="Return_the_size_of_the_CloudI_queue.">Return the size of the CloudI queue.</a></h4>
+</p>
+
+<h3 class="function"><a name="suspend-2">suspend/2</a></h3>
+<div class="spec">
+<p><tt>suspend(Dispatcher::<a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a>, State::<a href="#type-state">state()</a>) -&gt; StateNew::<a href="#type-state">state()</a></tt><br></p>
+</div><p>
+  <h4><a name="Suspend_sending_service_requests.">Suspend sending service requests.</a></h4>
 </p>
 
 <h3 class="function"><a name="timeout-3">timeout/3</a></h3>

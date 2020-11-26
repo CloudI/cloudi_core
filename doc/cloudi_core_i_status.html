@@ -12,9 +12,9 @@
 <h1>Module cloudi_core_i_status</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Status_Data">CloudI Status Data</a></h3>.
-<p>Copyright © 2018-2019 Michael Truog</p>
+<p>Copyright © 2018-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.8.1 Jun 3 2020 18:48:05
+<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:55
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -55,8 +55,8 @@
 <tr><td valign="top"><a href="#nanoseconds_to_availability_week-3">nanoseconds_to_availability_week/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#nanoseconds_to_availability_year-1">nanoseconds_to_availability_year/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#nanoseconds_to_availability_year-3">nanoseconds_to_availability_year/3</a></td><td></td></tr>
-<tr><td valign="top"><a href="#nanoseconds_to_string-2">nanoseconds_to_string/2</a></td><td></td></tr>
-<tr><td valign="top"><a href="#nanoseconds_to_string-3">nanoseconds_to_string/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#nanoseconds_to_string_gt-2">nanoseconds_to_string_gt/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#nanoseconds_to_string_lt-2">nanoseconds_to_string_lt/2</a></td><td></td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
@@ -98,52 +98,52 @@
 
 <h3 class="function"><a name="nanoseconds_to_availability_day-1">nanoseconds_to_availability_day/1</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_availability_day(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_availability_day(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; <a href="cloudi_service_api.html#type-availability">cloudi_service_api:availability()</a></tt><br></p>
 </div>
 
 <h3 class="function"><a name="nanoseconds_to_availability_day-3">nanoseconds_to_availability_day/3</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_availability_day(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), NanoSecondsDowntime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_availability_day(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), NanoSecondsDowntime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; <a href="cloudi_service_api.html#type-availability_approx">cloudi_service_api:availability_approx()</a></tt><br></p>
 </div>
 
 <h3 class="function"><a name="nanoseconds_to_availability_month-1">nanoseconds_to_availability_month/1</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_availability_month(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_availability_month(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; <a href="cloudi_service_api.html#type-availability">cloudi_service_api:availability()</a></tt><br></p>
 </div>
 
 <h3 class="function"><a name="nanoseconds_to_availability_month-3">nanoseconds_to_availability_month/3</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_availability_month(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), NanoSecondsDowntime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_availability_month(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), NanoSecondsDowntime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; <a href="cloudi_service_api.html#type-availability_approx">cloudi_service_api:availability_approx()</a></tt><br></p>
 </div>
 
 <h3 class="function"><a name="nanoseconds_to_availability_week-1">nanoseconds_to_availability_week/1</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_availability_week(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_availability_week(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; <a href="cloudi_service_api.html#type-availability">cloudi_service_api:availability()</a></tt><br></p>
 </div>
 
 <h3 class="function"><a name="nanoseconds_to_availability_week-3">nanoseconds_to_availability_week/3</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_availability_week(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), NanoSecondsDowntime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_availability_week(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), NanoSecondsDowntime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; <a href="cloudi_service_api.html#type-availability_approx">cloudi_service_api:availability_approx()</a></tt><br></p>
 </div>
 
 <h3 class="function"><a name="nanoseconds_to_availability_year-1">nanoseconds_to_availability_year/1</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_availability_year(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_availability_year(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; <a href="cloudi_service_api.html#type-availability">cloudi_service_api:availability()</a></tt><br></p>
 </div>
 
 <h3 class="function"><a name="nanoseconds_to_availability_year-3">nanoseconds_to_availability_year/3</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_availability_year(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), NanoSecondsDowntime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_availability_year(NanoSecondsUptime::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), NanoSecondsDowntime::<a href="#type-nanoseconds">nanoseconds()</a>) -&gt; <a href="cloudi_service_api.html#type-availability_approx">cloudi_service_api:availability_approx()</a></tt><br></p>
 </div>
 
-<h3 class="function"><a name="nanoseconds_to_string-2">nanoseconds_to_string/2</a></h3>
+<h3 class="function"><a name="nanoseconds_to_string_gt-2">nanoseconds_to_string_gt/2</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_string(NanoSeconds::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean()) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_string_gt(NanoSeconds::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean()) -&gt; <a href="cloudi_service_api.html#type-nanoseconds_string_approx_gt">cloudi_service_api:nanoseconds_string_approx_gt()</a></tt><br></p>
 </div>
 
-<h3 class="function"><a name="nanoseconds_to_string-3">nanoseconds_to_string/3</a></h3>
+<h3 class="function"><a name="nanoseconds_to_string_lt-2">nanoseconds_to_string_lt/2</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_string(NanoSeconds::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean(), ApproximateChar::char()) -&gt; string()</tt><br></p>
+<p><tt>nanoseconds_to_string_lt(NanoSeconds::<a href="#type-nanoseconds">nanoseconds()</a>, Approximate::boolean()) -&gt; <a href="cloudi_service_api.html#type-nanoseconds_string_approx_lt">cloudi_service_api:nanoseconds_string_approx_lt()</a></tt><br></p>
 </div>
 <hr>
 

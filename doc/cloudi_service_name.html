@@ -12,9 +12,9 @@
 <h1>Module cloudi_service_name</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Service_Name_Creation_and_Parsing">CloudI Service Name Creation and Parsing</a></h3>.
-<p>Copyright © 2014-2018 Michael Truog</p>
+<p>Copyright © 2014-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.5 Jun 3 2020 18:48:04
+<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:55
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -62,14 +62,14 @@
 
 <h3 class="function"><a name="parse-2">parse/2</a></h3>
 <div class="spec">
-<p><tt>parse(Name::string(), Pattern::string()) -&gt; [string()] | error</tt><br></p>
+<p><tt>parse(Name::string(), Pattern::string()) -&gt; [nonempty_string()] | error</tt><br></p>
 </div><p>
   <h4><a name="Parse_a_service_name_pattern_to_return_parameters.">Parse a service name pattern to return parameters.</a></h4>
 </p>
 
 <h3 class="function"><a name="parse_with_suffix-2">parse_with_suffix/2</a></h3>
 <div class="spec">
-<p><tt>parse_with_suffix(Name::string(), Pattern::string()) -&gt; {[string()], string()} | error</tt><br></p>
+<p><tt>parse_with_suffix(Name::string(), Pattern::string()) -&gt; {[nonempty_string()], string()} | error</tt><br></p>
 </div><p>
   <h4><a name="Parse_a_service_name_pattern_and_return_the_common_suffix.">Parse a service name pattern and return the common suffix.</a></h4>
 </p>
@@ -84,7 +84,7 @@
 
 <h3 class="function"><a name="suffix-2">suffix/2</a></h3>
 <div class="spec">
-<p><tt>suffix(Prefix::string(), NameOrPattern::string()) -&gt; string()</tt><br></p>
+<p><tt>suffix(Prefix::nonempty_string(), NameOrPattern::nonempty_string()) -&gt; string()</tt><br></p>
 </div><p>
   <h4><a name="Provide_the_suffix_of_the_service_name_or_service_pattern_based_on_the_service's_configured_prefix.">Provide the suffix of the service name or service pattern based on the service's configured prefix.</a></h4>
 </p>

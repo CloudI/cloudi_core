@@ -16,9 +16,9 @@
    transaction id ("TransId" or "trans_id") that follows a CloudI
    service request for the lifetime (defined by the service request timeout)
    of the request and its response result.
-<p>Copyright © 2015-2017 Michael Truog</p>
+<p>Copyright © 2015-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.1 Jun 3 2020 18:48:07
+<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:58
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -61,21 +61,21 @@
 
 <h3 class="function"><a name="datetime-1">datetime/1</a></h3>
 <div class="spec">
-<p><tt>datetime(TransId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>) -&gt; string()</tt><br></p>
+<p><tt>datetime(TransId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>) -&gt; <a href="cloudi_timestamp.html#type-iso8601">cloudi_timestamp:iso8601()</a></tt><br></p>
 </div><p>
   <h4><a name="Provide_an_ISO8601_datetime_in_UTC_based_on_the_time_stored_in_the_transaction_id.">Provide an ISO8601 datetime in UTC based on the time stored in the transaction id.</a></h4>
 </p>
 
 <h3 class="function"><a name="datetime-2">datetime/2</a></h3>
 <div class="spec">
-<p><tt>datetime(TransId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>, MicroSecondsOffset::integer()) -&gt; string()</tt><br></p>
+<p><tt>datetime(TransId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>, MicroSecondsOffset::integer()) -&gt; <a href="cloudi_timestamp.html#type-iso8601">cloudi_timestamp:iso8601()</a></tt><br></p>
 </div><p>
   <h4><a name="Provide_an_ISO8601_datetime_in_UTC_based_on_the_time_stored_in_the_transaction_id_with_an_offset_in_microseconds.">Provide an ISO8601 datetime in UTC based on the time stored in the transaction id with an offset in microseconds.</a></h4>
 </p>
 
 <h3 class="function"><a name="from_string-1">from_string/1</a></h3>
 <div class="spec">
-<p><tt>from_string(String::string() | binary()) -&gt; <a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a></tt><br></p>
+<p><tt>from_string(String::<a href="deps/uuid/doc/uuid.html#type-uuid_string">uuid:uuid_string()</a>) -&gt; <a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a></tt><br></p>
 </div><p>
   <h4><a name="Return_a_transaction_id_as_a_binary_UUID_(16_bytes).">Return a transaction id as a binary UUID (16 bytes).</a></h4>
 </p>
@@ -112,14 +112,14 @@
 
 <h3 class="function"><a name="to_string-1">to_string/1</a></h3>
 <div class="spec">
-<p><tt>to_string(TransId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>) -&gt; string()</tt><br></p>
+<p><tt>to_string(TransId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>) -&gt; <a href="deps/uuid/doc/uuid.html#type-uuid_string_list">uuid:uuid_string_list()</a></tt><br></p>
 </div><p>
   <h4><a name="Return_the_transaction_id_in_a_standard_string_format.">Return the transaction id in a standard string format.</a></h4>
 </p>
 
 <h3 class="function"><a name="to_string-2">to_string/2</a></h3>
 <div class="spec">
-<p><tt>to_string(TransId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>, Format::standard | nodash | list_standard | list_nodash | binary_standard | binary_nodash) -&gt; string() | binary()</tt><br></p>
+<p><tt>to_string(TransId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>, Format::standard | nodash | list_standard | list_nodash | binary_standard | binary_nodash) -&gt; <a href="deps/uuid/doc/uuid.html#type-uuid_string">uuid:uuid_string()</a></tt><br></p>
 </div><p>
   <h4><a name="Return_the_transaction_id_in_a_string_format.">Return the transaction id in a string format.</a></h4>
 </p>

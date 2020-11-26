@@ -12,9 +12,9 @@
 <h1>Module cloudi_timestamp</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="Timestamp_operations">Timestamp operations</a></h3>.
-<p>Copyright © 2015-2018 Michael Truog</p>
+<p>Copyright © 2015-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.7.4 Jun 3 2020 18:48:07
+<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:58
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -22,6 +22,14 @@
    <h3><a name="Timestamp_operations">Timestamp operations</a></h3>
 
 <h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-iso8601">iso8601()</a></h3>
+<p><tt>iso8601() = [48..57 | 84 | 45 | 58 | 46 | 90, ...]</tt></p>
+<p> timestamps as 1970-01-01T00:00:00Z</p>
+
+<h3 class="typedecl"><a name="type-iso8601_seconds">iso8601_seconds()</a></h3>
+<p><tt>iso8601_seconds() = [48..57 | 84 | 45 | 58 | 90, ...]</tt></p>
+
 
 <h3 class="typedecl"><a name="type-microseconds_epoch">microseconds_epoch()</a></h3>
 <p><tt>microseconds_epoch() = non_neg_integer()</tt></p>
@@ -49,7 +57,8 @@
 
 <h3 class="typedecl"><a name="type-native_monotonic">native_monotonic()</a></h3>
 <p><tt>native_monotonic() = integer()</tt></p>
-
+<p> timestamps as 1970-01-01T00:00:00.000000Z
+            or 1970-01-01T00:00:00.000Z</p>
 
 <h3 class="typedecl"><a name="type-seconds_epoch">seconds_epoch()</a></h3>
 <p><tt>seconds_epoch() = non_neg_integer()</tt></p>
@@ -66,12 +75,14 @@
 <h2><a name="index">Function Index</a></h2>
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#convert-3">convert/3</a></td><td>
   <h4><a name="Convert_between_time_units.">Convert between time units.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#datetime_utc_to_string-1">datetime_utc_to_string/1</a></td><td>
+  <h4><a name="Create_an_ISO8601_timestamp_from_a_datetime_in_UTC.">Create an ISO8601 timestamp from a datetime in UTC.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#microseconds-0">microseconds/0</a></td><td>
   <h4><a name="Microseconds_since_the_UNIX_epoch.">Microseconds since the UNIX epoch.</a></h4>
   (The UNIX epoch is 1970-01-01T00:00:00Z).</td></tr>
 <tr><td valign="top"><a href="#microseconds_epoch_to_string-1">microseconds_epoch_to_string/1</a></td><td>
   <h4><a name="Create_an_ISO8601_timestamp_from_microseconds_since_the_UNIX_epoch.">Create an ISO8601 timestamp from microseconds since the UNIX epoch.</a></h4>
-  (The UNIX epoch is 1970-01-01T00:00:00Z).</td></tr>
+  (The UNIX epoch is 1970-01-01T00:00:00.000000Z).</td></tr>
 <tr><td valign="top"><a href="#microseconds_monotonic-0">microseconds_monotonic/0</a></td><td>
   <h4><a name="Microseconds_since_an_undefined_point_in_time,_from_the_Erlang_VM.">Microseconds since an undefined point in time, from the Erlang VM.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#microseconds_os-0">microseconds_os/0</a></td><td>
@@ -82,7 +93,7 @@
   (The UNIX epoch is 1970-01-01T00:00:00Z).</td></tr>
 <tr><td valign="top"><a href="#milliseconds_epoch_to_string-1">milliseconds_epoch_to_string/1</a></td><td>
   <h4><a name="Create_an_ISO8601_timestamp_from_milliseconds_since_the_UNIX_epoch.">Create an ISO8601 timestamp from milliseconds since the UNIX epoch.</a></h4>
-  (The UNIX epoch is 1970-01-01T00:00:00Z).</td></tr>
+  (The UNIX epoch is 1970-01-01T00:00:00.000Z).</td></tr>
 <tr><td valign="top"><a href="#milliseconds_monotonic-0">milliseconds_monotonic/0</a></td><td>
   <h4><a name="Milliseconds_since_an_undefined_point_in_time,_from_the_Erlang_VM.">Milliseconds since an undefined point in time, from the Erlang VM.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#milliseconds_os-0">milliseconds_os/0</a></td><td>
@@ -154,6 +165,13 @@
   <h4><a name="Convert_between_time_units.">Convert between time units.</a></h4>
 </p>
 
+<h3 class="function"><a name="datetime_utc_to_string-1">datetime_utc_to_string/1</a></h3>
+<div class="spec">
+<p><tt>datetime_utc_to_string(DateTimeUTC::<a href="calendar.html#type-datetime">calendar:datetime()</a>) -&gt; <a href="#type-iso8601_seconds">iso8601_seconds()</a></tt><br></p>
+</div><p>
+  <h4><a name="Create_an_ISO8601_timestamp_from_a_datetime_in_UTC.">Create an ISO8601 timestamp from a datetime in UTC.</a></h4>
+</p>
+
 <h3 class="function"><a name="microseconds-0">microseconds/0</a></h3>
 <div class="spec">
 <p><tt>microseconds() -&gt; <a href="#type-microseconds_epoch">microseconds_epoch()</a></tt><br></p>
@@ -163,10 +181,10 @@
 
 <h3 class="function"><a name="microseconds_epoch_to_string-1">microseconds_epoch_to_string/1</a></h3>
 <div class="spec">
-<p><tt>microseconds_epoch_to_string(MicroSeconds::<a href="#type-microseconds_epoch">microseconds_epoch()</a>) -&gt; string()</tt><br></p>
+<p><tt>microseconds_epoch_to_string(MicroSeconds::<a href="#type-microseconds_epoch">microseconds_epoch()</a>) -&gt; <a href="#type-iso8601">iso8601()</a></tt><br></p>
 </div><p>
   <h4><a name="Create_an_ISO8601_timestamp_from_microseconds_since_the_UNIX_epoch.">Create an ISO8601 timestamp from microseconds since the UNIX epoch.</a></h4>
-  (The UNIX epoch is 1970-01-01T00:00:00Z)</p>
+  (The UNIX epoch is 1970-01-01T00:00:00.000000Z)</p>
 
 <h3 class="function"><a name="microseconds_monotonic-0">microseconds_monotonic/0</a></h3>
 <div class="spec">
@@ -192,10 +210,10 @@
 
 <h3 class="function"><a name="milliseconds_epoch_to_string-1">milliseconds_epoch_to_string/1</a></h3>
 <div class="spec">
-<p><tt>milliseconds_epoch_to_string(MilliSeconds::<a href="#type-milliseconds_epoch">milliseconds_epoch()</a>) -&gt; string()</tt><br></p>
+<p><tt>milliseconds_epoch_to_string(MilliSeconds::<a href="#type-milliseconds_epoch">milliseconds_epoch()</a>) -&gt; <a href="#type-iso8601">iso8601()</a></tt><br></p>
 </div><p>
   <h4><a name="Create_an_ISO8601_timestamp_from_milliseconds_since_the_UNIX_epoch.">Create an ISO8601 timestamp from milliseconds since the UNIX epoch.</a></h4>
-  (The UNIX epoch is 1970-01-01T00:00:00Z)</p>
+  (The UNIX epoch is 1970-01-01T00:00:00.000Z)</p>
 
 <h3 class="function"><a name="milliseconds_monotonic-0">milliseconds_monotonic/0</a></h3>
 <div class="spec">
@@ -236,14 +254,14 @@
 
 <h3 class="function"><a name="nanoseconds_to_string-1">nanoseconds_to_string/1</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_string(TotalNanoSeconds::non_neg_integer()) -&gt; nonempty_string()</tt><br></p>
+<p><tt>nanoseconds_to_string(TotalNanoSeconds::non_neg_integer()) -&gt; <a href="cloudi_service_api.html#type-nanoseconds_string">cloudi_service_api:nanoseconds_string()</a></tt><br></p>
 </div><p>
   <h4><a name="Format_a_nanoseconds_duration_as_a_minimal_string_with_lower-precision_integers.">Format a nanoseconds duration as a minimal string with lower-precision integers.</a></h4>
 </p>
 
 <h3 class="function"><a name="nanoseconds_to_string-2">nanoseconds_to_string/2</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_string(TotalNanoSeconds::integer(), Options::signed) -&gt; nonempty_string()</tt><br></p>
+<p><tt>nanoseconds_to_string(TotalNanoSeconds::integer(), Options::signed) -&gt; <a href="cloudi_service_api.html#type-nanoseconds_string_signed">cloudi_service_api:nanoseconds_string_signed()</a></tt><br></p>
 </div><p>
   <h4><a name="Format_a_nanoseconds_duration_with_options_as_a_minimal_string_with_lower-precision_integers.">Format a nanoseconds duration with options as a minimal string with lower-precision integers.</a></h4>
 </p>
@@ -279,7 +297,7 @@
 
 <h3 class="function"><a name="seconds_epoch_to_string-1">seconds_epoch_to_string/1</a></h3>
 <div class="spec">
-<p><tt>seconds_epoch_to_string(Seconds::<a href="#type-seconds_epoch">seconds_epoch()</a>) -&gt; string()</tt><br></p>
+<p><tt>seconds_epoch_to_string(Seconds::<a href="#type-seconds_epoch">seconds_epoch()</a>) -&gt; <a href="#type-iso8601_seconds">iso8601_seconds()</a></tt><br></p>
 </div><p>
   <h4><a name="Create_an_ISO8601_timestamp_from_seconds_since_the_UNIX_epoch.">Create an ISO8601 timestamp from seconds since the UNIX epoch.</a></h4>
   (The UNIX epoch is 1970-01-01T00:00:00Z)</p>
@@ -315,14 +333,14 @@
 
 <h3 class="function"><a name="seconds_to_string-1">seconds_to_string/1</a></h3>
 <div class="spec">
-<p><tt>seconds_to_string(TotalSeconds::non_neg_integer()) -&gt; nonempty_string()</tt><br></p>
+<p><tt>seconds_to_string(TotalSeconds::non_neg_integer()) -&gt; <a href="cloudi_service_api.html#type-seconds_string">cloudi_service_api:seconds_string()</a></tt><br></p>
 </div><p>
   <h4><a name="Format_a_seconds_duration_as_a_minimal_string_with_lower-precision_integers.">Format a seconds duration as a minimal string with lower-precision integers.</a></h4>
 </p>
 
 <h3 class="function"><a name="seconds_to_string-2">seconds_to_string/2</a></h3>
 <div class="spec">
-<p><tt>seconds_to_string(TotalSeconds::integer(), Options::signed) -&gt; nonempty_string()</tt><br></p>
+<p><tt>seconds_to_string(TotalSeconds::integer(), Options::signed) -&gt; <a href="cloudi_service_api.html#type-seconds_string_signed">cloudi_service_api:seconds_string_signed()</a></tt><br></p>
 </div><p>
   <h4><a name="Format_a_seconds_duration_with_options_as_a_minimal_string_with_lower-precision_integers.">Format a seconds duration with options as a minimal string with lower-precision integers.</a></h4>
 </p>

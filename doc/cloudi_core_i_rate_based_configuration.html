@@ -16,7 +16,7 @@
    rate-based configuration adjustments.
 <p>Copyright © 2013-2020 Michael Truog</p>
 
-<p><b>Version:</b> 1.8.1 Jun 3 2020 18:48:07
+<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:58
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -54,7 +54,7 @@
 
 <h3 class="function"><a name="count_process_dynamic_format-1">count_process_dynamic_format/1</a></h3>
 <div class="spec">
-<p><tt>count_process_dynamic_format(Count_process_dynamic::#count_process_dynamic{method = undefined | rate_request, period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), rate_min = undefined | number(), count_process_max = undefined | pos_integer(), count_process_min = undefined | pos_integer(), terminate = boolean()} | false) -&gt; [{atom(), any()}] | false</tt><br></p>
+<p><tt>count_process_dynamic_format(Count_process_dynamic::#count_process_dynamic{method = undefined | rate_request, period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), rate_min = undefined | number(), count_process_max = undefined | pos_integer(), count_process_min = undefined | pos_integer(), terminate = boolean()} | false) -&gt; <a href="cloudi_service_api.html#type-service_options_count_process_dynamic_options">cloudi_service_api:service_options_count_process_dynamic_options()</a> | false</tt><br></p>
 </div>
 
 <h3 class="function"><a name="count_process_dynamic_init-1">count_process_dynamic_init/1</a></h3>
@@ -104,7 +104,7 @@
 
 <h3 class="function"><a name="hibernate_format-1">hibernate_format/1</a></h3>
 <div class="spec">
-<p><tt>hibernate_format(Hibernate::#hibernate{method = undefined | rate_request, period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_min = undefined | number(), hibernate = boolean()} | true | false) -&gt; [{atom(), any()}] | true | false</tt><br></p>
+<p><tt>hibernate_format(Hibernate::#hibernate{method = undefined | rate_request, period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_min = undefined | number(), hibernate = boolean()} | boolean()) -&gt; <a href="cloudi_service_api.html#type-service_options_internal_hibernate_options">cloudi_service_api:service_options_internal_hibernate_options()</a> | boolean()</tt><br></p>
 </div>
 
 <h3 class="function"><a name="hibernate_init-1">hibernate_init/1</a></h3>
@@ -124,12 +124,12 @@
 
 <h3 class="function"><a name="hibernate_validate-1">hibernate_validate/1</a></h3>
 <div class="spec">
-<p><tt>hibernate_validate(Options::[{atom(), any()}] | true | false) -&gt; {ok, #hibernate{method = undefined | rate_request, period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_min = undefined | number(), hibernate = boolean()} | true | false} | {error, {service_options_hibernate_invalid, any()}}</tt><br></p>
+<p><tt>hibernate_validate(Options::[{atom(), any()}] | boolean()) -&gt; {ok, #hibernate{method = undefined | rate_request, period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_min = undefined | number(), hibernate = boolean()} | boolean()} | {error, {service_options_hibernate_invalid, any()}}</tt><br></p>
 </div>
 
 <h3 class="function"><a name="rate_request_format-1">rate_request_format/1</a></h3>
 <div class="spec">
-<p><tt>rate_request_format(Rate_request::#rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()} | undefined) -&gt; [{atom(), any()}] | undefined</tt><br></p>
+<p><tt>rate_request_format(Rate_request::#rate_request{period = undefined | <a href="cloudi_service_api.html#type-period_seconds">cloudi_service_api:period_seconds()</a>, count = non_neg_integer(), rate_max = undefined | number(), blocking = boolean()} | undefined) -&gt; <a href="cloudi_service_api.html#type-service_options_rate_request_max_options">cloudi_service_api:service_options_rate_request_max_options()</a> | undefined</tt><br></p>
 </div>
 
 <h3 class="function"><a name="rate_request_init-1">rate_request_init/1</a></h3>
@@ -154,7 +154,7 @@
 
 <h3 class="function"><a name="restart_delay_format-1">restart_delay_format/1</a></h3>
 <div class="spec">
-<p><tt>restart_delay_format(Restart_delay::#restart_delay{method = undefined | exponential | linear | absolute, time_min = undefined | <a href="cloudi_service_api.html#type-restart_delay_value_milliseconds">cloudi_service_api:restart_delay_value_milliseconds()</a>, time_max = undefined | <a href="cloudi_service_api.html#type-restart_delay_value_milliseconds">cloudi_service_api:restart_delay_value_milliseconds()</a>, time_slope = undefined | <a href="cloudi_service_api.html#type-restart_delay_value_milliseconds">cloudi_service_api:restart_delay_value_milliseconds()</a>} | false) -&gt; [{atom(), any()}] | false</tt><br></p>
+<p><tt>restart_delay_format(Restart_delay::#restart_delay{method = undefined | exponential | linear | absolute, time_min = undefined | <a href="cloudi_service_api.html#type-restart_delay_value_milliseconds">cloudi_service_api:restart_delay_value_milliseconds()</a>, time_max = undefined | <a href="cloudi_service_api.html#type-restart_delay_value_milliseconds">cloudi_service_api:restart_delay_value_milliseconds()</a>, time_slope = undefined | <a href="cloudi_service_api.html#type-restart_delay_value_milliseconds">cloudi_service_api:restart_delay_value_milliseconds()</a>} | false) -&gt; <a href="cloudi_service_api.html#type-service_options_restart_delay_options">cloudi_service_api:service_options_restart_delay_options()</a> | false</tt><br></p>
 </div>
 
 <h3 class="function"><a name="restart_delay_validate-1">restart_delay_validate/1</a></h3>
