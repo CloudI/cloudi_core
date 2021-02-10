@@ -303,7 +303,7 @@ init([ProcessIndex, ProcessCount, TimeStart, TimeRestart, Restarts,
         is_pid(GroupLeader) ->
             erlang:group_leader(GroupLeader, Dispatcher)
     end,
-    quickrand:seed(),
+    ok = quickrand:seed(),
     WordSize = erlang:system_info(wordsize),
     ConfigOptionsNew = check_init_send(ConfigOptions),
     DuoModePid = if
