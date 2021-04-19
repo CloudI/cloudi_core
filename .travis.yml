@@ -1,9 +1,9 @@
 language: erlang
 otp_release:
-  - 23.0.4
+  - 23.2.5
   - 22.3.4
   - 21.3.8.1
-  - 20.3.8.5
+  - 20.3.8.22
   - 19.3
 before_script:
   - kerl list installations
