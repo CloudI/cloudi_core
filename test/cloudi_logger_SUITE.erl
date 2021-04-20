@@ -79,14 +79,14 @@ suite() ->
      {timetrap, {seconds, ?CLOUDI_TEST_TIMEOUT}}].
 
 init_per_suite(Config) ->
-    ok = cloudi_x_reltool_util:application_start(cloudi_x_hut,
+    ok = reltool_util:application_start(hut,
                                                  [{use_log_level_gate, true},
                                                   {level, info}], infinity),
-    ok = cloudi_x_reltool_util:application_start(cloudi_core, [], infinity),
+    ok = reltool_util:application_start(cloudi_core, [], infinity),
     Config.
 
 end_per_suite(_Config) ->
-    ok = cloudi_x_reltool_util:application_stop(cloudi_core),
+    ok = reltool_util:application_stop(cloudi_core),
     ok.
 
 group(_GroupName) ->
@@ -132,7 +132,7 @@ t_cloudi_logger_lager_1(_Config) ->
 t_cloudi_logger_hut_1(_Config) ->
     ok.
 -else.
--include_lib("cloudi_x_hut/include/cloudi_x_hut.hrl").
+-include_lib("hut/include/hut.hrl").
 
 t_cloudi_logger_hut_1(_Config) ->
     ok = set_aspect_log_after(),
