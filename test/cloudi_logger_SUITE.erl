@@ -79,9 +79,7 @@ suite() ->
      {timetrap, {seconds, ?CLOUDI_TEST_TIMEOUT}}].
 
 init_per_suite(Config) ->
-    ok = reltool_util:application_start(hut,
-                                                 [{use_log_level_gate, true},
-                                                  {level, info}], infinity),
+    ok = init_hut(),
     ok = reltool_util:application_start(cloudi_core, [], infinity),
     Config.
 
@@ -178,3 +176,12 @@ get_log_message(Count, LogMessage) ->
             end
     end.
 
+-ifdef(CLOUDI_CORE_STANDALONE).
+init_hut() ->
+    ok.
+-else.
+init_hut() ->
+    reltool_util:application_start(hut,
+                                            [{use_log_level_gate, true},
+                                             {level, info}], infinity).
+-endif.
