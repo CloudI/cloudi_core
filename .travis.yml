@@ -8,7 +8,7 @@ otp_release:
 before_script:
   - kerl list installations
   - rebar get-deps
-script: rebar compile ct suites=cloudi_service || ( cat logs/raw.log logs/ct_run*/cloudi.log && exit 1 )
+script: rebar compile ct suites=cloudi_service,cloudi_logger || ( cat logs/raw.log logs/ct_run*/cloudi.log && exit 1 )
 after_script:
   - rebar clean
 branches:
