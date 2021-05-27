@@ -12,9 +12,9 @@
 <h1>Module cloudi_core_i_spawn</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Spawn">CloudI Spawn</a></h3>.
-<p>Copyright © 2011-2020 Michael Truog</p>
+<p>Copyright © 2011-2021 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:55
+<p><b>Version:</b> 2.0.2 May 26 2021 19:42:45
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -34,8 +34,8 @@
 <h2><a name="index">Function Index</a></h2>
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#start_external-21">start_external/21</a></td><td></td></tr>
 <tr><td valign="top"><a href="#start_internal-18">start_internal/18</a></td><td></td></tr>
-<tr><td valign="top"><a href="#status_external-4">status_external/4</a></td><td></td></tr>
-<tr><td valign="top"><a href="#status_internal-3">status_internal/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#status_external-6">status_external/6</a></td><td></td></tr>
+<tr><td valign="top"><a href="#status_internal-4">status_internal/4</a></td><td></td></tr>
 <tr><td valign="top"><a href="#update_external-3">update_external/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#update_external_f-12">update_external_f/12</a></td><td></td></tr>
 <tr><td valign="top"><a href="#update_internal_f-9">update_internal_f/9</a></td><td></td></tr>
@@ -46,36 +46,43 @@
 <h3 class="function"><a name="start_external-21">start_external/21</a></h3>
 <div class="spec">
 <p><tt>start_external(ProcessIndex, ProcessCount, TimeStart, TimeRestart, Restarts, ThreadsPerProcess, Filename, Arguments, Environment, Protocol, BufferSize, Timeout, Prefix, TimeoutAsync, TimeoutSync, TimeoutTerm, DestRefresh, DestListDeny, DestListAllow, ConfigOptions, ID) -&gt; any()</tt></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="start_internal-18">start_internal/18</a></h3>
 <div class="spec">
 <p><tt>start_internal(ProcessIndex, ProcessCount, TimeStart, TimeRestart, Restarts, GroupLeader, Module, Args, Timeout, Prefix, TimeoutAsync, TimeoutSync, TimeoutTerm, DestRefresh, DestListDeny, DestListAllow, ConfigOptions, ID) -&gt; any()</tt></p>
+<p> </p>
 </div>
 
-<h3 class="function"><a name="status_external-4">status_external/4</a></h3>
+<h3 class="function"><a name="status_external-6">status_external/6</a></h3>
 <div class="spec">
-<p><tt>status_external(CountProcess, CountThread, X3, Status) -&gt; any()</tt></p>
+<p><tt>status_external(CountProcess, CountThread, OSPidsOrdered, PidsOrdered, X5, Status) -&gt; any()</tt></p>
+<p> </p>
 </div>
 
-<h3 class="function"><a name="status_internal-3">status_internal/3</a></h3>
+<h3 class="function"><a name="status_internal-4">status_internal/4</a></h3>
 <div class="spec">
-<p><tt>status_internal(CountProcess, X2, Status) -&gt; any()</tt></p>
+<p><tt>status_internal(CountProcess, PidsOrdered, X3, Status) -&gt; any()</tt></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="update_external-3">update_external/3</a></h3>
 <div class="spec">
 <p><tt>update_external(Pids, Ports, X3) -&gt; any()</tt></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="update_external_f-12">update_external_f/12</a></h3>
 <div class="spec">
 <p><tt>update_external_f(FilenameNew, ArgumentsNew, EnvironmentNew, DestRefreshNew, TimeoutInitNew, TimeoutAsyncNew, TimeoutSyncNew, DestListDenyNew, DestListAllowNew, OptionsKeys, ConfigOptionsNew, X12) -&gt; any()</tt></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="update_internal_f-9">update_internal_f/9</a></h3>
 <div class="spec">
 <p><tt>update_internal_f(DestRefreshNew, TimeoutInitNew, TimeoutAsyncNew, TimeoutSyncNew, DestListDenyNew, DestListAllowNew, OptionsKeys, ConfigOptionsNew, X9) -&gt; any()</tt></p>
+<p> </p>
 </div>
 <hr>
 

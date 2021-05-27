@@ -15,7 +15,7 @@
    Functions to simplify validation done during service initialization.
 <p>Copyright © 2015-2020 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:55
+<p><b>Version:</b> 2.0.1 May 26 2021 19:42:45
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -38,41 +38,49 @@
 <h3 class="function"><a name="function_optional-2">function_optional/2</a></h3>
 <div class="spec">
 <p><tt>function_optional(Function::undefined | {{module(), atom()}} | {module(), atom()} | function(), Arity::non_neg_integer()) -&gt; undefined | function()</tt><br></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="function_required-2">function_required/2</a></h3>
 <div class="spec">
 <p><tt>function_required(Function::{{module(), atom()}} | {module(), atom()} | function(), Arity::non_neg_integer()) -&gt; function()</tt><br></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="function_required_pick-2">function_required_pick/2</a></h3>
 <div class="spec">
 <p><tt>function_required_pick(Function::{{module(), atom()}} | {module(), atom()} | function(), ArityOrder::[non_neg_integer(), ...]) -&gt; {function(), Arity::non_neg_integer()}</tt><br></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="priority-1">priority/1</a></h3>
 <div class="spec">
 <p><tt>priority(Priority::<a href="cloudi.html#type-priority">cloudi:priority()</a>) -&gt; true</tt><br></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="service_name-1">service_name/1</a></h3>
 <div class="spec">
 <p><tt>service_name(Name::<a href="cloudi.html#type-service_name">cloudi:service_name()</a>) -&gt; true</tt><br></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="service_name_pattern_suffix-2">service_name_pattern_suffix/2</a></h3>
 <div class="spec">
 <p><tt>service_name_pattern_suffix(Prefix::<a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, Pattern::<a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>) -&gt; string()</tt><br></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="service_name_suffix-2">service_name_suffix/2</a></h3>
 <div class="spec">
 <p><tt>service_name_suffix(Prefix::<a href="cloudi.html#type-service_name_pattern">cloudi:service_name_pattern()</a>, Name::<a href="cloudi.html#type-service_name">cloudi:service_name()</a>) -&gt; string()</tt><br></p>
+<p> </p>
 </div>
 
 <h3 class="function"><a name="timeout_milliseconds-1">timeout_milliseconds/1</a></h3>
 <div class="spec">
 <p><tt>timeout_milliseconds(Timeout::<a href="cloudi.html#type-timeout_milliseconds">cloudi:timeout_milliseconds()</a>) -&gt; true</tt><br></p>
+<p> </p>
 </div>
 <hr>
 

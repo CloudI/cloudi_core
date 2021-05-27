@@ -12,9 +12,9 @@
 <h1>Module cloudi_environment</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Runtime_Environment">CloudI Runtime Environment</a></h3>.
-<p>Copyright © 2014-2020 Michael Truog</p>
+<p>Copyright © 2014-2021 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:58
+<p><b>Version:</b> 2.0.2 May 26 2021 19:42:48
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -47,6 +47,7 @@
 <h3 class="function"><a name="lookup-0">lookup/0</a></h3>
 <div class="spec">
 <p><tt>lookup() -&gt; <a href="#type-lookup">lookup()</a></tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Get_an_environment_variable_lookup.">Get an environment variable lookup.</a></h4>
 </p>
@@ -54,6 +55,7 @@
 <h3 class="function"><a name="status-0">status/0</a></h3>
 <div class="spec">
 <p><tt>status() -&gt; [{atom(), string()}, ...]</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Get_execution_environment_status.">Get execution environment status.</a></h4>
 </p>
@@ -61,6 +63,7 @@
 <h3 class="function"><a name="transform-1">transform/1</a></h3>
 <div class="spec">
 <p><tt>transform(String::string()) -&gt; string()</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Transform_a_string,_substituting_environment_variable_values_from_the_lookup.">Transform a string, substituting environment variable values from the lookup.</a></h4>
   Use ${VARIABLE} or $VARIABLE syntax, where VARIABLE is a name with
@@ -69,6 +72,7 @@
 <h3 class="function"><a name="transform-2">transform/2</a></h3>
 <div class="spec">
 <p><tt>transform(String::string(), Lookup::<a href="#type-lookup">lookup()</a>) -&gt; string()</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Transform_a_string,_substituting_environment_variable_values_from_the_lookup.">Transform a string, substituting environment variable values from the lookup.</a></h4>
   Use ${VARIABLE} or $VARIABLE syntax, where VARIABLE is a name with

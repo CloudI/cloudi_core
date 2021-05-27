@@ -23,7 +23,7 @@
    (<code>&lt;&lt;&gt;&gt;</code> will never exist as a key in text_pairs data).</p>.
 <p>Copyright © 2014-2020 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:58
+<p><b>Version:</b> 2.0.1 May 26 2021 19:42:48
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -83,6 +83,7 @@ and can utilize the same functions below.</p>
 <h3 class="function"><a name="key_value_append-2">key_value_append/2</a></h3>
 <div class="spec">
 <p><tt>key_value_append(RequestInfo::<a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, Existing::binary()) -&gt; Result::binary()</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Append_RequestInfo_key/value_data.">Append RequestInfo key/value data.</a></h4>
   Use the same binary format.</p>
@@ -90,6 +91,7 @@ and can utilize the same functions below.</p>
 <h3 class="function"><a name="key_value_new-1">key_value_new/1</a></h3>
 <div class="spec">
 <p><tt>key_value_new(RequestInfo::<a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::binary()</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="New_RequestInfo_key/value_data.">New RequestInfo key/value data.</a></h4>
   RequestInfo is meant to contain key/value pairs that is request
@@ -99,6 +101,7 @@ and can utilize the same functions below.</p>
 <h3 class="function"><a name="key_value_new-2">key_value_new/2</a></h3>
 <div class="spec">
 <p><tt>key_value_new(RequestInfo::<a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, Format::<a href="#type-format">format()</a>) -&gt; Result::binary()</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="New_RequestInfo_key/value_data.">New RequestInfo key/value data.</a></h4>
   RequestInfo is meant to contain key/value pairs that is request
@@ -108,6 +111,7 @@ and can utilize the same functions below.</p>
 <h3 class="function"><a name="key_value_parse-1">key_value_parse/1</a></h3>
 <div class="spec">
 <p><tt>key_value_parse(RequestInfo::binary() | <a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::#{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Parse_RequestInfo_key/value_data.">Parse RequestInfo key/value data.</a></h4>
   RequestInfo is meant to contain key/value pairs that is request
@@ -116,6 +120,7 @@ and can utilize the same functions below.</p>
 <h3 class="function"><a name="key_value_parse-2">key_value_parse/2</a></h3>
 <div class="spec">
 <p><tt>key_value_parse(RequestInfo::binary() | <a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, ResultType::map | list) -&gt; Result::#{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>} | [{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a>, <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}]</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Parse_RequestInfo_key/value_data_to_the_return_type_specified.">Parse RequestInfo key/value data to the return type specified.</a></h4>
   RequestInfo is meant to contain key/value pairs that is request

@@ -12,9 +12,9 @@
 <h1>Module cloudi_os_process</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_OS_Process_Functionality">CloudI OS Process Functionality</a></h3>.
-<p>Copyright © 2020 Michael Truog</p>
+<p>Copyright © 2020-2021 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.1 Nov 26 2020 15:50:57
+<p><b>Version:</b> 2.0.2 May 26 2021 19:42:48
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -53,6 +53,7 @@
 <h3 class="function"><a name="kill-2">kill/2</a></h3>
 <div class="spec">
 <p><tt>kill(Signal::<a href="#type-signal">signal()</a>, OSPids::pos_integer() | [pos_integer()]) -&gt; ok | {error, any()}</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Kill_OS_processes.">Kill OS processes.</a></h4>
 </p>
@@ -60,6 +61,7 @@
 <h3 class="function"><a name="kill_group-2">kill_group/2</a></h3>
 <div class="spec">
 <p><tt>kill_group(Signal::<a href="#type-signal">signal()</a>, OSPids::pos_integer() | [pos_integer()]) -&gt; ok | {error, any()}</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Kill_OS_process_groups.">Kill OS process groups.</a></h4>
 </p>
@@ -67,6 +69,7 @@
 <h3 class="function"><a name="shell-1">shell/1</a></h3>
 <div class="spec">
 <p><tt>shell(Exec::iodata()) -&gt; {non_neg_integer(), [binary()]}</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Execute_a_shell_command.">Execute a shell command.</a></h4>
 </p>
@@ -74,6 +77,7 @@
 <h3 class="function"><a name="shell-2">shell/2</a></h3>
 <div class="spec">
 <p><tt>shell(Command::string(), Arguments::list()) -&gt; {non_neg_integer(), [binary()]}</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Execute_a_shell_command_with_a_string_format.">Execute a shell command with a string format.</a></h4>
 </p>
@@ -81,6 +85,7 @@
 <h3 class="function"><a name="signal_to_integer-1">signal_to_integer/1</a></h3>
 <div class="spec">
 <p><tt>signal_to_integer(Signal::<a href="#type-signal">signal()</a>) -&gt; pos_integer()</tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Convert_a_signal_to_an_integer.">Convert a signal to an integer.</a></h4>
 </p>
@@ -88,6 +93,7 @@
 <h3 class="function"><a name="signal_to_string-1">signal_to_string/1</a></h3>
 <div class="spec">
 <p><tt>signal_to_string(Signal::pos_integer()) -&gt; <a href="#type-signal_string">signal_string()</a></tt><br></p>
+<p> </p>
 </div><p>
   <h4><a name="Convert_a_signal_integer_to_a_string.">Convert a signal integer to a string.</a></h4>
   Only signal integers that are consistent among all platforms use a
