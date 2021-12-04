@@ -12,9 +12,9 @@
 <h1>Module cloudi</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Erlang_Interface">CloudI Erlang Interface</a></h3>.
-<p>Copyright © 2013-2020 Michael Truog</p>
+<p>Copyright © 2013-2021 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.1 May 26 2021 19:42:45
+<p><b>Version:</b> 2.0.3 Dec 3 2021 17:15:32
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -25,6 +25,10 @@
 
 <h3 class="typedecl"><a name="type-agent">agent()</a></h3>
 <p><tt>agent() = <a href="#type-context">context()</a> | <a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a></tt></p>
+
+
+<h3 class="typedecl"><a name="type-bytestring">bytestring()</a></h3>
+<p><tt>bytestring() = [byte()]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-context">context()</a></h3>
@@ -49,6 +53,10 @@
 
 <h3 class="typedecl"><a name="type-message_service_response">message_service_response()</a></h3>
 <p><tt>message_service_response() = {Type::cloudi_service_return_async | cloudi_service_return_sync, Name::<a href="#type-service_name">service_name()</a>, Pattern::<a href="#type-service_name_pattern">service_name_pattern()</a>, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, Timeout::<a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a>, TransId::<a href="#type-trans_id">trans_id()</a>, Source::pid()}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-nonempty_bytestring">nonempty_bytestring()</a></h3>
+<p><tt>nonempty_bytestring() = [byte(), ...]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-options">options()</a></h3>
@@ -88,15 +96,15 @@
 
 
 <h3 class="typedecl"><a name="type-service_name">service_name()</a></h3>
-<p><tt>service_name() = nonempty_string()</tt></p>
+<p><tt>service_name() = <a href="#type-nonempty_bytestring">nonempty_bytestring()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_name_pattern">service_name_pattern()</a></h3>
-<p><tt>service_name_pattern() = nonempty_string()</tt></p>
+<p><tt>service_name_pattern() = <a href="#type-nonempty_bytestring">nonempty_bytestring()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-service_name_pattern_suffix">service_name_pattern_suffix()</a></h3>
-<p><tt>service_name_pattern_suffix() = string()</tt></p>
+<p><tt>service_name_pattern_suffix() = <a href="#type-bytestring">bytestring()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-timeout_milliseconds">timeout_milliseconds()</a></h3>
