@@ -63,10 +63,10 @@ defmodule CloudICore.Mixfile do
   defp deps do
     [{:cpg, "~> 2.0.3", [app: false]},
      {:uuid, "~> 2.0.3", [hex: :uuid_erl, app: false]},
-     {:reltool_util, "~> 2.0.3", [app: false, override: true]},
-     {:trie, "~> 2.0.3", [app: false, override: true]},
+     {:reltool_util, "~> 2.0.3", [app: false]},
+     {:trie, "~> 2.0.3", [app: false]},
      {:erlang_term, "~> 2.0.3", [app: false]},
-     {:quickrand, "~> 2.0.3", [app: false, override: true]},
+     {:quickrand, "~> 2.0.3", [app: false]},
      {:pqueue, "~> 2.0.3", [app: false]},
      {:key2value, "~> 2.0.3", [app: false]},
      {:keys1value, "~> 2.0.3", [app: false]},
