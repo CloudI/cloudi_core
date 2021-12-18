@@ -108,9 +108,10 @@
         default = undefined
             :: undefined | #config_logging_formatter{},
         % nonempty_list(module()) -> #config_logging_formatter{} lookup
-        lookup = keys1value:new(maps)
+        lookup = keys1value:new(trie)
             :: keys1value:
-               keys1value(module(), #config_logging_formatter{}),
+               keys1value(nonempty_string(),
+                                   #config_logging_formatter{}),
         level = undefined
             :: undefined | cloudi_service_api:loglevel()
     }).
