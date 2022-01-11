@@ -86,7 +86,6 @@
         syslog_socket,
         syntax_tools,
         compiler,
-        sasl,
         stdlib,
         kernel
         ]},
