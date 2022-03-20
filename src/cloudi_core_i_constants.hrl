@@ -32,9 +32,9 @@
 % able to use -if/-elif here
 -if(?OTP_RELEASE >= 24).
 -define(ERLANG_OTP_VERSION_24_FEATURES, true).
+-endif.
 -if(?OTP_RELEASE >= 25).
 -define(ERLANG_OTP_VERSION_25_FEATURES, true).
--endif.
 -endif.
 -else.
 -error("Erlang/OTP version invalid").
