@@ -11,20 +11,23 @@
 
 <h1>Module cloudi</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
-   <h3><a name="CloudI_Erlang_Interface">CloudI Erlang Interface</a></h3>.
-<p>Copyright © 2013-2021 Michael Truog</p>
+   <h3><a name="CloudI_Erlang_Interface">CloudI Erlang Interface</a></h3>
+   Used for sending CloudI service requests from any Erlang process.
+<p>Copyright © 2013-2022 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.3 Dec 3 2021 17:15:32
+<p><b>Version:</b> 2.0.5 Oct 11 2022 20:13:40
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
 <h2><a name="description">Description</a></h2>
    <h3><a name="CloudI_Erlang_Interface">CloudI Erlang Interface</a></h3>
-
+   Used for sending CloudI service requests from any Erlang process.
+   To create an Erlang CloudI service, use the cloudi_service behavior
+   module instead of this module.
 <h2><a name="types">Data Types</a></h2>
 
 <h3 class="typedecl"><a name="type-agent">agent()</a></h3>
-<p><tt>agent() = <a href="#type-context">context()</a> | <a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a></tt></p>
+<p><tt>agent() = <a href="#type-context">context()</a> | <a href="doc/cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-bytestring">bytestring()</a></h3>
@@ -32,15 +35,11 @@
 
 
 <h3 class="typedecl"><a name="type-context">context()</a></h3>
-<p><tt>context() = #cloudi_context{dest_refresh = <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, dest_refresh_delay = <a href="cloudi_service_api.html#type-dest_refresh_delay_milliseconds">cloudi_service_api:dest_refresh_delay_milliseconds()</a>, request_name_lookup = sync | async, timeout_async = <a href="cloudi_service_api.html#type-timeout_send_async_value_milliseconds">cloudi_service_api:timeout_send_async_value_milliseconds()</a>, timeout_sync = <a href="cloudi_service_api.html#type-timeout_send_sync_value_milliseconds">cloudi_service_api:timeout_send_sync_value_milliseconds()</a>, priority_default = <a href="cloudi_service_api.html#type-priority">cloudi_service_api:priority()</a>, scope = atom(), receiver = pid(), uuid_generator = <a href="deps/uuid/doc/uuid.html#type-state">uuid:state()</a>, cpg_data = <a href="deps/cpg/doc/cpg_data.html#type-state">cpg_data:state()</a>, cpg_data_stale = boolean()}</tt></p>
-
-
-<h3 class="typedecl"><a name="type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a></h3>
-<p><tt>dest_refresh_delay_milliseconds() = 101..4294967295</tt></p>
+<p><tt>context() = #cloudi_context{dest_refresh = <a href="doc/cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>, dest_refresh_delay = <a href="doc/cloudi_service_api.html#type-dest_refresh_delay_value_milliseconds">cloudi_service_api:dest_refresh_delay_value_milliseconds()</a>, request_name_lookup = sync | async, timeout_async = <a href="doc/cloudi_service_api.html#type-timeout_send_async_value_milliseconds">cloudi_service_api:timeout_send_async_value_milliseconds()</a>, timeout_sync = <a href="doc/cloudi_service_api.html#type-timeout_send_sync_value_milliseconds">cloudi_service_api:timeout_send_sync_value_milliseconds()</a>, priority_default = <a href="doc/cloudi_service_api.html#type-priority">cloudi_service_api:priority()</a>, scope = atom(), receiver = pid(), uuid_generator = <a href="deps/uuid/doc/uuid.html#type-state">uuid:state()</a>, cpg_data = <a href="deps/cpg/doc/cpg_data.html#type-state">cpg_data:state()</a>, cpg_data_stale = boolean()}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-dispatcher">dispatcher()</a></h3>
-<p><tt>dispatcher() = <a href="cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a></tt></p>
+<p><tt>dispatcher() = <a href="doc/cloudi_service.html#type-dispatcher">cloudi_service:dispatcher()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-error_reason">error_reason()</a></h3>
@@ -60,7 +59,7 @@
 
 
 <h3 class="typedecl"><a name="type-options">options()</a></h3>
-<p><tt>options() = [{dest_refresh, <a href="cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>} | {dest_refresh_start, <a href="#type-dest_refresh_delay_milliseconds">dest_refresh_delay_milliseconds()</a>} | {dest_refresh_delay, <a href="cloudi_service_api.html#type-dest_refresh_delay_milliseconds">cloudi_service_api:dest_refresh_delay_milliseconds()</a>} | {request_name_lookup, sync | async} | {timeout_async, <a href="cloudi_service_api.html#type-timeout_send_async_value_milliseconds">cloudi_service_api:timeout_send_async_value_milliseconds()</a>} | {timeout_sync, <a href="cloudi_service_api.html#type-timeout_send_sync_value_milliseconds">cloudi_service_api:timeout_send_sync_value_milliseconds()</a>} | {priority_default, <a href="#type-priority">priority()</a>} | {scope, atom()} | {uuid, <a href="deps/uuid/doc/uuid.html#type-state">uuid:state()</a>} | {groups, <a href="deps/cpg/doc/cpg_data.html#type-state">cpg_data:state()</a>} | {groups_scope, atom()} | {groups_static, boolean()}]</tt></p>
+<p><tt>options() = [{dest_refresh, <a href="doc/cloudi_service_api.html#type-dest_refresh">cloudi_service_api:dest_refresh()</a>} | {dest_refresh_start, <a href="doc/cloudi_service_api.html#type-dest_refresh_delay_period">cloudi_service_api:dest_refresh_delay_period()</a>} | {dest_refresh_delay, <a href="doc/cloudi_service_api.html#type-dest_refresh_delay_period">cloudi_service_api:dest_refresh_delay_period()</a>} | {request_name_lookup, sync | async} | {timeout_async, <a href="doc/cloudi_service_api.html#type-timeout_send_async_period">cloudi_service_api:timeout_send_async_period()</a>} | {timeout_sync, <a href="doc/cloudi_service_api.html#type-timeout_send_sync_period">cloudi_service_api:timeout_send_sync_period()</a>} | {priority_default, <a href="#type-priority">priority()</a>} | {scope, atom()} | {uuid, <a href="deps/uuid/doc/uuid.html#type-state">uuid:state()</a>} | {groups, <a href="deps/cpg/doc/cpg_data.html#type-state">cpg_data:state()</a>} | {groups_scope, atom()} | {groups_static, boolean()}]</tt></p>
 
 
 <h3 class="typedecl"><a name="type-pattern_pid">pattern_pid()</a></h3>
@@ -72,7 +71,7 @@
 
 
 <h3 class="typedecl"><a name="type-priority_value">priority_value()</a></h3>
-<p><tt>priority_value() = <a href="cloudi_service_api.html#type-priority">cloudi_service_api:priority()</a></tt></p>
+<p><tt>priority_value() = <a href="doc/cloudi_service_api.html#type-priority">cloudi_service_api:priority()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-request">request()</a></h3>
@@ -84,7 +83,7 @@
 
 
 <h3 class="typedecl"><a name="type-request_type">request_type()</a></h3>
-<p><tt>request_type() = <a href="cloudi_service.html#type-request_type">cloudi_service:request_type()</a></tt></p>
+<p><tt>request_type() = <a href="doc/cloudi_service.html#type-request_type">cloudi_service:request_type()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-response">response()</a></h3>
@@ -109,6 +108,10 @@
 
 <h3 class="typedecl"><a name="type-timeout_milliseconds">timeout_milliseconds()</a></h3>
 <p><tt>timeout_milliseconds() = <a href="#type-timeout_value_milliseconds">timeout_value_milliseconds()</a> | undefined | limit_min | limit_max</tt></p>
+
+
+<h3 class="typedecl"><a name="type-timeout_period">timeout_period()</a></h3>
+<p><tt>timeout_period() = {pos_integer(), second | seconds | minute | minutes | hour | hours | day | days} | <a href="#type-timeout_milliseconds">timeout_milliseconds()</a></tt></p>
 
 
 <h3 class="typedecl"><a name="type-timeout_value_milliseconds">timeout_value_milliseconds()</a></h3>
@@ -269,7 +272,7 @@
 
 <h3 class="function"><a name="get_pid-3">get_pid/3</a></h3>
 <div class="spec">
-<p><tt>get_pid(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {{ok, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>get_pid(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>) -&gt; {{ok, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Get_a_service_destination_based_on_a_service_name.">Get a service destination based on a service name.</a></h4>
@@ -285,7 +288,7 @@
 
 <h3 class="function"><a name="get_pids-3">get_pids/3</a></h3>
 <div class="spec">
-<p><tt>get_pids(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {{ok, PatternPids::[<a href="#type-pattern_pid">pattern_pid()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>get_pids(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>) -&gt; {{ok, PatternPids::[<a href="#type-pattern_pid">pattern_pid()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Get_all_service_destinations_based_on_a_service_name.">Get all service destinations based on a service name.</a></h4>
@@ -302,7 +305,7 @@
 
 <h3 class="function"><a name="mcast_async-4">mcast_async/4</a></h3>
 <div class="spec">
-<p><tt>mcast_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {{ok, TransIdList::[<a href="#type-trans_id">trans_id()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>mcast_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>) -&gt; {{ok, TransIdList::[<a href="#type-trans_id">trans_id()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_a_multicast_asynchronous_service_request.">Send a multicast asynchronous service request.</a></h4>
@@ -311,7 +314,7 @@
 
 <h3 class="function"><a name="mcast_async-6">mcast_async/6</a></h3>
 <div class="spec">
-<p><tt>mcast_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, TransIdList::[<a href="#type-trans_id">trans_id()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>mcast_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, TransIdList::[<a href="#type-trans_id">trans_id()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_a_multicast_asynchronous_service_request.">Send a multicast asynchronous service request.</a></h4>
@@ -329,7 +332,7 @@
 
 <h3 class="function"><a name="mcast_async_passive-4">mcast_async_passive/4</a></h3>
 <div class="spec">
-<p><tt>mcast_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {{ok, TransIdList::[<a href="#type-trans_id">trans_id()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>mcast_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>) -&gt; {{ok, TransIdList::[<a href="#type-trans_id">trans_id()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_a_multicast_asynchronous_service_request.">Send a multicast asynchronous service request.</a></h4>
@@ -338,7 +341,7 @@
 
 <h3 class="function"><a name="mcast_async_passive-6">mcast_async_passive/6</a></h3>
 <div class="spec">
-<p><tt>mcast_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, TransIdList::[<a href="#type-trans_id">trans_id()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>mcast_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, TransIdList::[<a href="#type-trans_id">trans_id()</a>]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_a_multicast_asynchronous_service_request.">Send a multicast asynchronous service request.</a></h4>
@@ -365,7 +368,7 @@
 
 <h3 class="function"><a name="priority_default-1">priority_default/1</a></h3>
 <div class="spec">
-<p><tt>priority_default(Context::<a href="#type-agent">agent()</a>) -&gt; PriorityDefault::<a href="cloudi_service_api.html#type-priority">cloudi_service_api:priority()</a></tt><br></p>
+<p><tt>priority_default(Context::<a href="#type-agent">agent()</a>) -&gt; PriorityDefault::<a href="doc/cloudi_service_api.html#type-priority">cloudi_service_api:priority()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Configured_service_default_priority.">Configured service default priority.</a></h4>
@@ -382,7 +385,7 @@
 
 <h3 class="function"><a name="recv_async-2">recv_async/2</a></h3>
 <div class="spec">
-<p><tt>recv_async(Context::<a href="#type-agent">agent()</a>, TransId_Timeout::<a href="#type-trans_id">trans_id()</a> | <a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>recv_async(Context::<a href="#type-agent">agent()</a>, TransId_Timeout::<a href="#type-trans_id">trans_id()</a> | <a href="#type-timeout_period">timeout_period()</a>) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Receive_an_asynchronous_service_request.">Receive an asynchronous service request.</a></h4>
@@ -392,7 +395,7 @@
 
 <h3 class="function"><a name="recv_async-3">recv_async/3</a></h3>
 <div class="spec">
-<p><tt>recv_async(Context::<a href="#type-agent">agent()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, TransId::<a href="#type-trans_id">trans_id()</a>) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>recv_async(Context::<a href="#type-agent">agent()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, TransId::<a href="#type-trans_id">trans_id()</a>) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Receive_an_asynchronous_service_request.">Receive an asynchronous service request.</a></h4>
@@ -410,7 +413,7 @@
 
 <h3 class="function"><a name="recv_asyncs-3">recv_asyncs/3</a></h3>
 <div class="spec">
-<p><tt>recv_asyncs(Context::<a href="#type-agent">agent()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, TransIdList::[<a href="#type-trans_id">trans_id()</a>]) -&gt; {{ok, [{ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>}]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>recv_asyncs(Context::<a href="#type-agent">agent()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, TransIdList::[<a href="#type-trans_id">trans_id()</a>]) -&gt; {{ok, [{ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>, TransId::<a href="#type-trans_id">trans_id()</a>}]} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Receive_asynchronous_service_requests.">Receive asynchronous service requests.</a></h4>
@@ -426,7 +429,7 @@
 
 <h3 class="function"><a name="send_async-4">send_async/4</a></h3>
 <div class="spec">
-<p><tt>send_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_an_asynchronous_service_request.">Send an asynchronous service request.</a></h4>
@@ -434,7 +437,7 @@
 
 <h3 class="function"><a name="send_async-5">send_async/5</a></h3>
 <div class="spec">
-<p><tt>send_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_an_asynchronous_service_request.">Send an asynchronous service request.</a></h4>
@@ -442,7 +445,7 @@
 
 <h3 class="function"><a name="send_async-6">send_async/6</a></h3>
 <div class="spec">
-<p><tt>send_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_an_asynchronous_service_request.">Send an asynchronous service request.</a></h4>
@@ -450,7 +453,7 @@
 
 <h3 class="function"><a name="send_async-7">send_async/7</a></h3>
 <div class="spec">
-<p><tt>send_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_async(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, Priority::<a href="#type-priority">priority()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_an_asynchronous_service_request.">Send an asynchronous service request.</a></h4>
@@ -467,7 +470,7 @@
 
 <h3 class="function"><a name="send_async_passive-4">send_async_passive/4</a></h3>
 <div class="spec">
-<p><tt>send_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_an_asynchronous_service_request.">Send an asynchronous service request.</a></h4>
@@ -476,7 +479,7 @@
 
 <h3 class="function"><a name="send_async_passive-5">send_async_passive/5</a></h3>
 <div class="spec">
-<p><tt>send_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_an_asynchronous_service_request.">Send an asynchronous service request.</a></h4>
@@ -485,7 +488,7 @@
 
 <h3 class="function"><a name="send_async_passive-6">send_async_passive/6</a></h3>
 <div class="spec">
-<p><tt>send_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_an_asynchronous_service_request.">Send an asynchronous service request.</a></h4>
@@ -494,7 +497,7 @@
 
 <h3 class="function"><a name="send_async_passive-7">send_async_passive/7</a></h3>
 <div class="spec">
-<p><tt>send_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_async_passive(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, Priority::<a href="#type-priority">priority()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, TransId::<a href="#type-trans_id">trans_id()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_an_asynchronous_service_request.">Send an asynchronous service request.</a></h4>
@@ -511,7 +514,7 @@
 
 <h3 class="function"><a name="send_sync-4">send_sync/4</a></h3>
 <div class="spec">
-<p><tt>send_sync(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_sync(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
@@ -519,7 +522,7 @@
 
 <h3 class="function"><a name="send_sync-5">send_sync/5</a></h3>
 <div class="spec">
-<p><tt>send_sync(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_sync(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
@@ -527,7 +530,7 @@
 
 <h3 class="function"><a name="send_sync-6">send_sync/6</a></h3>
 <div class="spec">
-<p><tt>send_sync(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_sync(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, Priority::<a href="#type-priority">priority()</a>) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
@@ -535,7 +538,7 @@
 
 <h3 class="function"><a name="send_sync-7">send_sync/7</a></h3>
 <div class="spec">
-<p><tt>send_sync(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_milliseconds">timeout_milliseconds()</a>, Priority::<a href="#type-priority">priority()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
+<p><tt>send_sync(Context::<a href="#type-agent">agent()</a>, Name::<a href="#type-service_name">service_name()</a>, RequestInfo::<a href="#type-request_info">request_info()</a>, Request::<a href="#type-request">request()</a>, Timeout::<a href="#type-timeout_period">timeout_period()</a>, Priority::<a href="#type-priority">priority()</a>, PatternPid::<a href="#type-pattern_pid">pattern_pid()</a> | undefined) -&gt; {{ok, ResponseInfo::<a href="#type-response_info">response_info()</a>, Response::<a href="#type-response">response()</a>} | {ok, Response::<a href="#type-response">response()</a>} | {error, Reason::<a href="#type-error_reason">error_reason()</a>}, <a href="#type-agent">agent()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Send_a_synchronous_service_request.">Send a synchronous service request.</a></h4>
@@ -543,7 +546,7 @@
 
 <h3 class="function"><a name="timeout_async-1">timeout_async/1</a></h3>
 <div class="spec">
-<p><tt>timeout_async(Context::<a href="#type-agent">agent()</a>) -&gt; TimeoutAsync::<a href="cloudi_service_api.html#type-timeout_send_async_value_milliseconds">cloudi_service_api:timeout_send_async_value_milliseconds()</a></tt><br></p>
+<p><tt>timeout_async(Context::<a href="#type-agent">agent()</a>) -&gt; TimeoutAsync::<a href="doc/cloudi_service_api.html#type-timeout_send_async_value_milliseconds">cloudi_service_api:timeout_send_async_value_milliseconds()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Configured_service_default_asynchronous_timeout_(in_milliseconds).">Configured service default asynchronous timeout (in milliseconds).</a></h4>
@@ -559,7 +562,7 @@
 
 <h3 class="function"><a name="timeout_sync-1">timeout_sync/1</a></h3>
 <div class="spec">
-<p><tt>timeout_sync(Context::<a href="#type-agent">agent()</a>) -&gt; TimeoutSync::<a href="cloudi_service_api.html#type-timeout_send_sync_value_milliseconds">cloudi_service_api:timeout_send_sync_value_milliseconds()</a></tt><br></p>
+<p><tt>timeout_sync(Context::<a href="#type-agent">agent()</a>) -&gt; TimeoutSync::<a href="doc/cloudi_service_api.html#type-timeout_send_sync_value_milliseconds">cloudi_service_api:timeout_send_sync_value_milliseconds()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Configured_service_default_synchronous_timeout_(in_milliseconds).">Configured service default synchronous timeout (in milliseconds).</a></h4>

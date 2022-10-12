@@ -12,9 +12,9 @@
 <h1>Module cloudi_string</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="String_manipulation_functions">String manipulation functions</a></h3>.
-<p>Copyright © 2009-2020 Michael Truog</p>
+<p>Copyright © 2009-2022 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.1 Dec 3 2021 17:15:32
+<p><b>Version:</b> 2.0.5 Oct 11 2022 20:13:40
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -105,6 +105,10 @@
   <h4><a name="Trim_the_edges_of_the_string_from_the_right.">Trim the edges of the string from the right.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#uppercase-1">uppercase/1</a></td><td>
   <h4><a name="Return_the_string_in_uppercase.">Return the string in uppercase.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#uri_decode-1">uri_decode/1</a></td><td>
+  <h4><a name="Return_the_string_without_URI_encoding.">Return the string without URI encoding.</a></h4>.</td></tr>
+<tr><td valign="top"><a href="#uri_encode-1">uri_encode/1</a></td><td>
+  <h4><a name="Return_the_string_with_URI_encoding.">Return the string with URI encoding.</a></h4>.</td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
@@ -408,6 +412,22 @@
 <p> </p>
 </div><p>
   <h4><a name="Return_the_string_in_uppercase.">Return the string in uppercase.</a></h4>
+</p>
+
+<h3 class="function"><a name="uri_decode-1">uri_decode/1</a></h3>
+<div class="spec">
+<p><tt>uri_decode(String::string() | binary()) -&gt; string() | binary()</tt><br></p>
+<p> </p>
+</div><p>
+  <h4><a name="Return_the_string_without_URI_encoding.">Return the string without URI encoding.</a></h4>
+</p>
+
+<h3 class="function"><a name="uri_encode-1">uri_encode/1</a></h3>
+<div class="spec">
+<p><tt>uri_encode(URI::string() | binary()) -&gt; string() | binary()</tt><br></p>
+<p> </p>
+</div><p>
+  <h4><a name="Return_the_string_with_URI_encoding.">Return the string with URI encoding.</a></h4>
 </p>
 <hr>
 

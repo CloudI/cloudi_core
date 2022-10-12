@@ -16,7 +16,7 @@
    defined in the cloudi_request_info module.
 <p>Copyright © 2014-2020 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.1 Dec 3 2021 17:15:35
+<p><b>Version:</b> 2.0.1 Oct 11 2022 20:13:45
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -27,7 +27,7 @@
 <h2><a name="types">Data Types</a></h2>
 
 <h3 class="typedecl"><a name="type-format">format()</a></h3>
-<p><tt>format() = <a href="cloudi_request_info.html#type-format">cloudi_request_info:format()</a></tt></p>
+<p><tt>format() = <a href="doc/cloudi_request_info.html#type-format">cloudi_request_info:format()</a></tt></p>
 
 
 <h2><a name="index">Function Index</a></h2>
@@ -59,7 +59,7 @@
 
 <h3 class="function"><a name="key_value_new-1">key_value_new/1</a></h3>
 <div class="spec">
-<p><tt>key_value_new(ResponseInfo::<a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::binary()</tt><br></p>
+<p><tt>key_value_new(ResponseInfo::<a href="doc/cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::binary()</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="New_ResponseInfo_key/value_data.">New ResponseInfo key/value data.</a></h4>
@@ -69,7 +69,7 @@
 
 <h3 class="function"><a name="key_value_new-2">key_value_new/2</a></h3>
 <div class="spec">
-<p><tt>key_value_new(ResponseInfo::<a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, Format::<a href="#type-format">format()</a>) -&gt; Result::binary()</tt><br></p>
+<p><tt>key_value_new(ResponseInfo::<a href="doc/cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, Format::<a href="#type-format">format()</a>) -&gt; Result::binary()</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="New_ResponseInfo_key/value_data.">New ResponseInfo key/value data.</a></h4>
@@ -79,7 +79,7 @@
 
 <h3 class="function"><a name="key_value_parse-1">key_value_parse/1</a></h3>
 <div class="spec">
-<p><tt>key_value_parse(ResponseInfo::binary() | <a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::#{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}</tt><br></p>
+<p><tt>key_value_parse(ResponseInfo::binary() | <a href="doc/cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>) -&gt; Result::#{<a href="doc/cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="doc/cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Parse_ResponseInfo_key/value_data.">Parse ResponseInfo key/value data.</a></h4>
@@ -88,7 +88,7 @@
 
 <h3 class="function"><a name="key_value_parse-2">key_value_parse/2</a></h3>
 <div class="spec">
-<p><tt>key_value_parse(ResponseInfo::binary() | <a href="cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, ResultType::map | list) -&gt; Result::#{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>} | [{<a href="cloudi_key_value.html#type-key">cloudi_key_value:key()</a>, <a href="cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}]</tt><br></p>
+<p><tt>key_value_parse(ResponseInfo::binary() | <a href="doc/cloudi_key_value.html#type-key_values">cloudi_key_value:key_values()</a>, ResultType::map | list) -&gt; Result::#{<a href="doc/cloudi_key_value.html#type-key">cloudi_key_value:key()</a> := <a href="doc/cloudi_key_value.html#type-value">cloudi_key_value:value()</a>} | [{<a href="doc/cloudi_key_value.html#type-key">cloudi_key_value:key()</a>, <a href="doc/cloudi_key_value.html#type-value">cloudi_key_value:value()</a>}]</tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Parse_ResponseInfo_key/value_data_to_the_return_type_specified.">Parse ResponseInfo key/value data to the return type specified.</a></h4>

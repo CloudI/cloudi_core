@@ -12,9 +12,9 @@
 <h1>Module cloudi_lists</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="List_operations">List operations</a></h3>.
-<p>Copyright © 2009-2020 Michael Truog</p>
+<p>Copyright © 2009-2022 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.1 Dec 3 2021 17:15:32
+<p><b>Version:</b> 2.0.5 Oct 11 2022 20:13:40
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -29,6 +29,9 @@
 <tr><td valign="top"><a href="#index-2">index/2</a></td><td>
   <h4><a name="Find_the_index_of_the_first_occurrence_of_an_item_within_a_list.">Find the index of the first occurrence of an item within a list.</a></h4>
   The integer index returned is 1-based.</td></tr>
+<tr><td valign="top"><a href="#insert-3">insert/3</a></td><td>
+  <h4><a name="Insert_the_item_into_the_list_based_on_the_provided_index.">Insert the item into the list based on the provided index.</a></h4>
+  The integer index is 1-based.</td></tr>
 <tr><td valign="top"><a href="#iodata_to_list-1">iodata_to_list/1</a></td><td>
   <h4><a name="Convert_iodata_to_a_list_of_bytes_and_return_the_size_of_the_list.">Convert iodata to a list of bytes and return the size of the list.</a></h4>.</td></tr>
 <tr><td valign="top"><a href="#itera-3">itera/3</a></td><td>
@@ -70,6 +73,14 @@
 </div><p>
   <h4><a name="Find_the_index_of_the_first_occurrence_of_an_item_within_a_list.">Find the index of the first occurrence of an item within a list.</a></h4>
   The integer index returned is 1-based.</p>
+
+<h3 class="function"><a name="insert-3">insert/3</a></h3>
+<div class="spec">
+<p><tt>insert(Index::pos_integer(), Item::any(), L::list()) -&gt; nonempty_list()</tt><br></p>
+<p> </p>
+</div><p>
+  <h4><a name="Insert_the_item_into_the_list_based_on_the_provided_index.">Insert the item into the list based on the provided index.</a></h4>
+  The integer index is 1-based.</p>
 
 <h3 class="function"><a name="iodata_to_list-1">iodata_to_list/1</a></h3>
 <div class="spec">

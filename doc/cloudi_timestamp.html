@@ -12,9 +12,9 @@
 <h1>Module cloudi_timestamp</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="Timestamp_operations">Timestamp operations</a></h3>.
-<p>Copyright © 2015-2021 Michael Truog</p>
+<p>Copyright © 2015-2022 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.2 Dec 3 2021 17:15:35
+<p><b>Version:</b> 2.0.5 Oct 11 2022 20:13:45
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -182,7 +182,7 @@
 
 <h3 class="function"><a name="datetime_utc-1">datetime_utc/1</a></h3>
 <div class="spec">
-<p><tt>datetime_utc(TimeNativeNow::integer()) -&gt; <a href="calendar.html#type-datetime">calendar:datetime()</a></tt><br></p>
+<p><tt>datetime_utc(TimeNativeNow::integer()) -&gt; <a href="/home/george/organized/work/financial_helper_apps/mc2_all-patterns/intraday_system/cloudi_org/stdlib/doc/calendar.html#type-datetime">calendar:datetime()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Create_a_datetime_in_UTC_from_native_time_units.">Create a datetime in UTC from native time units.</a></h4>
@@ -190,7 +190,7 @@
 
 <h3 class="function"><a name="datetime_utc_to_string-1">datetime_utc_to_string/1</a></h3>
 <div class="spec">
-<p><tt>datetime_utc_to_string(DateTimeUTC::<a href="calendar.html#type-datetime">calendar:datetime()</a>) -&gt; <a href="#type-iso8601_seconds">iso8601_seconds()</a></tt><br></p>
+<p><tt>datetime_utc_to_string(DateTimeUTC::<a href="/home/george/organized/work/financial_helper_apps/mc2_all-patterns/intraday_system/cloudi_org/stdlib/doc/calendar.html#type-datetime">calendar:datetime()</a>) -&gt; <a href="#type-iso8601_seconds">iso8601_seconds()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Create_an_ISO8601_timestamp_from_a_datetime_in_UTC.">Create an ISO8601 timestamp from a datetime in UTC.</a></h4>
@@ -305,7 +305,7 @@
 
 <h3 class="function"><a name="nanoseconds_to_string-1">nanoseconds_to_string/1</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_string(TotalNanoSeconds::non_neg_integer()) -&gt; <a href="cloudi_service_api.html#type-nanoseconds_string">cloudi_service_api:nanoseconds_string()</a></tt><br></p>
+<p><tt>nanoseconds_to_string(TotalNanoSeconds::non_neg_integer()) -&gt; <a href="doc/cloudi_service_api.html#type-nanoseconds_string">cloudi_service_api:nanoseconds_string()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Format_a_nanoseconds_duration_as_a_minimal_string_with_lower-precision_integers.">Format a nanoseconds duration as a minimal string with lower-precision integers.</a></h4>
@@ -313,7 +313,7 @@
 
 <h3 class="function"><a name="nanoseconds_to_string-2">nanoseconds_to_string/2</a></h3>
 <div class="spec">
-<p><tt>nanoseconds_to_string(TotalNanoSeconds::integer(), Options::signed) -&gt; <a href="cloudi_service_api.html#type-nanoseconds_string_signed">cloudi_service_api:nanoseconds_string_signed()</a></tt><br></p>
+<p><tt>nanoseconds_to_string(TotalNanoSeconds::integer(), Options::signed) -&gt; <a href="doc/cloudi_service_api.html#type-nanoseconds_string_signed">cloudi_service_api:nanoseconds_string_signed()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Format_a_nanoseconds_duration_with_options_as_a_minimal_string_with_lower-precision_integers.">Format a nanoseconds duration with options as a minimal string with lower-precision integers.</a></h4>
@@ -395,7 +395,7 @@
 
 <h3 class="function"><a name="seconds_to_string-1">seconds_to_string/1</a></h3>
 <div class="spec">
-<p><tt>seconds_to_string(TotalSeconds::non_neg_integer()) -&gt; <a href="cloudi_service_api.html#type-seconds_string">cloudi_service_api:seconds_string()</a></tt><br></p>
+<p><tt>seconds_to_string(TotalSeconds::non_neg_integer()) -&gt; <a href="doc/cloudi_service_api.html#type-seconds_string">cloudi_service_api:seconds_string()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Format_a_seconds_duration_as_a_minimal_string_with_lower-precision_integers.">Format a seconds duration as a minimal string with lower-precision integers.</a></h4>
@@ -403,7 +403,7 @@
 
 <h3 class="function"><a name="seconds_to_string-2">seconds_to_string/2</a></h3>
 <div class="spec">
-<p><tt>seconds_to_string(TotalSeconds::integer(), Options::signed) -&gt; <a href="cloudi_service_api.html#type-seconds_string_signed">cloudi_service_api:seconds_string_signed()</a></tt><br></p>
+<p><tt>seconds_to_string(TotalSeconds::integer(), Options::signed) -&gt; <a href="doc/cloudi_service_api.html#type-seconds_string_signed">cloudi_service_api:seconds_string_signed()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Format_a_seconds_duration_with_options_as_a_minimal_string_with_lower-precision_integers.">Format a seconds duration with options as a minimal string with lower-precision integers.</a></h4>
@@ -411,7 +411,7 @@
 
 <h3 class="function"><a name="timestamp-0">timestamp/0</a></h3>
 <div class="spec">
-<p><tt>timestamp() -&gt; <a href="erlang.html#type-timestamp">erlang:timestamp()</a></tt><br></p>
+<p><tt>timestamp() -&gt; <a href="/home/george/organized/work/financial_helper_apps/mc2_all-patterns/intraday_system/cloudi_org/erts/doc/erlang.html#type-timestamp">erlang:timestamp()</a></tt><br></p>
 <p> </p>
 </div><p>
   <h4><a name="Return_an_Erlang_VM_timestamp.">Return an Erlang VM timestamp.</a></h4>

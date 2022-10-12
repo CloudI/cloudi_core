@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="Fake_CloudI_Logger_Interface">Fake CloudI Logger Interface</a></h3>
    These functions get replaced dynamically.
-<p>Copyright © 2011-2019 Michael Truog</p>
+<p>Copyright © 2011-2021 Michael Truog</p>
 
-<p><b>Version:</b> 1.8.0 Dec 3 2021 17:15:32
+<p><b>Version:</b> 2.0.5 Oct 11 2022 20:13:40
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -58,7 +58,7 @@
 
 <h3 class="function"><a name="debug-6">debug/6</a></h3>
 <div class="spec">
-<p><tt>debug(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>debug(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
@@ -76,13 +76,13 @@
 
 <h3 class="function"><a name="debug_sync-6">debug_sync/6</a></h3>
 <div class="spec">
-<p><tt>debug_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>debug_sync(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
 <h3 class="function"><a name="error-6">error/6</a></h3>
 <div class="spec">
-<p><tt>error(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>error(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
@@ -100,13 +100,13 @@
 
 <h3 class="function"><a name="error_sync-6">error_sync/6</a></h3>
 <div class="spec">
-<p><tt>error_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>error_sync(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
 <h3 class="function"><a name="fatal-6">fatal/6</a></h3>
 <div class="spec">
-<p><tt>fatal(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>fatal(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
@@ -124,13 +124,13 @@
 
 <h3 class="function"><a name="fatal_sync-6">fatal_sync/6</a></h3>
 <div class="spec">
-<p><tt>fatal_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>fatal_sync(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
 <h3 class="function"><a name="info-6">info/6</a></h3>
 <div class="spec">
-<p><tt>info(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>info(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
@@ -148,13 +148,13 @@
 
 <h3 class="function"><a name="info_sync-6">info_sync/6</a></h3>
 <div class="spec">
-<p><tt>info_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>info_sync(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
 <h3 class="function"><a name="log-7">log/7</a></h3>
 <div class="spec">
-<p><tt>log(Module, Line, Function, Arity, Level, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>log(FileName, Line, Function, Arity, Level, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
@@ -172,13 +172,13 @@
 
 <h3 class="function"><a name="log_sync-7">log_sync/7</a></h3>
 <div class="spec">
-<p><tt>log_sync(Module, Line, Function, Arity, Level, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>log_sync(FileName, Line, Function, Arity, Level, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
 <h3 class="function"><a name="trace-6">trace/6</a></h3>
 <div class="spec">
-<p><tt>trace(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>trace(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
@@ -196,13 +196,13 @@
 
 <h3 class="function"><a name="trace_sync-6">trace_sync/6</a></h3>
 <div class="spec">
-<p><tt>trace_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>trace_sync(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
 <h3 class="function"><a name="warn-6">warn/6</a></h3>
 <div class="spec">
-<p><tt>warn(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>warn(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
@@ -220,7 +220,7 @@
 
 <h3 class="function"><a name="warn_sync-6">warn_sync/6</a></h3>
 <div class="spec">
-<p><tt>warn_sync(Module, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
+<p><tt>warn_sync(FileName, Line, Function, Arity, Format, Arguments) -&gt; any()</tt></p>
 <p> </p>
 </div>
 <hr>

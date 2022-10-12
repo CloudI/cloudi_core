@@ -1,6 +1,6 @@
-# [`cloudi_core` 2.0.4](https://cloudi.org)
+# [`cloudi_core` 2.0.5](https://cloudi.org)
 
-[![Build Status](https://secure.travis-ci.org/CloudI/cloudi_core.png?branch=master)](http://travis-ci.org/CloudI/cloudi_core)
+[![Build Status](https://app.travis-ci.com/CloudI/cloudi_core.svg?branch=master)](https://app.travis-ci.com/CloudI/cloudi_core)
 [![hex.pm version](https://img.shields.io/hexpm/v/cloudi_core.svg)](https://hex.pm/packages/cloudi_core)
 
 ## LICENSE
