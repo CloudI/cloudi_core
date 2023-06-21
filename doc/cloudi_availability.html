@@ -12,9 +12,9 @@
 <h1>Module cloudi_availability</h1>
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Availability_Tracking_Functionality">CloudI Availability Tracking Functionality</a></h3>.
-<p>Copyright © 2018-2022 Michael Truog</p>
+<p>Copyright © 2018-2023 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.5 Oct 11 2022 20:13:45
+<p><b>Version:</b> 2.0.6 Jun 20 2023 18:35:42
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -28,7 +28,7 @@
 
 
 <h3 class="typedecl"><a name="type-durations">durations()</a></h3>
-<p><tt>durations(Key) = #{Key := <a href="#type-durations_state">durations_state()</a>}</tt></p>
+<p><tt>durations(Key) = #{Key := <a href="#type-durations_state">durations_state()</a>} | #{}</tt></p>
 
 
 <h3 class="typedecl"><a name="type-durations_state">durations_state()</a></h3>
@@ -77,7 +77,7 @@
 
 <h3 class="function"><a name="durations_new-0">durations_new/0</a></h3>
 <div class="spec">
-<p><tt>durations_new() -&gt; <a href="#type-durations">durations</a>(any())</tt><br></p>
+<p><tt>durations_new() -&gt; #{}</tt><br></p>
 <p> </p>
 </div>
 

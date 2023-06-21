@@ -14,9 +14,9 @@
    <h3><a name="CloudI_Services">CloudI Services</a></h3>
    Manage all cloudi_core_i_spawn processes with monitors and their
    configuration.
-<p>Copyright © 2011-2022 Michael Truog</p>
+<p>Copyright © 2011-2023 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.5 Oct 11 2022 20:13:44
+<p><b>Version:</b> 2.0.6 Jun 20 2023 18:35:40
   ------------------------------------------------------------------------</p>
 <p><b>Behaviours:</b> <a href="gen_server.html"><tt>gen_server</tt></a>.</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
@@ -32,7 +32,7 @@
 <tr><td valign="top"><a href="#handle_cast-2">handle_cast/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#handle_info-2">handle_info/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#init-1">init/1</a></td><td></td></tr>
-<tr><td valign="top"><a href="#monitor-14">monitor/14</a></td><td></td></tr>
+<tr><td valign="top"><a href="#monitor-15">monitor/15</a></td><td></td></tr>
 <tr><td valign="top"><a href="#node_status-1">node_status/1</a></td><td></td></tr>
 <tr><td valign="top"><a href="#pids-2">pids/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#process_decrease-5">process_decrease/5</a></td><td></td></tr>
@@ -47,7 +47,7 @@
 <tr><td valign="top"><a href="#search-2">search/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#shutdown-2">shutdown/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td></td></tr>
-<tr><td valign="top"><a href="#status-2">status/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#status-3">status/3</a></td><td></td></tr>
 <tr><td valign="top"><a href="#suspend-2">suspend/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#terminate-2">terminate/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#update-2">update/2</a></td><td></td></tr>
@@ -85,9 +85,9 @@
 <p> </p>
 </div>
 
-<h3 class="function"><a name="monitor-14">monitor/14</a></h3>
+<h3 class="function"><a name="monitor-15">monitor/15</a></h3>
 <div class="spec">
-<p><tt>monitor(M::cloudi_core_i_spawn, F::start_internal | start_external, A::list(), ProcessIndex::non_neg_integer(), CountProcess::pos_integer(), CountThread::pos_integer(), Scope::atom(), TimeoutTerm::<a href="doc/cloudi_service_api.html#type-timeout_terminate_value_milliseconds">cloudi_service_api:timeout_terminate_value_milliseconds()</a>, RestartAll::boolean(), RestartDelay::tuple() | false, MaxR::non_neg_integer(), MaxT::non_neg_integer(), ServiceId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>, Timeout::infinity | pos_integer()) -&gt; {ok, [pid()]} | {error, any()}</tt><br></p>
+<p><tt>monitor(M::cloudi_core_i_spawn, F::start_internal | start_external, A::list(), ProcessIndex::non_neg_integer(), ProcessCount::pos_integer(), ThreadCount::pos_integer(), Scope::atom(), TimeoutTerm::<a href="doc/cloudi_service_api.html#type-timeout_terminate_value_milliseconds">cloudi_service_api:timeout_terminate_value_milliseconds()</a>, RestartAll::boolean(), RestartDelay::tuple() | false, Critical::boolean(), MaxR::non_neg_integer(), MaxT::non_neg_integer(), ServiceId::<a href="deps/uuid/doc/uuid.html#type-uuid">uuid:uuid()</a>, Timeout::infinity | pos_integer()) -&gt; {ok, [pid()]} | {error, any()}</tt><br></p>
 <p> </p>
 </div>
 
@@ -105,13 +105,13 @@
 
 <h3 class="function"><a name="process_decrease-5">process_decrease/5</a></h3>
 <div class="spec">
-<p><tt>process_decrease(Pid, Period, RateCurrent, RateMin, CountProcessMin) -&gt; any()</tt></p>
+<p><tt>process_decrease(Pid, Period, RateCurrent, RateMin, ProcessCountMin) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
 <h3 class="function"><a name="process_increase-5">process_increase/5</a></h3>
 <div class="spec">
-<p><tt>process_increase(Pid, Period, RateCurrent, RateMax, CountProcessMax) -&gt; any()</tt></p>
+<p><tt>process_increase(Pid, Period, RateCurrent, RateMax, ProcessCountMax) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
@@ -175,9 +175,9 @@
 <p> </p>
 </div>
 
-<h3 class="function"><a name="status-2">status/2</a></h3>
+<h3 class="function"><a name="status-3">status/3</a></h3>
 <div class="spec">
-<p><tt>status(ServiceIdList, Timeout) -&gt; any()</tt></p>
+<p><tt>status(ServiceIdList, Required, Timeout) -&gt; any()</tt></p>
 <p> </p>
 </div>
 
