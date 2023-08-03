@@ -20,7 +20,7 @@
 %%%
 %%% MIT License
 %%%
-%%% Copyright (c) 2022 Michael Truog <mjtruog at protonmail dot com>
+%%% Copyright (c) 2022-2023 Michael Truog <mjtruog at protonmail dot com>
 %%%
 %%% Permission is hereby granted, free of charge, to any person obtaining a
 %%% copy of this software and associated documentation files (the "Software"),
@@ -41,8 +41,8 @@
 %%% DEALINGS IN THE SOFTWARE.
 %%%
 %%% @author Michael Truog <mjtruog at protonmail dot com>
-%%% @copyright 2022 Michael Truog
-%%% @version 2.0.5 {@date} {@time}
+%%% @copyright 2022-2023 Michael Truog
+%%% @version 2.0.7 {@date} {@time}
 %%%------------------------------------------------------------------------
 
 -module(cloudi_statistics).
@@ -627,12 +627,15 @@ gamma_kurtosis(Skewness) ->
     X = 2 / Skewness,
     6 / (X * X).
 
-log_normal_kurtosis(0.0) ->
-    0.0;
 log_normal_kurtosis(Skewness) ->
-    A = log_normal_skewness_a(Skewness),
-    A2 = A * A,
-    A2 * A2 + 2 * A2 * A + 3 * A2 - 6.
+    if
+        Skewness /= 0.0 ->
+            A = log_normal_skewness_a(Skewness),
+            A2 = A * A,
+            A2 * A2 + 2 * A2 * A + 3 * A2 - 6;
+        true ->
+            0.0
+    end.
 
 log_normal_skewness_a(Skewness) ->
     % use Halley's method to determine A based on Log-normal skewness
