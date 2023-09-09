@@ -1260,7 +1260,8 @@ cloudi_core_started(#config{code = ConfigCode}) ->
 application_dependent([]) ->
     ok;
 application_dependent([Dependent | Dependents]) ->
-    case reltool_util:ensure_application_started(Dependent) of
+    case reltool_util:application_start(Dependent, [],
+                                                 [cloudi_core], infinity) of
         ok ->
             application_dependent(Dependents);
         {error, Reason} ->
