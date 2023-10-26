@@ -13,9 +13,9 @@
 <ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
    <h3><a name="CloudI_Service_Configuration_Arguments_Type_Checking">CloudI Service Configuration Arguments Type Checking</a></h3>
    Functions to simplify validation done during service initialization.
-<p>Copyright © 2015-2022 Michael Truog</p>
+<p>Copyright © 2015-2023 Michael Truog</p>
 
-<p><b>Version:</b> 2.0.5 Jun 20 2023 18:35:36
+<p><b>Version:</b> 2.0.7 Oct 26 2023 12:17:22
   ------------------------------------------------------------------------</p>
 <p><b>Authors:</b> Michael Truog (<a href="mailto:mjtruog at protonmail dot com"><tt>mjtruog at protonmail dot com</tt></a>).</p>
 
@@ -30,6 +30,8 @@
 
 <h2><a name="index">Function Index</a></h2>
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#function_optional-2">function_optional/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#function_optional_pick-2">function_optional_pick/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#function_optional_pick_any-2">function_optional_pick_any/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#function_required-2">function_required/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#function_required_pick-2">function_required_pick/2</a></td><td></td></tr>
 <tr><td valign="top"><a href="#period_to_milliseconds-3">period_to_milliseconds/3</a></td><td></td></tr>
@@ -49,19 +51,31 @@
 
 <h3 class="function"><a name="function_optional-2">function_optional/2</a></h3>
 <div class="spec">
-<p><tt>function_optional(Function::undefined | {{module(), atom()}} | {module(), atom()} | function(), Arity::non_neg_integer()) -&gt; undefined | function()</tt><br></p>
+<p><tt>function_optional(Function::undefined | function() | {module(), atom()} | {{module(), atom()}} | {{module(), atom(), list()}}, Arity::non_neg_integer()) -&gt; undefined | function()</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="function_optional_pick-2">function_optional_pick/2</a></h3>
+<div class="spec">
+<p><tt>function_optional_pick(Function::undefined | function() | {module(), atom()} | {{module(), atom()}} | {{module(), atom(), list()}}, ArityOrder::[non_neg_integer(), ...]) -&gt; undefined | {function(), Arity::non_neg_integer()}</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="function_optional_pick_any-2">function_optional_pick_any/2</a></h3>
+<div class="spec">
+<p><tt>function_optional_pick_any(Function::undefined | function() | {module(), atom()} | {{module(), atom()}} | {{module(), atom(), list()}}, ArityOrder::[non_neg_integer(), ...]) -&gt; undefined | function()</tt><br></p>
 <p> </p>
 </div>
 
 <h3 class="function"><a name="function_required-2">function_required/2</a></h3>
 <div class="spec">
-<p><tt>function_required(Function::{{module(), atom()}} | {module(), atom()} | function(), Arity::non_neg_integer()) -&gt; function()</tt><br></p>
+<p><tt>function_required(Function::function() | {module(), atom()} | {{module(), atom()}} | {{module(), atom(), list()}}, Arity::non_neg_integer()) -&gt; function()</tt><br></p>
 <p> </p>
 </div>
 
 <h3 class="function"><a name="function_required_pick-2">function_required_pick/2</a></h3>
 <div class="spec">
-<p><tt>function_required_pick(Function::{{module(), atom()}} | {module(), atom()} | function(), ArityOrder::[non_neg_integer(), ...]) -&gt; {function(), Arity::non_neg_integer()}</tt><br></p>
+<p><tt>function_required_pick(Function::function() | {module(), atom()} | {{module(), atom()}} | {{module(), atom(), list()}}, ArityOrder::[non_neg_integer(), ...]) -&gt; {function(), Arity::non_neg_integer()}</tt><br></p>
 <p> </p>
 </div>
 

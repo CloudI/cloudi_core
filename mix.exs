@@ -6,7 +6,7 @@ defmodule CloudICore.Mixfile do
 
   def project do
     [app: :cloudi_core,
-     version: "2.0.6",
+     version: "2.0.7",
      language: :erlang,
      erlc_options: [
        {:d, :erlang.list_to_atom('ERLANG_OTP_VERSION_' ++ :erlang.system_info(:otp_release))},
@@ -52,19 +52,19 @@ defmodule CloudICore.Mixfile do
   end
 
   defp deps do
-    [{:cpg, ">= 2.0.6"},
-     {:uuid, ">= 2.0.6", [hex: :uuid_erl]},
-     {:reltool_util, ">= 2.0.6"},
-     {:trie, ">= 2.0.6"},
-     {:erlang_term, ">= 2.0.6"},
-     {:quickrand, ">= 2.0.6"},
-     {:pqueue, ">= 2.0.6"},
-     {:key2value, ">= 2.0.6"},
-     {:keys1value, ">= 2.0.6"},
-     {:nodefinder, ">= 2.0.6"},
-     {:supool, ">= 2.0.6"},
-     {:varpool, ">= 2.0.6"},
-     {:syslog_socket, ">= 2.0.6"}]
+    [{:cpg, ">= 2.0.7"},
+     {:uuid, ">= 2.0.7", [hex: :uuid_erl]},
+     {:reltool_util, ">= 2.0.7"},
+     {:trie, ">= 2.0.7"},
+     {:erlang_term, ">= 2.0.7"},
+     {:quickrand, ">= 2.0.7"},
+     {:pqueue, ">= 2.0.7"},
+     {:key2value, ">= 2.0.7"},
+     {:keys1value, ">= 2.0.7"},
+     {:nodefinder, ">= 2.0.7"},
+     {:supool, ">= 2.0.7"},
+     {:varpool, ">= 2.0.7"},
+     {:syslog_socket, ">= 2.0.7"}]
   end
 
   defp description do
