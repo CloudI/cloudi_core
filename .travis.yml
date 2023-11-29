@@ -9,7 +9,7 @@ before_script:
   - rebar3 get-deps
 script:
   - rebar3 compile
-  - rebar3 ct --suite cloudi_service,cloudi_logger
+  - rebar3 ct --suite cloudi_service_SUITE,cloudi_logger_SUITE
 after_script:
   - rebar3 clean
 branches:
