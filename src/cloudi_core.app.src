@@ -89,6 +89,7 @@
         erlang_term,
         cpg,
         syslog_socket,
+        ntpstat,
         syntax_tools,
         compiler,
         stdlib,
